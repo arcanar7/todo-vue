@@ -1,43 +1,49 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div> -->
     <router-view />
   </div>
 </template>
 
 <style lang="scss">
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 a {
   text-decoration: none;
   outline: none;
 }
 
 button {
-  outline: none !important;
+  width: 195px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: $primary-lightness;
+  background-color: $primary;
+  border: none;
+  box-shadow: 3px 3px 3px hsla(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s linear;
+}
+
+button:active {
+  box-shadow: 1px 1px 3px hsla(0, 0, 0, 0.5);
+}
+
+button:hover {
+  background-color: $primary-light;
 }
 
 input {
+  width: 180px;
   padding-left: 10px;
-  border-radius: 5px;
-  outline: none;
 }
-// #app {
-//   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   text-align: center;
-//   color: #2c3e50;
-// }
-// #nav {
-//   padding: 30px;
-//   a {
-//     font-weight: bold;
-//     color: #2c3e50;
-//     &.router-link-exact-active {
-//       color: #42b983;
-//     }
-//   }
-// }
+
+button,
+input {
+  height: 40px;
+  font-size: 18px;
+  border-radius: 5px;
+  outline: none !important;
+}
 </style>

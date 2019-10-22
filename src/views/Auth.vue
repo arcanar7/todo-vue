@@ -37,8 +37,8 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 300px;
-  height: 300px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
+  background-color: $primary-lightness;
 
   .nav {
     display: flex;
@@ -50,14 +50,22 @@ export default {
       justify-content: center;
       width: 150px;
       height: 50px;
-      color: white;
-      background-color: grey;
+      color: $primary-lightness;
+      background-color: $primary;
+      font-size: 18px;
+      font-weight: 900;
+      transition: background-color 0.3s linear;
+    }
+
+    &__login:hover,
+    &__registration:hover {
+      background-color: $primary-light;
     }
   }
 }
 
 .active {
-  color: black !important;
-  background-color: white !important;
+  color: $primary !important;
+  background-color: $primary-lightness !important;
 }
 </style>
