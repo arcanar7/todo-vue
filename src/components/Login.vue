@@ -1,6 +1,5 @@
 <template>
   <form class="login-form" ref="form" @submit="onSubmit">
-    {{ $v.$invalid }}
     <input
       type="email"
       name="email"
@@ -26,7 +25,13 @@
       @blur="$v.password.$touch()"
     />
     <button type="submit" class="login-form__btn">
-      log in
+      <div class="lds-ring" v-if="loadingApp">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <span v-else>log in</span>
     </button>
     <span class="login-form__forgot">
       <router-link to="/registration" class="login-form__forgot">
@@ -61,7 +66,10 @@ export default {
   },
   methods: {
     onSubmit(e) {
-      console.log(1)
+      this.$store.dispatch('setLoading', true)
+      setTimeout(() => {
+        this.$store.dispatch('setLoading', false)
+      }, 5000)
 
       if (this.email && this.password) {
         this.$router.push('/')

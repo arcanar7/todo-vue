@@ -36,7 +36,15 @@
       v-model="password"
       @blur="$v.password.$touch()"
     />
-    <button type="submit" class="login-form__btn">create account</button>
+    <button type="submit" class="login-form__btn">
+      <div class="lds-ring" v-if="loadingApp">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <span v-else>create account</span>
+    </button>
   </form>
 </template>
 

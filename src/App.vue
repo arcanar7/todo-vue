@@ -22,14 +22,9 @@ button {
   color: $primary-lightness;
   background-color: $primary;
   border: none;
-  // box-shadow: 3px 3px 3px hsla(0, 0, 0, 0.5);
   cursor: pointer;
   transition: background-color 0.3s linear;
 }
-
-// button:active {
-//   box-shadow: 1px 1px 3px hsla(0, 0, 0, 0.5);
-// }
 
 button:hover {
   background-color: $primary-light;
