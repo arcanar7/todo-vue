@@ -3,14 +3,14 @@
     <section class="inner">
       <div class="nav">
         <router-link to="/login" class="nav__login" active-class="active">
-          Sign In
+          Login
         </router-link>
         <router-link
           to="/registration"
           class="nav__registration"
           active-class="active"
         >
-          Sign Up
+          Register
         </router-link>
       </div>
       <router-view />
@@ -54,7 +54,6 @@ export default {
       background-color: $primary;
       font-size: 18px;
       font-weight: 900;
-      transition: background-color 0.3s linear;
     }
 
     &__login:hover,
