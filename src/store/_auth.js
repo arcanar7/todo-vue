@@ -1,3 +1,12 @@
+import fb from 'firebase/app'
+import 'firebase/auth'
+
+class User {
+  constructor(id) {
+    this.id = id
+  }
+}
+
 export default {
   state: {
     user: null,
@@ -7,7 +16,48 @@ export default {
       state.user = payload
     },
   },
-  actions: {},
+  actions: {
+    async registerUser({ commit }, { email, password }) {
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        const user = await fb
+          .auth()
+          .createUserWithEmailAndPassword(email, password)
+        commit('setUser', new User(user.uid))
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setLoading', false)
+        commit('setError', error.message)
+        throw error
+      }
+    },
+    async loginUser({ commit }, { email, password }) {
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        const user = await fb.auth().signInWithEmailAndPassword(email, password)
+        commit('setUser', new User(user.user.uid))
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setLoading', false)
+        commit('setError', error.message)
+        throw error
+      }
+    },
+    async changePassword({ commit }, { email }) {
+      commit('clearError')
+      commit('setLoading', true)
+      try {
+        await fb.auth().sendPasswordResetEmail(email)
+        commit('setLoading', false)
+      } catch (error) {
+        commit('setLoading', false)
+        commit('setError', error.message)
+        throw error
+      }
+    },
+  },
   getters: {
     user(state) {
       return state.user

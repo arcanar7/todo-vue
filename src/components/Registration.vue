@@ -1,27 +1,10 @@
 <template>
   <section class="center">
-    <form class="login-form" @submit.prevent="onSubmit" novalidate>
-      <input
-        type="text"
-        name="name"
-        class="login-form__name"
-        :class="{
-          'has-error': $v.name.$error,
-          'valid-input': !$v.name.$invalid,
-        }"
-        placeholder="Name"
-        v-model="name"
-        @blur="$v.name.$touch()"
-      />
-      <span v-if="$v.name.$error" class="message-input text-error">
-        <img src="../assets/icons/warning.svg" alt="" />
-        <template v-if="!$v.name.required">
-          Required
-        </template>
-        <template v-else-if="!$v.name.minLength">
-          Name must be equal or more than 4 characters
-        </template>
-      </span>
+    <form
+      class="login-form"
+      @submit.prevent="onSubmit('registerUser')"
+      novalidate
+    >
       <input
         type="email"
         name="email"
@@ -64,6 +47,27 @@
           Password must be equal or more than 6 characters
         </template>
       </span>
+      <input
+        type="password"
+        name="repeatPassword"
+        class="login-form__password"
+        :class="{
+          'has-error': $v.repeatPassword.$error,
+          'valid-input': !$v.repeatPassword.$invalid,
+        }"
+        placeholder="Repeat password"
+        v-model="repeatPassword"
+        @blur="$v.repeatPassword.$touch()"
+      />
+      <span v-if="$v.repeatPassword.$error" class="message-input text-error">
+        <img src="../assets/icons/warning.svg" alt="" />
+        <template v-if="!$v.repeatPassword.required">
+          Required
+        </template>
+        <template v-else-if="!$v.repeatPassword.sameAsPassword">
+          Passwords must be identical
+        </template>
+      </span>
       <button
         type="submit"
         class="login-form__btn"
@@ -83,28 +87,33 @@
 </template>
 
 <script>
-import { required, email, minLength } from 'vuelidate/lib/validators'
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 
 export default {
   data() {
     return {
       email: null,
       password: null,
-      name: null,
+      repeatPassword: null,
     }
   },
   methods: {
-    onSubmit() {
+    onSubmit(act) {
       if (!this.$v.$invalid) {
-        this.$router.push('/login')
+        const user = {
+          email: this.email,
+          password: this.password,
+        }
+        this.$store
+          .dispatch(act, user)
+          .then(() => {
+            this.$router.push('/login?loginError=true')
+          })
+          .catch(() => {})
       }
     },
   },
   validations: {
-    name: {
-      required,
-      minLength: minLength(4),
-    },
     email: {
       required,
       email,
@@ -112,6 +121,10 @@ export default {
     password: {
       required,
       minLength: minLength(6),
+    },
+    repeatPassword: {
+      required,
+      sameAsPassword: sameAs('password'),
     },
   },
 }

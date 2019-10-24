@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Auth from '@/views/Auth.vue'
-import Home from '@/views/Home.vue'
+// import Home from '@/views/Home.vue'
 import Login from '@/components/Login.vue'
 import AuthGuard from './auth-guard'
 
@@ -16,12 +16,11 @@ export default new Router({
       path: '/',
       name: 'home',
       beforeEnter: AuthGuard,
-      component: Home,
+      component: () => import('@/views/Home.vue'),
     },
     {
       path: '/login',
       component: Auth,
-      // redirect: '/todo',
       children: [
         {
           path: '',

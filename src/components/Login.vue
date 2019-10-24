@@ -1,6 +1,6 @@
 <template>
   <section class="center">
-    <form class="login-form" @submit.prevent="onSubmit" novalidate>
+    <form class="login-form" @submit.prevent="onSubmit('loginUser')" novalidate>
       <input
         type="email"
         name="email"
@@ -77,22 +77,19 @@ export default {
     }
   },
   methods: {
-    onSubmit() {
+    onSubmit(act) {
       if (!this.$v.$invalid) {
-        this.$router.push('/')
+        const user = {
+          email: this.email,
+          password: this.password,
+        }
+        this.$store
+          .dispatch(act, user)
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(() => {})
       }
-      // if (this.$refs.form.validate()) {
-      //   const user = {
-      //     email: this.email,
-      //     password: this.password,
-      //   }
-      //   this.$store
-      //     .dispatch(user)
-      //     .then(() => {
-      //       this.$router.push('/todo')
-      //     })
-      //     .catch(() => {})
-      // }
     },
   },
   validations: {
