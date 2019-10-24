@@ -58,9 +58,12 @@
         Log in
       </button>
       <span class="login-form__forgot">
-        <router-link to="/registration" class="login-form__forgot">
+        <button class="login-form__forgot" @click="onResetPass">
           Forgot password?
-        </router-link>
+        </button>
+        <!-- <router-link to="/registration" class="login-form__forgot">
+          Forgot password?
+        </router-link> -->
       </span>
     </form>
   </section>
@@ -90,6 +93,15 @@ export default {
           })
           .catch(() => {})
       }
+    },
+    onResetPass() {
+      const email = this.email
+      this.$store
+        .dispatch('resetPassword', email)
+        .then(() => {
+          this.$router.push('/login')
+        })
+        .catch(() => {})
     },
   },
   validations: {

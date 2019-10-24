@@ -45,7 +45,7 @@ export default {
         throw error
       }
     },
-    async changePassword({ commit }, { email }) {
+    async resetPassword({ commit }, email) {
       commit('clearError')
       commit('setLoading', true)
       try {
