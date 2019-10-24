@@ -4,8 +4,15 @@ $primary-lightness: hsl(158, 10, 100%);
 $primary-dark: hsl(158, 10, 30%);
 $primary-darkness: hsl(158, 10, 10%);
 
-$success: hsl(115, 88%, 50%);
-$success-light: hsl(115, 88%, 60%);
-$success-lightness: hsl(115, 88%, 80%);
+$success: hsl(115, 92%, 75%);
+$success-light: hsl(115, 92%, 95%);
+$success-lightness: hsl(115, 88%, 88%);
 $success-dark: hsl(115, 88%, 40%);
 $success-darkness: hsl(115, 88%, 30%);
+
+$error: hsl(0, 42%, 50%);
+$error-light: hsl(0, 42%, 79%);
+$error-lightness: hsl(0, 100%, 98%);
+
+$background: hsl(0, 0, 94%);
+$background-input: hsl(0, 0, 97%);

@@ -16,7 +16,6 @@ a {
 
 button {
   width: 205px;
-  text-transform: uppercase;
   font-size: 16px;
   font-weight: 900;
   color: $primary-lightness;
@@ -26,15 +25,11 @@ button {
   transition: background-color 0.3s linear;
 }
 
-button:hover {
-  background-color: $primary-light;
-}
-
 input {
   padding-left: 10px;
   font-size: 14px;
   border: 1px solid $primary-light;
-  transition: border-color 2s;
+  background-color: $background-input;
 }
 
 button,

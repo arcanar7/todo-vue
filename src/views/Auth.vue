@@ -38,12 +38,22 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
+  min-width: 300px;
+  min-height: 426px;
   box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
-  background-color: $primary-lightness;
+  background-color: $background;
+  border-radius: 10px;
 
   .nav {
     display: flex;
+
+    &__login {
+      border-radius: 10px 0 0 0;
+    }
+
+    &__registration {
+      border-radius: 0 10px 0 0;
+    }
 
     &__login,
     &__registration {
@@ -53,9 +63,9 @@ export default {
       width: 150px;
       height: 50px;
       color: $primary-lightness;
-      background-color: $primary;
+      background-color: $primary-light;
       font-size: 18px;
-      font-weight: 900;
+      font-weight: 400;
       transition: background-color 0.3s ease;
     }
 
@@ -68,7 +78,8 @@ export default {
 
 .active {
   color: $primary !important;
-  background-color: $primary-lightness !important;
+  background-color: $background !important;
+  font-weight: 900 !important;
 }
 
 .component-fade-enter-active,
