@@ -2,6 +2,7 @@
   <section class="center">
     <h1 class="title">Recover account</h1>
     <p class="error-title" v-if="isError">{{ isError }}</p>
+    <p class="success-title" v-if="isSuccess">{{ isSuccess }}</p>
     <form class="login-form" @submit.prevent="onResetPass" novalidate>
       <input
         type="email"

@@ -19,6 +19,7 @@ export default {
   actions: {
     async registerUser({ commit }, { email, password }) {
       commit('clearError')
+      commit('clearSuccess')
       commit('setLoading', true)
       try {
         const user = await fb
@@ -34,6 +35,7 @@ export default {
     },
     async loginUser({ commit }, { email, password }) {
       commit('clearError')
+      commit('clearSuccess')
       commit('setLoading', true)
       try {
         const user = await fb.auth().signInWithEmailAndPassword(email, password)
@@ -47,6 +49,7 @@ export default {
     },
     async resetPassword({ commit }, email) {
       commit('clearError')
+      commit('clearSuccess')
       commit('setLoading', true)
       try {
         await fb.auth().sendPasswordResetEmail(email)

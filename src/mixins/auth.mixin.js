@@ -26,7 +26,10 @@ export default {
       this.$store
         .dispatch('resetPassword', email)
         .then(() => {
-          this.$router.push('/login')
+          this.$store.dispatch(
+            'setSuccess',
+            'Please check your email and click on the provided link to reset your password.'
+          )
         })
         .catch(() => {})
     },
