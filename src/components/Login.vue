@@ -50,7 +50,7 @@
         type="submit"
         class="login-form__btn"
         :class="[$v.$invalid ? 'disabled-btn' : 'enabled-btn']"
-        :disabled="this.$v.$invalid"
+        :disabled="this.$v.email.$invalid || this.$v.password.$invalid"
       >
         <div class="lds-ring" v-if="loadingApp">
           <div></div>
@@ -72,37 +72,10 @@
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators'
 
+import AuthMixin from '@/mixins/auth.mixin'
+
 export default {
-  data() {
-    return {
-      email: null,
-      password: null,
-    }
-  },
-  methods: {
-    onSubmit(act) {
-      if (!this.$v.$invalid) {
-        const user = {
-          email: this.email,
-          password: this.password,
-        }
-        this.$store
-          .dispatch(act, user)
-          .then(() => {
-            this.$router.push('/')
-          })
-          .catch(() => {})
-      }
-    },
-  },
-  computed: {
-    isError() {
-      return this.$store.getters.error
-    },
-    isSuccess() {
-      return this.$store.getters.success
-    },
-  },
+  mixins: [AuthMixin],
   validations: {
     email: {
       required,
@@ -112,10 +85,6 @@ export default {
       required,
       minLength: minLength(6),
     },
-  },
-  beforeCreate() {
-    this.$store.dispatch('clearError')
-    this.$store.dispatch('clearSuccess')
   },
   created() {
     if (this.$route.query['loginError']) {
@@ -134,9 +103,7 @@ export default {
 <style lang="scss">
 .center {
   display: flex;
-  // flex-wrap: wrap;
   flex-direction: column;
-  // justify-content: center;
   align-items: center;
   flex-grow: 1;
 
@@ -171,10 +138,7 @@ export default {
 .login-form {
   display: flex;
   flex-direction: column;
-  // flex-wrap: wrap;
   justify-content: center;
-  // align-items: center;
-  // flex-grow: 1;
   margin: 30px 0;
 
   &__email,

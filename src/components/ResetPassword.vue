@@ -45,36 +45,15 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators'
 
+import AuthMixin from '../mixins/auth.mixin'
+
 export default {
-  data() {
-    return {
-      email: null,
-    }
-  },
-  methods: {
-    onResetPass() {
-      const email = this.email
-      this.$store
-        .dispatch('resetPassword', email)
-        .then(() => {
-          this.$router.push('/login')
-        })
-        .catch(() => {})
-    },
-  },
-  computed: {
-    isError() {
-      return this.$store.getters.error
-    },
-  },
+  mixins: [AuthMixin],
   validations: {
     email: {
       required,
       email,
     },
-  },
-  beforeCreate() {
-    this.$store.dispatch('clearError')
   },
 }
 </script>

@@ -4,7 +4,7 @@
     <p class="error-title" v-if="isError">{{ isError }}</p>
     <form
       class="login-form"
-      @submit.prevent="onSubmit('registerUser')"
+      @submit.prevent="onSubmit('registerUser', 'login?registerSuccess=true')"
       novalidate
     >
       <input
@@ -91,35 +91,10 @@
 <script>
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 
+import AuthMixin from '../mixins/auth.mixin'
+
 export default {
-  data() {
-    return {
-      email: null,
-      password: null,
-      repeatPassword: null,
-    }
-  },
-  methods: {
-    onSubmit(act) {
-      if (!this.$v.$invalid) {
-        const user = {
-          email: this.email,
-          password: this.password,
-        }
-        this.$store
-          .dispatch(act, user)
-          .then(() => {
-            this.$router.push('/login?registerSuccess=true')
-          })
-          .catch(() => {})
-      }
-    },
-  },
-  computed: {
-    isError() {
-      return this.$store.getters.error
-    },
-  },
+  mixins: [AuthMixin],
   validations: {
     email: {
       required,
@@ -133,9 +108,6 @@ export default {
       required,
       sameAsPassword: sameAs('password'),
     },
-  },
-  beforeCreate() {
-    this.$store.dispatch('clearError')
   },
 }
 </script>
