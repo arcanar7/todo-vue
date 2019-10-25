@@ -32,6 +32,11 @@ export default new Router({
           name: 'registration',
           component: () => import('@/components/Registration.vue'),
         },
+        {
+          path: '/reset',
+          name: 'reset',
+          component: () => import('@/components/ResetPassword.vue'),
+        },
       ],
     },
     { path: '*', component: () => import('@/components/NotFound.vue') },

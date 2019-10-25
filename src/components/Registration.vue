@@ -1,5 +1,7 @@
 <template>
   <section class="center">
+    <h1 class="title">Register account</h1>
+    <p class="error-title" v-if="isError">{{ isError }}</p>
     <form
       class="login-form"
       @submit.prevent="onSubmit('registerUser')"
@@ -107,10 +109,15 @@ export default {
         this.$store
           .dispatch(act, user)
           .then(() => {
-            this.$router.push('/login?loginError=true')
+            this.$router.push('/login?registerSuccess=true')
           })
           .catch(() => {})
       }
+    },
+  },
+  computed: {
+    isError() {
+      return this.$store.getters.error
     },
   },
   validations: {
@@ -126,6 +133,9 @@ export default {
       required,
       sameAsPassword: sameAs('password'),
     },
+  },
+  beforeCreate() {
+    this.$store.dispatch('clearError')
   },
 }
 </script>

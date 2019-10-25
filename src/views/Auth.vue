@@ -38,8 +38,8 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 300px;
-  min-height: 426px;
+  width: 300px;
+  min-height: 472px;
   box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
   background-color: $background;
   border-radius: 10px;

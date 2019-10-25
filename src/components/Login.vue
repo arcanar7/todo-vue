@@ -1,5 +1,8 @@
 <template>
   <section class="center">
+    <h1 class="title">Log in account</h1>
+    <p class="error-title" v-if="isError">{{ isError }}</p>
+    <p class="success-title" v-if="isSuccess">{{ isSuccess }}</p>
     <form class="login-form" @submit.prevent="onSubmit('loginUser')" novalidate>
       <input
         type="email"
@@ -58,12 +61,9 @@
         Log in
       </button>
       <span class="login-form__forgot">
-        <button class="login-form__forgot" @click="onResetPass">
+        <router-link to="/reset" class="login-form__forgot">
           Forgot password?
-        </button>
-        <!-- <router-link to="/registration" class="login-form__forgot">
-          Forgot password?
-        </router-link> -->
+        </router-link>
       </span>
     </form>
   </section>
@@ -94,14 +94,13 @@ export default {
           .catch(() => {})
       }
     },
-    onResetPass() {
-      const email = this.email
-      this.$store
-        .dispatch('resetPassword', email)
-        .then(() => {
-          this.$router.push('/login')
-        })
-        .catch(() => {})
+  },
+  computed: {
+    isError() {
+      return this.$store.getters.error
+    },
+    isSuccess() {
+      return this.$store.getters.success
     },
   },
   validations: {
@@ -114,13 +113,68 @@ export default {
       minLength: minLength(6),
     },
   },
+  beforeCreate() {
+    this.$store.dispatch('clearError')
+    this.$store.dispatch('clearSuccess')
+  },
+  created() {
+    if (this.$route.query['loginError']) {
+      this.$store.dispatch('setError', 'Please log in to access this page.')
+    }
+    if (this.$route.query['registerSuccess']) {
+      this.$store.dispatch(
+        'setSuccess',
+        'Success! Your account has been created.'
+      )
+    }
+  },
 }
 </script>
 
 <style lang="scss">
+.center {
+  display: flex;
+  // flex-wrap: wrap;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+
+  .title {
+    font-size: 24px;
+    color: $primary;
+    font-weight: 900;
+  }
+
+  .error-title {
+    font-size: 14px;
+    color: $error;
+    font-weight: 400;
+    border: 1px solid $error-light;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 5px;
+    background-color: $error-lightness;
+  }
+  .success-title {
+    font-size: 14px;
+    color: $success;
+    font-weight: 400;
+    border: 1px solid $success-light;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 5px;
+    background-color: $success-lightness;
+  }
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
+  // flex-wrap: wrap;
+  justify-content: center;
+  // align-items: center;
+  // flex-grow: 1;
   margin: 30px 0;
 
   &__email,
@@ -160,8 +214,8 @@ export default {
 }
 
 .valid-input {
-  border: 2px solid $success-dark;
-  background-color: $success-light;
+  border: 2px solid $success-light;
+  background-color: $success-lightness;
   height: 38px;
 }
 
@@ -184,12 +238,5 @@ export default {
   &:hover {
     background-color: $primary-light;
   }
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
 }
 </style>
