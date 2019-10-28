@@ -28,7 +28,6 @@
       <button
         type="submit"
         class="login-form__btn"
-        :class="[$v.$invalid ? 'disabled-btn' : 'enabled-btn']"
         :disabled="this.$v.$invalid"
       >
         <div class="lds-ring" v-if="loadingApp">

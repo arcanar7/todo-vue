@@ -1,18 +1,18 @@
 <template>
-  <main class="wrapper">
-    <h1 class="title">My ToDo List</h1>
-    <section class="inner">
-      <div class="account">
-        <span class="dropdown">
-          arcanar7@gmail.com
-          <ul class="menu">
-            <li class="menu__logout">Log out</li>
-          </ul>
-        </span>
+  <div class="app-wrapper">
+    <header class="header">
+      <div class="logout">
+        arcanar7@gmail.com
+        <button class="exit" title="Log out" @click="onLogOut">
+          <img src="../assets/icons/exit.svg" alt="" />
+        </button>
       </div>
+      <h1 class="title">My ToDo List</h1>
+    </header>
+    <main class="app-inner">
       <TodoList />
-    </section>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -23,46 +23,54 @@ export default {
   components: {
     TodoList,
   },
+  methods: {
+    onLogOut() {
+      this.$store.dispatch('logoutUser')
+      this.$router.push('/login')
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-.title {
-  color: $primary;
-}
-
-.account {
+.app-wrapper {
   display: flex;
-  justify-content: flex-end;
-  background-color: yellow;
-  width: 100%;
-  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
 }
 
-.dropdown {
-  cursor: pointer;
-  background-color: blue;
-  color: white;
-  position: relative;
-  display: inline-block;
-  padding: 5px;
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 600px;
+
+  .logout {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+    color: $primary;
+
+    .exit {
+      margin-left: 5px;
+      background-color: inherit;
+      color: $primary;
+    }
+  }
+
+  .title {
+    color: $primary;
+    text-align: center;
+    font-weight: 900;
+  }
+}
+
+.app-inner {
+  display: flex;
+  width: 588px;
+  border: 1px solid $primary;
   border-radius: 10px;
-
-  .menu {
-    list-style: none;
-    background-color: green;
-    display: none;
-
-    &__logout {
-      cursor: pointer;
-      display: block;
-    }
-  }
-
-  &:hover {
-    .menu {
-      display: block;
-    }
-  }
+  padding: 5px;
 }
 </style>

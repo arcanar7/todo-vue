@@ -49,8 +49,7 @@
       <button
         type="submit"
         class="login-form__btn"
-        :class="[$v.$invalid ? 'disabled-btn' : 'enabled-btn']"
-        :disabled="this.$v.email.$invalid || this.$v.password.$invalid"
+        :disabled="this.$v.$invalid"
       >
         <div class="lds-ring" v-if="loadingApp">
           <div></div>
@@ -114,24 +113,24 @@ export default {
   }
 
   .error-title {
-    font-size: 14px;
     color: $error;
-    font-weight: 400;
     border: 1px solid $error-light;
-    border-radius: 5px;
-    margin: 0 10px;
-    padding: 5px;
     background-color: $error-lightness;
   }
+
+  .success-title {
+    color: $success;
+    border: 1px solid $success-light;
+    background-color: $success-lightness;
+  }
+
+  .error-title,
   .success-title {
     font-size: 14px;
-    color: $success;
     font-weight: 400;
-    border: 1px solid $success-light;
     border-radius: 5px;
     margin: 0 10px;
     padding: 5px;
-    background-color: $success-lightness;
   }
 }
 
@@ -155,6 +154,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 211px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 900;
   }
 
   input + input,
@@ -191,16 +194,5 @@ export default {
 .text-error {
   font-size: 12px;
   color: $error;
-}
-
-.disabled-btn {
-  opacity: 0.4;
-  cursor: default;
-}
-
-.enabled-btn {
-  &:hover {
-    background-color: $primary-light;
-  }
 }
 </style>
