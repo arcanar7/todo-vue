@@ -1,12 +1,16 @@
 export default {
   state: {
     loading: false,
+    localLoading: false,
     error: null,
     success: null,
   },
   mutations: {
     setLoading(state, payload) {
       state.loading = payload
+    },
+    setLocalLoading(state, payload) {
+      state.localLoading = payload
     },
     setError(state, payload) {
       state.error = payload
@@ -25,6 +29,9 @@ export default {
     setLoading({ commit }, payload) {
       commit('setLoading', payload)
     },
+    setLocalLoading({ commit }, payload) {
+      commit('setLocalLoading', payload)
+    },
     setError({ commit }, payload) {
       commit('setError', payload)
     },
@@ -41,6 +48,9 @@ export default {
   getters: {
     loading(state) {
       return state.loading
+    },
+    localLoading(state) {
+      return state.localLoading
     },
     error(state) {
       return state.error

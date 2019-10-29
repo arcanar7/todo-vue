@@ -54,3 +54,11 @@ input {
   border-radius: 5px;
   outline: none !important;
 }
+
+.color-primary {
+  color: $primary;
+}
+
+.color-primary-lightest {
+  color: $primary-lightest;
+}

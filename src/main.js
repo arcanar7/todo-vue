@@ -15,6 +15,9 @@ Vue.mixin({
     loadingApp() {
       return this.$store.getters.loading
     },
+    localLoading() {
+      return this.$store.getters.localLoading
+    },
   },
 })
 
@@ -39,6 +42,6 @@ new Vue({
         this.$store.dispatch('autoLoginUser', user)
       }
     }) */
-    // this.$store.dispatch('fetchAds')
+    // this.$store.dispatch('fetchTodos')
   },
 }).$mount('#app')
