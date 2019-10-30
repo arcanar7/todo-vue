@@ -81,14 +81,14 @@
               @keyup.esc="cancelEdit(todo)"
             />
             <button class="edit-done" @click="doneEdit(todo)" title="Edit todo">
-              +
+              <img src="../assets/icons/edit.svg" alt="" />
             </button>
             <button
               class="edit-cancel"
               @click="cancelEdit(todo)"
               title="Cancel edit"
             >
-              -
+              <img src="../assets/icons/cancel.svg" alt="" />
             </button>
           </div>
         </li>
@@ -462,19 +462,30 @@ export default {
   }
 
   &-done {
-    right: 34px;
+    // background-color: $success;
+    right: 40px;
   }
   &-cancel {
-    right: 0;
+    // background-color: $error;
+    right: 2px;
   }
   &-done,
   &-cancel {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 34px;
-    height: 100%;
+    width: 38px;
+    height: 34px;
+    top: 2px;
     position: absolute;
+    background-color: inherit;
+    color: $primary;
+
+    &:hover,
+    &:focus {
+      background-color: inherit;
+      color: $primary-light;
+    }
   }
 }
 </style>
