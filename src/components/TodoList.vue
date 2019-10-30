@@ -22,7 +22,7 @@
       </div>
       <span v-else>+</span>
     </button>
-    <div class="empty-state" v-if="!todos.length">
+    <div class="empty-state" v-if="!todos.length && !loadingApp">
       <p>
         Either you've done everything already or there are still things to add
         to your list. Add your first todo.
@@ -462,29 +462,26 @@ export default {
   }
 
   &-done {
-    // background-color: $success;
-    right: 40px;
+    right: 35px;
   }
   &-cancel {
-    // background-color: $error;
-    right: 2px;
+    right: 7px;
   }
   &-done,
   &-cancel {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 38px;
-    height: 34px;
-    top: 2px;
+    padding: 2px;
+    width: 28px;
+    height: 24px;
+    top: 7px;
     position: absolute;
     background-color: inherit;
-    color: $primary;
 
     &:hover,
     &:focus {
       background-color: inherit;
-      color: $primary-light;
     }
   }
 }

@@ -27,21 +27,15 @@ new Vue({
   render: h => h(App),
   created() {
     let firebaseConfig = {
-      apiKey: 'AIzaSyC3rqNSnCeTPw27cuDVnOOuSWX_CAEh55I',
-      authDomain: 'todo-29aaf.firebaseapp.com',
-      databaseURL: 'https://todo-29aaf.firebaseio.com',
-      projectId: 'todo-29aaf',
-      storageBucket: 'todo-29aaf.appspot.com',
-      messagingSenderId: '877725745417',
-      appId: '1:877725745417:web:4560c406b4ced91a6453d8',
-      measurementId: 'G-18Y5ZPTCHP',
+      apiKey: process.env.VUE_APP_apiKey,
+      authDomain: process.env.VUE_APP_authDomain,
+      databaseURL: process.env.VUE_APP_databaseURL,
+      projectId: process.env.VUE_APP_projectId,
+      storageBucket: process.env.VUE_APP_storageBucket,
+      messagingSenderId: process.env.VUE_APP_messagingSenderId,
+      appId: process.env.VUE_APP_appId,
+      measurementId: process.env.VUE_APP_measurementId,
     }
     fb.initializeApp(firebaseConfig)
-    /* fb.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.$store.dispatch('autoLoginUser', user)
-      }
-    }) */
-    // this.$store.dispatch('fetchTodos')
   },
 }).$mount('#app')
