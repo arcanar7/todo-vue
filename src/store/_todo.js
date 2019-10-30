@@ -2,9 +2,9 @@ import fb from 'firebase/app'
 import 'firebase/database'
 
 class Todo {
-  constructor(title, complited = false, id = null) {
+  constructor(title, completed = false, id = null) {
     this.title = title
-    this.complited = complited
+    this.completed = completed
     this.id = id
   }
 }
@@ -20,12 +20,17 @@ export default {
     loadTodos(state, payload) {
       state.todos = payload
     },
-    updateTodo(state, { title, complited, id }) {
+    updateTitleTodo(state, { title, id }) {
       const todo = state.todos.find(t => {
         return t.id === id
       })
       todo.title = title
-      todo.complited = complited
+    },
+    updateCompleteTodo(state, { completed, id }) {
+      const todo = state.todos.find(t => {
+        return t.id === id
+      })
+      todo.completed = completed
     },
     removeTodo(state, id) {
       state.todos = state.todos.filter(todo => {
@@ -63,7 +68,7 @@ export default {
         const todos = fbVal.val()
         Object.keys(todos).forEach(key => {
           const todo = todos[key]
-          resultTodos.push(new Todo(todo.title, todo.complited, key))
+          resultTodos.push(new Todo(todo.title, todo.completed, key))
         })
         commit('loadTodos', resultTodos)
         commit('setLoading', false)
@@ -73,26 +78,36 @@ export default {
         throw error
       }
     },
-    async updateTodo({ commit, getters }, { title, complited, id }) {
+    async updateTitleTodo({ commit, getters }, { title, id }) {
       commit('clearError')
-      // commit('setLoading', true)
       try {
         await fb
           .database()
           .ref(getters.user.id)
           .child(id)
-          .update({ title, complited })
-        commit('updateTodo', { title, complited, id })
-        // commit('setLoading', false)
+          .update({ title })
+        commit('updateTitleTodo', { title, id })
       } catch (error) {
         commit('setError', error.message)
-        // commit('setLoading', false)
+        throw error
+      }
+    },
+    async updateCompleteTodo({ commit, getters }, { completed, id }) {
+      commit('clearError')
+      try {
+        await fb
+          .database()
+          .ref(getters.user.id)
+          .child(id)
+          .update({ completed })
+        commit('updateCompleteTodo', { completed, id })
+      } catch (error) {
+        commit('setError', error.message)
         throw error
       }
     },
     async removeTodo({ commit, getters }, id) {
       commit('clearError')
-      // commit('setLocalLoading', true)
       try {
         await fb
           .database()
@@ -100,10 +115,8 @@ export default {
           .child(id)
           .remove()
         commit('removeTodo', id)
-        // commit('setLocalLoading', false)
       } catch (error) {
         commit('setError', error.message)
-        // commit('setLocalLoading', false)
         throw error
       }
     },
