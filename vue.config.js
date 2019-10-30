@@ -2,7 +2,9 @@
 //   .BundleAnalyzerPlugin
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/todo-vue/' : '/',
+  // configureWebpack: {
+  //   plugins: [new BundleAnalyzerPlugin()],
+  // },
   css: {
     loaderOptions: {
       sass: {
@@ -10,7 +12,5 @@ module.exports = {
       },
     },
   },
-  // configureWebpack: {
-  //   plugins: [new BundleAnalyzerPlugin()],
-  // },
+  productionSourceMap: false,
 }
