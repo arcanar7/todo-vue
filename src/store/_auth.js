@@ -10,10 +10,14 @@ class User {
 export default {
   state: {
     user: null,
+    email: '',
   },
   mutations: {
     setUser(state, payload) {
       state.user = payload
+    },
+    setEmail(state, payload) {
+      state.email = payload
     },
   },
   actions: {
@@ -40,6 +44,8 @@ export default {
       try {
         const user = await fb.auth().signInWithEmailAndPassword(email, password)
         commit('setUser', new User(user.user.uid))
+        commit('setEmail', email)
+        commit('loadTodos', [])
         commit('setLoading', false)
       } catch (error) {
         commit('setLoading', false)
@@ -68,6 +74,9 @@ export default {
   getters: {
     user(state) {
       return state.user
+    },
+    email(state) {
+      return state.email
     },
     isUserLoggedIn(state) {
       return state.user != null

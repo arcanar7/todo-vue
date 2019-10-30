@@ -39,6 +39,9 @@ export default {
     },
   },
   actions: {
+    clearTodos({ commit }) {
+      commit('loadTodos', [])
+    },
     async createTodo({ commit, getters }, { title }) {
       commit('clearError')
       commit('setLocalLoading', true)

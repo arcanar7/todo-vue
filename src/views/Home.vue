@@ -2,7 +2,7 @@
   <div class="app-wrapper">
     <header class="header">
       <div class="logout">
-        arcanar7@gmail.com
+        {{ email }}
         <button class="exit" title="Log out" @click="onLogOut">
           <img src="../assets/icons/exit.svg" alt="" />
         </button>
@@ -27,6 +27,11 @@ export default {
     onLogOut() {
       this.$store.dispatch('logoutUser')
       this.$router.push('/login')
+    },
+  },
+  computed: {
+    email() {
+      return this.$store.getters.email
     },
   },
 }
