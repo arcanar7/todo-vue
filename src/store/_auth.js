@@ -69,6 +69,7 @@ export default {
     logoutUser({ commit }) {
       fb.auth().signOut()
       commit('setUser', null)
+      commit('setEmail', '')
     },
   },
   getters: {
@@ -77,9 +78,6 @@ export default {
     },
     email(state) {
       return state.email
-    },
-    isUserLoggedIn(state) {
-      return state.user != null
     },
   },
 }

@@ -36,63 +36,7 @@
         <div></div>
         <div></div>
       </div>
-      <ul class="todo-list" v-else>
-        <li
-          v-for="todo of filteredTodos"
-          class="todo"
-          :class="{ editing: todo == editedTodo }"
-          :key="todo.id"
-        >
-          <div class="todo__view">
-            <div class="checkbox">
-              <input
-                class="toggle"
-                type="checkbox"
-                v-model="todo.completed"
-                :id="todo.id"
-                @change="onToggleComplete"
-              />
-              <label
-                :for="todo.id"
-                class="label"
-                :class="{ 'color-primary': todo.completed }"
-              ></label>
-            </div>
-            <label
-              class="title"
-              :class="todo.completed ? 'completed' : 'color-primary'"
-              @dblclick="editTodo(todo)"
-              >{{ todo.title }}</label
-            >
-            <button
-              class="destroy"
-              @click="removeTodo(todo.id)"
-              title="Remove todo"
-            ></button>
-          </div>
-          <div class="edit">
-            <input
-              class="edit-title"
-              type="text"
-              v-model="todo.title"
-              v-todo-focus="todo == editedTodo"
-              @blur="doneEdit(todo)"
-              @keyup.enter="doneEdit(todo)"
-              @keyup.esc="cancelEdit(todo)"
-            />
-            <button class="edit-done" @click="doneEdit(todo)" title="Edit todo">
-              <img src="../assets/icons/edit.svg" alt="" />
-            </button>
-            <button
-              class="edit-cancel"
-              @click="cancelEdit(todo)"
-              title="Cancel edit"
-            >
-              <img src="../assets/icons/cancel.svg" alt="" />
-            </button>
-          </div>
-        </li>
-      </ul>
+      <todo v-else :visibility="visibility" :todos="todos"></todo>
     </section>
     <footer class="footer" v-show="todos.length" v-if="!loadingApp">
       <span class="todo-count">
@@ -139,6 +83,8 @@
 </template>
 
 <script>
+import Todo from '@/components/Todo.vue'
+
 const filters = {
   all(todos) {
     return todos
@@ -152,11 +98,13 @@ const filters = {
 }
 
 export default {
+  components: {
+    Todo,
+  },
   data() {
     return {
       newTodo: '',
       visibility: 'all',
-      editedTodo: null,
     }
   },
   methods: {
@@ -178,10 +126,6 @@ export default {
     },
     onFiltered(visibility) {
       this.visibility = visibility
-    },
-    onToggleComplete(e) {
-      const { checked, id } = e.target
-      this.$store.dispatch('updateCompleteTodo', { completed: checked, id })
     },
     editTodo(todo) {
       this.beforeEditCache = todo.title
@@ -211,9 +155,6 @@ export default {
     todos() {
       return this.$store.getters.todos
     },
-    filteredTodos() {
-      return filters[this.visibility](this.todos)
-    },
     remaining() {
       return filters.active(this.todos).length
     },
@@ -221,13 +162,6 @@ export default {
   filters: {
     pluralize(n) {
       return n === 1 ? 'item' : 'items'
-    },
-  },
-  directives: {
-    'todo-focus': function(el, binding) {
-      if (binding.value) {
-        el.focus()
-      }
     },
   },
   created() {

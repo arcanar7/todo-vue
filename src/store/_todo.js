@@ -128,20 +128,5 @@ export default {
     todos(state) {
       return state.todos
     },
-    // promoAds(state) {
-    //   return state.ads.filter(ad => {
-    //     return ad.promo
-    //   })
-    // },
-    // myTodos(state, getters) {
-    //   return state.todos.filter(todo => {
-    //     return todo.ownerId === getters.user.id
-    //   })
-    // },
-    // adById(state) {
-    //   return adId => {
-    //     return state.ads.find(ad => ad.id === adId)
-    //   }
-    // },
   },
 }
