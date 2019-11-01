@@ -12,8 +12,12 @@ class Todo {
 export default {
   state: {
     todos: [],
+    visibility: 'all',
   },
   mutations: {
+    setVisibility(state, payload) {
+      state.visibility = payload
+    },
     createTodo(state, payload) {
       state.todos.push(payload)
     },
@@ -39,6 +43,9 @@ export default {
     },
   },
   actions: {
+    setVisibility({ commit }, payload) {
+      commit('setVisibility', payload)
+    },
     clearTodos({ commit }) {
       commit('loadTodos', [])
     },
@@ -127,6 +134,9 @@ export default {
   getters: {
     todos(state) {
       return state.todos
+    },
+    visibility(state) {
+      return state.visibility
     },
   },
 }

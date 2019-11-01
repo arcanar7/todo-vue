@@ -71,7 +71,7 @@ const filters = {
   },
 }
 export default {
-  props: { visibility: String, todos: Array },
+  props: { todos: Array },
   data() {
     return {
       editedTodo: null,
@@ -82,10 +82,39 @@ export default {
       const { checked, id } = e.target
       this.$store.dispatch('updateCompleteTodo', { completed: checked, id })
     },
+    removeTodo(id) {
+      this.$store.dispatch('removeTodo', id)
+    },
+    editTodo(todo) {
+      this.beforeEditCache = todo.title
+      this.editedTodo = todo
+    },
+    doneEdit({ title, id }) {
+      if (!this.editedTodo) {
+        return
+      }
+      title = title.trim()
+      if (title !== this.beforeEditCache)
+        title
+          ? this.$store
+              .dispatch('updateTitleTodo', { title, id })
+              .then(() => (this.editedTodo = null))
+          : this.$store
+              .dispatch('removeTodo', id)
+              .then(() => (this.editedTodo = null))
+      else this.editedTodo = null
+    },
+    cancelEdit(todo) {
+      this.editedTodo = null
+      todo.title = this.beforeEditCache
+    },
   },
   computed: {
     filteredTodos() {
       return filters[this.visibility](this.todos)
+    },
+    visibility() {
+      return this.$store.getters.visibility
     },
   },
   directives: {
@@ -98,4 +127,157 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.todo-list {
+  flex-grow: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .todo {
+    display: flex;
+    border-bottom: 1px solid $primary-lightest;
+
+    &__view {
+      display: flex;
+      flex-grow: 1;
+      position: relative;
+      padding: 5px;
+
+      .checkbox {
+        color: $primary-lightest;
+        margin-right: 30px;
+
+        .toggle {
+          display: none;
+        }
+
+        .label {
+          position: relative;
+          transition: color 0.2s ease-out;
+        }
+
+        .label::before {
+          content: '';
+          height: 20px;
+          width: 20px;
+          border: 1px solid;
+          border-radius: 50%;
+        }
+
+        .label::after {
+          content: none;
+          left: 3px;
+          height: 8px;
+          width: 20px;
+          border-left: 2px solid;
+          border-bottom: 2px solid;
+          transform: rotate(-45deg);
+        }
+
+        .label::before,
+        .label::after {
+          top: 18px;
+          position: absolute;
+          display: inline-block;
+        }
+
+        .toggle:checked + .label::after {
+          content: '';
+        }
+      }
+
+      .title {
+        word-break: break-all;
+        flex-grow: 1;
+        font-size: 24px;
+        font-weight: 700;
+        font-style: italic;
+        transition: color 0.2s ease-out;
+      }
+
+      .destroy {
+        display: none;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        background-color: inherit;
+        color: $primary-light;
+        font-size: 30px;
+        transition: color 0.2s ease-out;
+
+        &::after {
+          content: '×';
+        }
+
+        &:hover {
+          color: $primary;
+        }
+      }
+
+      &:hover {
+        .destroy {
+          display: inline-block;
+        }
+      }
+    }
+  }
+  .editing {
+    .edit {
+      display: flex;
+    }
+
+    .todo__view {
+      display: none;
+    }
+  }
+}
+
+.edit {
+  display: none;
+  flex-grow: 1;
+  position: relative;
+
+  &-title {
+    height: auto;
+    margin-left: 23px;
+    padding: 3px 0 3px 10px;
+    word-break: break-all;
+    flex-grow: 1;
+    font-size: 24px;
+    font-weight: 700;
+    font-style: italic;
+    color: $primary;
+    transition: color 0.2s ease-out;
+
+    &:focus {
+      border: 2px solid $primary;
+      background-color: $primary-lightness;
+    }
+  }
+
+  &-done {
+    right: 35px;
+  }
+  &-cancel {
+    right: 7px;
+  }
+  &-done,
+  &-cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    width: 28px;
+    height: 24px;
+    top: 7px;
+    position: absolute;
+    background-color: inherit;
+
+    &:hover,
+    &:focus {
+      background-color: inherit;
+    }
+  }
+}
+</style>
