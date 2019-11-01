@@ -44,14 +44,14 @@
           @keyup.esc="cancelEdit(todo)"
         />
         <button class="edit-done" @click="doneEdit(todo)" title="Edit todo">
-          <img src="../assets/icons/edit.svg" alt="" />
+          <img src="@/assets/icons/edit.svg" alt="" />
         </button>
         <button
           class="edit-cancel"
           @click="cancelEdit(todo)"
           title="Cancel edit"
         >
-          <img src="../assets/icons/cancel.svg" alt="" />
+          <img src="@/assets/icons/cancel.svg" alt="" />
         </button>
       </div>
     </li>

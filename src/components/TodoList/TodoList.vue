@@ -1,33 +1,12 @@
 <template>
   <div class="todo-wrapper">
-    <input
-      class="new-todo"
-      autofocus
-      autocomplete="off"
-      placeholder="What needs to be done?"
-      v-model="newTodo"
-      @keyup.enter="addTodo"
-    />
-    <button
-      class="new-todo-btn"
-      @click="addTodo"
-      title="Add todo"
-      :disabled="localLoading"
-    >
-      <div class="lds-ring" v-if="localLoading">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-      <span v-else>+</span>
-    </button>
+    <todo-new></todo-new>
     <div class="empty-state" v-if="!todos.length && !loadingApp">
       <p>
         Either you've done everything already or there are still things to add
         to your list. Add your first todo.
       </p>
-      <img src="../assets/icons/arrow.svg" alt="" />
+      <img src="@/assets/icons/arrow.svg" alt="" />
     </div>
     <section class="main" v-else>
       <div class="lds-ring primary" v-if="loadingApp">
@@ -36,7 +15,7 @@
         <div></div>
         <div></div>
       </div>
-      <todo v-else :visibility="visibility" :todos="todos"></todo>
+      <todos v-else :visibility="visibility" :todos="todos"></todos>
     </section>
     <footer class="footer" v-show="todos.length" v-if="!loadingApp">
       <span class="todo-count">
@@ -83,7 +62,8 @@
 </template>
 
 <script>
-import Todo from '@/components/Todo.vue'
+import Todos from './Todos/Todos'
+import TodoNew from './TodoNew/TodoNew'
 
 const filters = {
   all(todos) {
@@ -99,7 +79,8 @@ const filters = {
 
 export default {
   components: {
-    Todo,
+    Todos,
+    TodoNew,
   },
   data() {
     return {
@@ -108,14 +89,6 @@ export default {
     }
   },
   methods: {
-    addTodo() {
-      if (this.newTodo) {
-        this.$store
-          .dispatch('createTodo', { title: this.newTodo })
-          .catch(() => {})
-        this.newTodo = ''
-      }
-    },
     removeTodo(id) {
       this.$store.dispatch('removeTodo', id)
     },
@@ -175,26 +148,6 @@ export default {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  position: relative;
-}
-
-.new-todo-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 44px;
-  height: 44px;
-  position: absolute;
-  right: 0;
-}
-.new-todo {
-  flex-grow: 1;
-
-  &:focus {
-    border: 2px solid $primary;
-    height: 38px;
-    background-color: $primary-lightness;
-  }
 }
 
 .empty-state {

@@ -15,9 +15,6 @@ Vue.mixin({
     loadingApp() {
       return this.$store.getters.loading
     },
-    localLoading() {
-      return this.$store.getters.localLoading
-    },
   },
 })
 
