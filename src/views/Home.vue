@@ -80,4 +80,13 @@ export default {
   box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
   background-color: $background;
 }
+
+@media screen and (max-width: $screen) {
+  .header {
+    width: 90%;
+  }
+  .app-inner {
+    width: 90%;
+  }
+}
 </style>

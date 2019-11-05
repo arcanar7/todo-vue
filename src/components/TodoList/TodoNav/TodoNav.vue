@@ -131,4 +131,16 @@ export default {
   color: $primary-lightest;
   text-decoration: line-through;
 }
+
+@media screen and (max-width: $screen) {
+  .todo-nav {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-filters {
+      position: initial;
+    }
+  }
+}
 </style>

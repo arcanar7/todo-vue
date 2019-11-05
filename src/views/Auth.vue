@@ -29,6 +29,8 @@ export default {}
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-content: center;
+  overflow: auto;
   justify-content: center;
   height: 100vh;
 }
