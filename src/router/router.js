@@ -38,6 +38,11 @@ export default new Router({
         },
       ],
     },
-    { path: '*', component: () => import('@/components/NotFound.vue') },
+    {
+      path: '/404',
+      name: '404',
+      component: () => import('@/components/NotFound.vue'),
+    },
+    { path: '*', redirect: '/404' },
   ],
 })
