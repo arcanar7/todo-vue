@@ -80,13 +80,9 @@ export default {
     font-weight: 700;
     font-style: italic;
     color: $primary;
-    border: none;
     transition: color 0.2s ease-out;
-
-    &:focus {
-      border: 2px solid $primary;
-      background-color: $primary-lightness;
-    }
+    border: 2px solid $primary;
+    background-color: $primary-lightness;
   }
 
   &-done {
