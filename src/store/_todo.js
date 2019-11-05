@@ -13,6 +13,8 @@ export default {
   state: {
     todos: [],
     visibility: 'all',
+    editedTodo: null,
+    beforeEditTitle: '',
   },
   mutations: {
     setVisibility(state, payload) {
@@ -40,6 +42,12 @@ export default {
       state.todos = state.todos.filter(todo => {
         return todo.id !== id
       })
+    },
+    editTodo(state, payload) {
+      state.editedTodo = payload
+    },
+    beforeEditTitle(state, payload) {
+      state.beforeEditTitle = payload
     },
   },
   actions: {
@@ -130,6 +138,12 @@ export default {
         throw error
       }
     },
+    editTodo({ commit }, payload) {
+      commit('editTodo', payload)
+    },
+    beforeEditTitle({ commit }, payload) {
+      commit('beforeEditTitle', payload)
+    },
   },
   getters: {
     todos(state) {
@@ -137,6 +151,12 @@ export default {
     },
     visibility(state) {
       return state.visibility
+    },
+    editedTodo(state) {
+      return state.editedTodo
+    },
+    beforeEditTitle(state) {
+      return state.beforeEditTitle
     },
   },
 }
