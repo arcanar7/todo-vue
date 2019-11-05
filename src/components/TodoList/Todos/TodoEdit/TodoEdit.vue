@@ -9,10 +9,14 @@
       @keyup.enter="doneEdit(todo)"
       @keyup.esc="cancelEdit(todo)"
     />
-    <button class="edit-done" @click="doneEdit(todo)" title="Edit todo">
+    <button class="edit-done" @mousedown="doneEdit(todo)" title="Edit todo">
       <img src="@/assets/icons/edit.svg" alt="" />
     </button>
-    <button class="edit-cancel" @click="cancelEdit(todo)" title="Cancel edit">
+    <button
+      class="edit-cancel"
+      @mousedown="cancelEdit(todo)"
+      title="Cancel edit"
+    >
       <img src="@/assets/icons/cancel.svg" alt="" />
     </button>
   </div>
@@ -76,6 +80,7 @@ export default {
     font-weight: 700;
     font-style: italic;
     color: $primary;
+    border: none;
     transition: color 0.2s ease-out;
 
     &:focus {

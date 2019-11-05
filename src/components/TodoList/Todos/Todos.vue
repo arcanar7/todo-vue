@@ -15,19 +15,10 @@
 <script>
 import Todo from './Todo/Todo'
 import TodoEdit from './TodoEdit/TodoEdit'
+import { filters } from '@/mixins/filter.mixin'
 
-const filters = {
-  all(todos) {
-    return todos
-  },
-  active(todos) {
-    return todos.filter(todo => !todo.completed)
-  },
-  completed(todos) {
-    return todos.filter(todo => todo.completed)
-  },
-}
 export default {
+  mixins: [filters],
   components: {
     Todo,
     TodoEdit,

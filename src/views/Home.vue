@@ -10,7 +10,7 @@
       <h1 class="title">My ToDo List</h1>
     </header>
     <main class="app-inner">
-      <TodoList />
+      <todo-list />
     </main>
   </div>
 </template>
