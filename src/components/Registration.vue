@@ -75,12 +75,7 @@
         class="login-form__btn"
         :disabled="this.$v.$invalid"
       >
-        <div class="lds-ring" v-if="loadingApp">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+        <spinner v-if="loadingApp"></spinner>
         Create account
       </button>
     </form>
@@ -91,9 +86,11 @@
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators'
 
 import AuthMixin from '../mixins/auth.mixin'
+import Spinner from '@/components/Spinner'
 
 export default {
   mixins: [AuthMixin],
+  components: { Spinner },
   validations: {
     email: {
       required,

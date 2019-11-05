@@ -1,3 +1,19 @@
+<template>
+  <div class="lds-ring" :class="primary">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: { primary: String },
+}
+</script>
+
+<style lang="scss">
 .lds-ring {
   display: inline-block;
   position: relative;
@@ -53,3 +69,4 @@
     border-color: $primary transparent transparent transparent;
   }
 }
+</style>

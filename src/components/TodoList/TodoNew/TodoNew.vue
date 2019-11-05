@@ -14,19 +14,17 @@
       title="Add todo"
       :disabled="localLoading"
     >
-      <div class="lds-ring" v-if="localLoading">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <spinner v-if="localLoading"></spinner>
       <span v-else>+</span>
     </button>
   </div>
 </template>
 
 <script>
+import Spinner from '@/components/Spinner'
+
 export default {
+  components: { Spinner },
   data() {
     return {
       newTodo: '',

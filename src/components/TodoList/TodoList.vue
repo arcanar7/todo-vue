@@ -9,12 +9,7 @@
       <img src="@/assets/icons/arrow.svg" alt="" />
     </div>
     <section class="main" v-else>
-      <div class="lds-ring primary" v-if="loadingApp">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
+      <spinner :primary="'primary'" v-if="loadingApp"></spinner>
       <todos v-else :todos="todos"></todos>
     </section>
     <footer class="footer" v-show="todos.length && !loadingApp">
@@ -27,12 +22,14 @@
 import Todos from './Todos/Todos'
 import TodoNew from './TodoNew/TodoNew'
 import TodoNav from './TodoNav/TodoNav'
+import Spinner from '@/components/Spinner'
 
 export default {
   components: {
     Todos,
     TodoNew,
     TodoNav,
+    Spinner,
   },
   computed: {
     todos() {
