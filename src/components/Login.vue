@@ -1,6 +1,6 @@
 <template>
   <section class="center">
-    <h1 class="title">Log in account</h1>
+    <h1 class="title">{{ $t('login.title') }}</h1>
     <p class="error-title" v-if="isError">{{ isError }}</p>
     <p class="success-title" v-if="isSuccess">{{ isSuccess }}</p>
     <form class="login-form" @submit.prevent="onSubmit('loginUser')" novalidate>
@@ -12,17 +12,17 @@
           'has-error': $v.email.$error,
           'valid-input': !$v.email.$invalid,
         }"
-        placeholder="Email"
+        :placeholder="$t('login.ph-email')"
         v-model="email"
         @blur="$v.email.$touch()"
       />
       <span v-if="$v.email.$error" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
         <template v-if="!$v.email.required">
-          Required
+          {{ $t('login.required') }}
         </template>
         <template v-else-if="!$v.email.email">
-          E-mail must be valid
+          {{ $t('login.email') }}
         </template>
       </span>
       <input
@@ -33,17 +33,17 @@
           'has-error': $v.password.$error,
           'valid-input': !$v.password.$invalid,
         }"
-        placeholder="Password"
+        :placeholder="$t('login.ph-password')"
         v-model="password"
         @blur="$v.password.$touch()"
       />
       <span v-if="$v.password.$error" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
         <template v-if="!$v.password.required">
-          Required
+          {{ $t('login.required') }}
         </template>
         <template v-else-if="!$v.password.minLength">
-          Password must be equal or more than 6 characters
+          {{ $t('login.password') }}
         </template>
       </span>
       <button
@@ -52,11 +52,11 @@
         :disabled="this.$v.$invalid"
       >
         <spinner v-if="loadingApp"></spinner>
-        Log in
+        {{ $t('login.log-in') }}
       </button>
       <span class="login-form__forgot">
         <router-link to="/reset" class="login-form__forgot">
-          Forgot password?
+          {{ $t('login.forgot-password') }}
         </router-link>
       </span>
     </form>

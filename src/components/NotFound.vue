@@ -1,14 +1,14 @@
 <template>
   <div class="not-found-wrapper">
     <header class="not-found-header">
-      <h1 class="not-found-header__title">My ToDo List</h1>
+      <h1 class="not-found-header__title">{{ $t('title') }}</h1>
     </header>
     <main class="not-found-main">
-      <h2 class="not-found-main__title">(404 error) Page not found!</h2>
+      <h2 class="not-found-main__title">{{ $t('not-found.title') }}</h2>
     </main>
     <nav class="not-found-nav">
       <router-link to="/" class="not-found-nav__home">
-        Go to homepage
+        {{ $t('not-found.home') }}
       </router-link>
     </nav>
   </div>

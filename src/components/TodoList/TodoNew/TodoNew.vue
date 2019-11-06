@@ -4,14 +4,14 @@
       class="new-todo__title"
       autofocus
       autocomplete="off"
-      placeholder="What needs to be done?"
+      :placeholder="$t('todo-new.ph-new')"
       v-model="newTodo"
       @keyup.enter="addTodo"
     />
     <button
       class="new-todo__btn"
       @click="addTodo"
-      title="Add todo"
+      :title="$t('todo-new.add-title')"
       :disabled="localLoading"
     >
       <spinner v-if="localLoading"></spinner>

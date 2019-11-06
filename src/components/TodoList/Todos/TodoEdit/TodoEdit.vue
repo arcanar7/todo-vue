@@ -9,13 +9,17 @@
       @keyup.enter="doneEdit(todo)"
       @keyup.esc="cancelEdit(todo)"
     />
-    <button class="edit-done" @mousedown="doneEdit(todo)" title="Edit todo">
+    <button
+      class="edit-done"
+      @mousedown="doneEdit(todo)"
+      :title="$t('todo-edit.edit-title')"
+    >
       <img src="@/assets/icons/edit.svg" alt="" />
     </button>
     <button
       class="edit-cancel"
       @mousedown="cancelEdit(todo)"
-      title="Cancel edit"
+      :title="$t('todo-edit.cancel-edit-title')"
     >
       <img src="@/assets/icons/cancel.svg" alt="" />
     </button>

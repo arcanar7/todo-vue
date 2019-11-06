@@ -23,7 +23,7 @@
     <button
       class="destroy"
       @click="removeTodo(todo.id)"
-      title="Remove todo"
+      :title="$t('todo.remove-title')"
     ></button>
   </div>
 </template>

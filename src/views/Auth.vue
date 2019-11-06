@@ -1,19 +1,20 @@
 <template>
   <div class="wrapper">
     <header class="header">
-      <h1 class="title">My ToDo List</h1>
+      <language />
+      <h1 class="title">{{ $t('title') }}</h1>
     </header>
     <section class="inner">
       <div class="nav">
         <router-link to="/login" class="nav__login" active-class="active">
-          Login
+          {{ $t('auth.login') }}
         </router-link>
         <router-link
           to="/registration"
           class="nav__registration"
           active-class="active"
         >
-          Register
+          {{ $t('auth.registration') }}
         </router-link>
       </div>
       <transition name="component-fade" mode="out-in">
@@ -24,7 +25,13 @@
 </template>
 
 <script>
-export default {}
+import Language from '@/components/Language.vue'
+
+export default {
+  components: {
+    Language,
+  },
+}
 </script>
 
 <style lang="scss">

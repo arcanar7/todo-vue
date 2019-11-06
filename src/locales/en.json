@@ -1,0 +1,52 @@
+{
+  "title": "My ToDo List",
+  "auth": {
+    "login": "Login",
+    "registration": "Register"
+  },
+  "login": {
+    "log-in": "Log in",
+    "title": "Log in account",
+    "required": "Required",
+    "email": "E-mail must be valid",
+    "password": "Password must be equal or more than 6 characters",
+    "forgot-password": "Forgot password?",
+    "ph-email": "Email",
+    "ph-password": "Password"
+  },
+  "register": {
+    "title": "Register account",
+    "repeat-pass": "Passwords must be identical",
+    "create": "Create account",
+    "ph-repeat-password": "Repeat password"
+  },
+  "reset": {
+    "title": "Recover account",
+    "reset-pass": "Reset password"
+  },
+  "not-found": {
+    "title": "(404 error) Page not found!",
+    "home": "Go to homepage"
+  },
+  "todo-list": {
+    "empty": "Either you've done everything already or there are still things to add to your list. Add your first todo."
+  },
+  "todo-nav": {
+    "left": "left",
+    "all": "All",
+    "active": "Active",
+    "completed": "Completed",
+    "clear": "Clear completed"
+  },
+  "todo-new": {
+    "ph-new": "What needs to be done?",
+    "add-title": "Add todo"
+  },
+  "todo": {
+    "remove-title": "Remove todo"
+  },
+  "todo-edit": {
+    "edit-title": "Edit todo",
+    "cancel-edit-title": "Cancel edit"
+  }
+}

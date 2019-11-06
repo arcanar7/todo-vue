@@ -1,6 +1,6 @@
 <template>
   <section class="center">
-    <h1 class="title">Register account</h1>
+    <h1 class="title">{{ $t('register.title') }}</h1>
     <p class="error-title" v-if="isError">{{ isError }}</p>
     <form
       class="login-form"
@@ -15,17 +15,17 @@
           'has-error': $v.email.$error,
           'valid-input': !$v.email.$invalid,
         }"
-        placeholder="Email"
+        :placeholder="$t('login.ph-email')"
         v-model="email"
         @blur="$v.email.$touch()"
       />
       <span v-if="$v.email.$error" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
         <template v-if="!$v.email.required">
-          Required
+          {{ $t('login.required') }}
         </template>
         <template v-else-if="!$v.email.email">
-          E-mail must be valid
+          {{ $t('login.email') }}
         </template>
       </span>
       <input
@@ -36,17 +36,17 @@
           'has-error': $v.password.$error,
           'valid-input': !$v.password.$invalid,
         }"
-        placeholder="Password"
+        :placeholder="$t('login.ph-password')"
         v-model="password"
         @blur="$v.password.$touch()"
       />
       <span v-if="$v.password.$error" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
         <template v-if="!$v.password.required">
-          Required
+          {{ $t('login.required') }}
         </template>
         <template v-else-if="!$v.password.minLength">
-          Password must be equal or more than 6 characters
+          {{ $t('login.password') }}
         </template>
       </span>
       <input
@@ -57,17 +57,17 @@
           'has-error': $v.repeatPassword.$error,
           'valid-input': !$v.repeatPassword.$invalid,
         }"
-        placeholder="Repeat password"
+        :placeholder="$t('register.ph-repeat-password')"
         v-model="repeatPassword"
         @blur="$v.repeatPassword.$touch()"
       />
       <span v-if="$v.repeatPassword.$error" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
         <template v-if="!$v.repeatPassword.required">
-          Required
+          {{ $t('login.required') }}
         </template>
         <template v-else-if="!$v.repeatPassword.sameAsPassword">
-          Passwords must be identical
+          {{ $t('register.repeat-pass') }}
         </template>
       </span>
       <button
@@ -76,7 +76,7 @@
         :disabled="this.$v.$invalid"
       >
         <spinner v-if="loadingApp"></spinner>
-        Create account
+        {{ $t('register.create') }}
       </button>
     </form>
   </section>

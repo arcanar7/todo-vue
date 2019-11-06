@@ -1,7 +1,8 @@
 <template>
   <nav class="todo-nav">
     <span class="todo-nav__count">
-      <strong>{{ remaining }}</strong> {{ remaining | pluralize }} left
+      <strong>{{ remaining }}</strong> {{ remaining | pluralize }}
+      {{ $t('todo-nav.left') }}
     </span>
     <ul class="todo-nav-filters">
       <li>
@@ -10,7 +11,7 @@
           :class="{ selected: visibility == 'all' }"
           @click="onChangeVisibility('all')"
         >
-          All
+          {{ $t('todo-nav.all') }}
         </button>
       </li>
       <li>
@@ -19,7 +20,7 @@
           :class="{ selected: visibility == 'active' }"
           @click="onChangeVisibility('active')"
         >
-          Active
+          {{ $t('todo-nav.active') }}
         </button>
       </li>
       <li>
@@ -28,7 +29,7 @@
           :class="{ selected: visibility == 'completed' }"
           @click="onChangeVisibility('completed')"
         >
-          Completed
+          {{ $t('todo-nav.completed') }}
         </button>
       </li>
     </ul>
@@ -37,7 +38,7 @@
       @click="removeCompleted"
       v-show="todos.length > remaining"
     >
-      Clear completed
+      {{ $t('todo-nav.clear') }}
     </button>
   </nav>
 </template>

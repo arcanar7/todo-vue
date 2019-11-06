@@ -1,6 +1,6 @@
 <template>
   <section class="center">
-    <h1 class="title">Recover account</h1>
+    <h1 class="title">{{ $t('reset.title') }}</h1>
     <p class="error-title" v-if="isError">{{ isError }}</p>
     <p class="success-title" v-if="isSuccess">{{ isSuccess }}</p>
     <form class="login-form" @submit.prevent="onResetPass" novalidate>
@@ -12,17 +12,17 @@
           'has-error': $v.email.$error,
           'valid-input': !$v.email.$invalid,
         }"
-        placeholder="Email"
+        :placeholder="$t('login.ph-email')"
         v-model="email"
         @blur="$v.email.$touch()"
       />
       <span v-if="$v.email.$error" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
         <template v-if="!$v.email.required">
-          Required
+          {{ $t('login.required') }}
         </template>
         <template v-else-if="!$v.email.email">
-          E-mail must be valid
+          {{ $t('login.email') }}
         </template>
       </span>
       <button
@@ -31,7 +31,7 @@
         :disabled="this.$v.$invalid"
       >
         <spinner v-if="loadingApp"></spinner>
-        Reset password
+        {{ $t('reset.reset-pass') }}
       </button>
     </form>
   </section>

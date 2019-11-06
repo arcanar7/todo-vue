@@ -7,7 +7,8 @@
           <img src="../assets/icons/exit.svg" alt="" />
         </button>
       </div>
-      <h1 class="title">My ToDo List</h1>
+      <language />
+      <h1 class="title">{{ $t('title') }}</h1>
     </header>
     <main class="app-inner">
       <todo-list />
@@ -17,11 +18,13 @@
 
 <script>
 import TodoList from '@/components/TodoList/TodoList.vue'
+import Language from '@/components/Language.vue'
 
 export default {
   name: 'home',
   components: {
     TodoList,
+    Language,
   },
   methods: {
     onLogOut() {

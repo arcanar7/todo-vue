@@ -7,6 +7,7 @@ import App from './App.vue'
 import router from './router/router'
 import store from './store/store'
 import './registerServiceWorker'
+import i18n from './i18n'
 
 Vue.use(Vuelidate)
 Vue.config.productionTip = false
@@ -22,6 +23,8 @@ new Vue({
   router,
   store,
   render: h => h(App),
+  i18n,
+
   created() {
     const firebaseConfig = {
       apiKey: process.env.VUE_APP_apiKey,
