@@ -1,5 +1,8 @@
 <template>
   <div class="wrapper">
+    <header class="header">
+      <h1 class="title">My ToDo List</h1>
+    </header>
     <section class="inner">
       <div class="nav">
         <router-link to="/login" class="nav__login" active-class="active">
@@ -29,8 +32,17 @@ export default {}
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
+
+  .header {
+    margin-top: 20px;
+
+    .title {
+      color: $primary;
+      text-align: center;
+      font-weight: 900;
+    }
+  }
 }
 
 .inner {
