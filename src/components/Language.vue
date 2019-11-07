@@ -58,6 +58,8 @@ export default {
   display: inline-block;
   position: relative;
   cursor: pointer;
+  transition: 0.2s box-shadow;
+  box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
 
   &__title {
     display: flex;
@@ -65,68 +67,64 @@ export default {
     justify-content: center;
     width: 150px;
     height: 40px;
-    background: #9dc852;
-    color: #ffffff;
+    background-color: $background-input;
+    color: $primary;
     font-weight: 700;
     transition: 0.3s background-color;
 
     &:hover {
-      background: #8db842;
+      background-color: $background;
     }
   }
 
   &__dropdown {
     right: 0;
-    width: 150px;
-    padding: 15px 0;
+    width: 100%;
+    list-style: none;
+    padding: 0;
     margin: 0;
     position: absolute;
-    background: #ebebeb;
-    z-index: 100;
-    transition: 0.5s padding, 0.5s background;
+    box-shadow: inherit;
+    // box-shadow: 0 5px 5px hsla(0, 0, 0, 0.5);
+    // background: #ebebeb;
+    z-index: 2;
+    // transition: 0.5s padding, 0.5s background;
 
-    * {
-      overflow: hidden;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       height: 30px;
-      padding: 5px 10px;
-      background: rgba(0, 0, 0, 0);
-      white-space: nowrap;
+      padding: 5px 0;
+      background-color: $background-input;
+      color: $primary;
+      font-weight: 700;
       transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5),
-        0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5),
-        0.5s margin cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color,
+        0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color,
         0.2s background-color;
 
       &:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background-color: $background;
+        // background-color: hsla(0, 0, 0, 0.1);
       }
     }
   }
 
   &:not(:hover) {
-    .lang__dropdown {
-      padding: 4px 0;
-      background: #dddddd;
-      z-index: 99;
+    box-shadow: none;
 
-      * {
+    .lang__dropdown {
+      li {
         visibility: hidden;
         height: 0;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0;
         margin: 0;
-        color: rgba(25, 25, 25, 0);
+        color: hsla(0, 0, 0, 0);
         transition: 0.5s 0.1s height, 0.5s 0.1s padding, 0.5s 0.1s margin,
           0.3s color, 0.6s visibility;
-        z-index: 99;
+        z-index: 1;
       }
-    }
-
-    .lang__dropdown:after {
-      border-top-color: #dddddd;
-    }
-
-    .lang__title:after {
-      border-bottom-color: #dddddd;
     }
   }
 }
