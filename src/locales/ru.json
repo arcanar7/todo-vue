@@ -4,19 +4,21 @@
     "login": "Логин",
     "registration": "Регистрация"
   },
-  "login": {
-    "log-in": "Войти",
-    "title": "Войти в аккаунт",
+  "validation": {
     "required": "Обязательно",
     "email": "E-mail должен быть действительным",
     "password": "Пароль должен быть больше или равен 6 символам",
+    "repeat-pass": "Пароли должны совпадать"
+  },
+  "login": {
+    "log-in": "Войти",
+    "title": "Войти в аккаунт",
     "forgot-password": "Забыли пароль?",
     "ph-email": "Email",
     "ph-password": "Пароль"
   },
   "register": {
     "title": "Регистрация аккаунта",
-    "repeat-pass": "Пароли должны совпадать",
     "create": "Создать аккаунт",
     "ph-repeat-password": "Повторите пароль"
   },

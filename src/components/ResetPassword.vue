@@ -19,10 +19,10 @@
       <span v-if="$v.email.$error" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
         <template v-if="!$v.email.required">
-          {{ $t('login.required') }}
+          {{ $t('validation.required') }}
         </template>
         <template v-else-if="!$v.email.email">
-          {{ $t('login.email') }}
+          {{ $t('validation.email') }}
         </template>
       </span>
       <button

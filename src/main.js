@@ -37,5 +37,6 @@ new Vue({
       measurementId: process.env.VUE_APP_measurementId,
     }
     fb.initializeApp(firebaseConfig)
+    i18n.locale = this.$store.getters.lang
   },
 }).$mount('#app')

@@ -4,19 +4,21 @@
     "login": "Login",
     "registration": "Register"
   },
-  "login": {
-    "log-in": "Log in",
-    "title": "Log in account",
+  "validation": {
     "required": "Required",
     "email": "E-mail must be valid",
     "password": "Password must be equal or more than 6 characters",
+    "repeat-pass": "Passwords must be identical"
+  },
+  "login": {
+    "log-in": "Log in",
+    "title": "Log in account",
     "forgot-password": "Forgot password?",
     "ph-email": "Email",
     "ph-password": "Password"
   },
   "register": {
     "title": "Register account",
-    "repeat-pass": "Passwords must be identical",
     "create": "Create account",
     "ph-repeat-password": "Repeat password"
   },
