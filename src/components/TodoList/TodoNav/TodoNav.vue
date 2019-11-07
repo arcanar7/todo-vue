@@ -1,7 +1,7 @@
 <template>
   <nav class="todo-nav">
     <span class="todo-nav__count">
-      <strong>{{ remaining }}</strong> {{ remaining | pluralize }}
+      <strong>{{ remaining }}</strong> {{ $tc('todo-nav.item', remaining) }}
       {{ $t('todo-nav.left') }}
     </span>
     <ul class="todo-nav-filters">
@@ -65,11 +65,6 @@ export default {
     },
     visibility() {
       return this.$store.getters.visibility
-    },
-  },
-  filters: {
-    pluralize(n) {
-      return n === 1 ? 'item' : 'items'
     },
   },
 }
