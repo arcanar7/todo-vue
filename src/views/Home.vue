@@ -1,6 +1,6 @@
 <template>
   <div class="app-wrapper">
-    <header class="header">
+    <header class="header-app">
       <div class="logout">
         {{ email }}
         <button class="exit" title="Log out" @click="onLogOut">
@@ -48,11 +48,11 @@ export default {
   height: 100vh;
 }
 
-.header {
+.header-app {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   width: 600px;
+  margin-top: 20px;
 
   .logout {
     display: flex;
@@ -62,32 +62,33 @@ export default {
 
     .exit {
       margin-left: 5px;
-      background-color: inherit;
       color: $primary;
+      background-color: inherit;
     }
   }
 
   .title {
+    font-weight: 900;
     color: $primary;
     text-align: center;
-    font-weight: 900;
   }
 }
 
 .app-inner {
   display: flex;
   width: 588px;
+  padding: 5px;
+  background-color: $background;
   border: 1px solid $primary;
   border-radius: 10px;
-  padding: 5px;
   box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
-  background-color: $background;
 }
 
 @media screen and (max-width: $screen) {
-  .header {
+  .header-app {
     width: 90%;
   }
+
   .app-inner {
     width: 90%;
   }

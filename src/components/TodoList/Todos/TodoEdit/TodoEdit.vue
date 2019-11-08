@@ -70,41 +70,43 @@ export default {
 
 <style lang="scss">
 .edit {
+  position: relative;
   display: none;
   flex-grow: 1;
-  position: relative;
 
   &-title {
-    height: auto;
-    margin-left: 23px;
-    padding: 3px 0 3px 10px;
-    word-break: break-all;
     flex-grow: 1;
+    height: auto;
+    padding: 3px 0 3px 10px;
+    margin-left: 23px;
     font-size: 24px;
-    font-weight: 700;
     font-style: italic;
+    font-weight: 700;
     color: $primary;
-    transition: color 0.2s ease-out;
-    border: 2px solid $primary;
+    word-break: break-all;
     background-color: $primary-lightness;
+    border: 2px solid $primary;
+    transition: color 0.2s ease-out;
   }
 
   &-done {
     right: 35px;
   }
+
   &-cancel {
     right: 7px;
   }
+
   &-done,
   &-cancel {
+    position: absolute;
+    top: 7px;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 2px;
+    justify-content: center;
     width: 28px;
     height: 24px;
-    top: 7px;
-    position: absolute;
+    padding: 2px;
     background-color: inherit;
 
     &:hover,

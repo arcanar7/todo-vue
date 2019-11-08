@@ -40,15 +40,18 @@ export default {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+}
 
-  .header {
-    margin-top: 20px;
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin-top: 20px;
 
-    .title {
-      color: $primary;
-      text-align: center;
-      font-weight: 900;
-    }
+  .title {
+    font-weight: 900;
+    color: $primary;
+    text-align: center;
   }
 }
 
@@ -58,9 +61,9 @@ export default {
   align-items: center;
   width: 300px;
   min-height: 472px;
-  box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
   background-color: $background;
   border-radius: 10px;
+  box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
 
   .nav {
     display: flex;
@@ -80,10 +83,10 @@ export default {
       justify-content: center;
       width: 150px;
       height: 50px;
-      color: $primary-lightness;
-      background-color: $primary-light;
       font-size: 18px;
       font-weight: 400;
+      color: $primary-lightness;
+      background-color: $primary-light;
       transition: background-color 0.3s ease;
     }
 
@@ -95,15 +98,16 @@ export default {
 }
 
 .active {
+  font-weight: 900 !important;
   color: $primary !important;
   background-color: $background !important;
-  font-weight: 900 !important;
 }
 
 .component-fade-enter-active,
 .component-fade-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .component-fade-enter,
 .component-fade-leave-to {
   opacity: 0;

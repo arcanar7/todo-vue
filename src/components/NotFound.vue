@@ -29,13 +29,13 @@ export default {}
 .not-found-header {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
   width: 600px;
+  margin-top: 20px;
 
   &__title {
+    font-weight: 900;
     color: $primary;
     text-align: center;
-    font-weight: 900;
   }
 }
 
@@ -43,9 +43,9 @@ export default {}
   margin-top: 20px;
 
   &__title {
+    font-weight: 900;
     color: $primary;
     text-align: center;
-    font-weight: 900;
   }
 }
 
@@ -54,9 +54,9 @@ export default {}
 
   &__home {
     padding: 10px;
-    border-radius: 5px;
     color: $primary-lightness;
     background-color: $primary;
+    border-radius: 5px;
     box-shadow: 4px 4px 4px hsla(0, 0, 0, 0.5);
 
     &:hover,

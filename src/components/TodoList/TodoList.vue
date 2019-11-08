@@ -50,11 +50,11 @@ export default {
 
 .empty-state {
   display: flex;
-  align-self: center;
   align-items: center;
-  text-align: center;
-  color: $primary;
+  align-self: center;
   width: 300px;
+  color: $primary;
+  text-align: center;
 }
 
 .main {

@@ -100,34 +100,34 @@ export default {
 .center {
   display: flex;
   flex-direction: column;
-  align-items: center;
   flex-grow: 1;
+  align-items: center;
 
   .title {
     font-size: 24px;
-    color: $primary;
     font-weight: 900;
+    color: $primary;
   }
 
   .error-title {
     color: $error;
-    border: 1px solid $error-light;
     background-color: $error-lightness;
+    border: 1px solid $error-light;
   }
 
   .success-title {
     color: $success;
-    border: 1px solid $success-light;
     background-color: $success-lightness;
+    border: 1px solid $success-light;
   }
 
   .error-title,
   .success-title {
+    padding: 5px;
+    margin: 0 10px;
     font-size: 14px;
     font-weight: 400;
     border-radius: 5px;
-    margin: 0 10px;
-    padding: 5px;
   }
 }
 
@@ -141,9 +141,9 @@ export default {
   &__password,
   &__name {
     &:focus {
-      border: 2px solid $primary;
       height: 38px;
       background-color: $primary-lightness;
+      border: 2px solid $primary;
     }
   }
 
@@ -165,27 +165,27 @@ export default {
   }
 
   &__forgot {
-    text-align: end;
     font-size: 14px;
     color: $primary;
+    text-align: end;
   }
 }
 
 .has-error {
-  border: 2px solid $error-light;
-  background-color: $error-lightness;
   height: 38px;
+  background-color: $error-lightness;
+  border: 2px solid $error-light;
 }
 
 .valid-input {
-  border: 2px solid $success-light;
-  background-color: $success-lightness;
   height: 38px;
+  background-color: $success-lightness;
+  border: 2px solid $success-light;
 }
 
 .message-input {
-  margin-top: 5px;
   max-width: 205px;
+  margin-top: 5px;
 }
 
 .text-error {

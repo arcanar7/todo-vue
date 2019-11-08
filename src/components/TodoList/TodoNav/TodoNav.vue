@@ -72,11 +72,11 @@ export default {
 
 <style lang="scss">
 .todo-nav {
+  position: relative;
   display: flex;
+  flex-grow: 1;
   align-items: baseline;
   justify-content: space-between;
-  flex-grow: 1;
-  position: relative;
   padding-left: 10px;
 
   &__count {
@@ -85,40 +85,40 @@ export default {
   }
 
   &-filters {
-    display: flex;
     position: absolute;
     left: 35%;
-    list-style: none;
-    margin: 0;
+    display: flex;
     padding: 0;
+    margin: 0;
+    list-style: none;
 
     li + li {
       margin-left: 5px;
     }
 
     &__btn {
-      background-color: inherit;
-      color: $primary;
       padding: 5px;
+      color: $primary;
+      background-color: inherit;
     }
 
     &__btn:hover,
     &__btn:focus,
     .selected {
-      background-color: $primary-light;
       color: $primary-lightness;
+      background-color: $primary-light;
     }
   }
 
   &__clear-completed {
-    background-color: inherit;
-    color: $primary;
     padding: 5px;
+    color: $primary;
+    background-color: inherit;
 
     &:hover,
     &:focus {
-      background-color: $primary-light;
       color: $primary-lightness;
+      background-color: $primary-light;
     }
   }
 }
@@ -131,8 +131,8 @@ export default {
 @media screen and (max-width: $screen) {
   .todo-nav {
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     &-filters {
       position: initial;

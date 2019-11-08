@@ -15,23 +15,38 @@ export default {
 
 <style lang="scss">
 .lds-ring {
-  display: inline-block;
   position: relative;
+  display: inline-block;
   width: 20px;
   height: 20px;
   margin-right: 10px;
+
+  div {
+    position: absolute;
+    box-sizing: border-box;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid $primary-lightness;
+    border-color: $primary-lightness transparent transparent transparent;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  }
 }
 
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 2px solid $primary-lightness;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: $primary-lightness transparent transparent transparent;
+.primary {
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+
+  div {
+    width: 50px;
+    height: 50px;
+    border: 4px solid $primary-lightness;
+    border-color: $primary transparent transparent transparent;
+  }
 }
 
 .lds-ring div:nth-child(1) {
@@ -50,23 +65,9 @@ export default {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
-  }
-}
-
-.primary {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  width: 50px;
-  height: 50px;
-
-  div {
-    width: 50px;
-    height: 50px;
-    border: 4px solid $primary-lightness;
-    border-color: $primary transparent transparent transparent;
   }
 }
 </style>

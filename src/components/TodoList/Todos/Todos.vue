@@ -41,14 +41,15 @@ export default {
 <style lang="scss">
 .todo-list {
   flex-grow: 1;
-  list-style: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
+  list-style: none;
 
   .todo {
     display: flex;
     border-bottom: 1px solid $primary-lightest;
   }
+
   .editing {
     .edit {
       display: flex;

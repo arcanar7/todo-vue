@@ -50,26 +50,27 @@ export default {
 
 <style lang="scss">
 .new-todo {
-  display: flex;
   position: relative;
+  display: flex;
 
   &__title {
     flex-grow: 1;
 
     &:focus {
-      border: 2px solid $primary;
       height: 38px;
       background-color: $primary-lightness;
+      border: 2px solid $primary;
     }
   }
+
   &__btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 44px;
-    height: 44px;
     position: absolute;
     right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
 
     span {
       font-size: 32px;

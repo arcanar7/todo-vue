@@ -66,19 +66,19 @@ export default {
 }
 
 .lang {
-  display: inline-block;
   position: relative;
-  cursor: pointer;
-  transition: 1s box-shadow, 0.4s border-radius linear;
-  box-shadow: none;
+  display: inline-block;
   width: 150px;
   height: 40px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: 1s box-shadow, 0.4s border-radius linear;
 
   &::after {
-    content: '';
     position: absolute;
-    right: 10%;
     top: 17px;
+    right: 10%;
+    content: '';
     border: 6px solid $primary;
     border-color: $primary transparent transparent transparent;
     transition: 0.5s all ease-in-out;
@@ -89,8 +89,8 @@ export default {
     align-items: center;
     justify-content: center;
     height: 100%;
-    color: $primary;
     font-weight: 700;
+    color: $primary;
     background-color: $background-input;
     transition: 0.3s background-color, 0.4s border-radius linear;
 
@@ -100,34 +100,30 @@ export default {
   }
 
   &__dropdown {
+    position: absolute;
     right: 0;
+    z-index: 1;
     width: 100%;
-    list-style: none;
     padding: 0;
     margin: 0;
-    position: absolute;
-    box-shadow: inherit;
+    list-style: none;
     border-radius: 0 0 10px 10px;
-    z-index: 1;
+    box-shadow: inherit;
 
     li {
-      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      background-color: $background-input;
-      font-weight: 700;
       height: 0;
       padding: 0;
       margin: 0;
+      overflow: hidden;
+      font-weight: 700;
       color: hsla(0, 0, 0, 0);
-      transition: 0.4s 0.1s height, 0.4s 0.1s padding, 0.4s 0.1s margin,
+      background-color: $background-input;
+      transition: 0.4s 0.1s padding, 0.4s 0.1s height, 0.4s 0.1s margin,
         0.2s color;
-
-      &:hover {
-        background-color: $background;
-      }
     }
 
     :last-child {
@@ -137,16 +133,16 @@ export default {
 }
 
 .expanded {
-  box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
   border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
 
   .lang__title {
     border-radius: 10px 10px 0 0;
   }
 
   &::after {
-    transform: rotate(-180deg);
     top: 11px;
+    transform: rotate(-180deg);
   }
 
   li {
@@ -155,6 +151,10 @@ export default {
     color: $primary;
     transition: 0.4s height ease-in-out, 0.4s padding ease-in-out,
       0.4s 0.2s color, 0.2s background-color;
+
+    &:hover {
+      background-color: $background;
+    }
   }
 }
 </style>

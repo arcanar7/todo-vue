@@ -49,14 +49,14 @@ export default {
 
 <style lang="scss">
 .todo__view {
+  position: relative;
   display: flex;
   flex-grow: 1;
-  position: relative;
   padding: 5px;
 
   .checkbox {
-    color: $primary-lightest;
     margin-right: 30px;
+    color: $primary-lightest;
 
     .toggle {
       display: none;
@@ -68,27 +68,27 @@ export default {
     }
 
     .label::before {
-      content: '';
-      height: 20px;
       width: 20px;
+      height: 20px;
+      content: '';
       border: 1px solid;
       border-radius: 50%;
     }
 
     .label::after {
-      content: none;
       left: 3px;
-      height: 8px;
       width: 20px;
-      border-left: 2px solid;
+      height: 8px;
+      content: none;
       border-bottom: 2px solid;
+      border-left: 2px solid;
       transform: rotate(-45deg);
     }
 
     .label::before,
     .label::after {
-      top: 18px;
       position: absolute;
+      top: 18px;
       display: inline-block;
     }
 
@@ -98,22 +98,22 @@ export default {
   }
 
   .title {
-    word-break: break-all;
     flex-grow: 1;
     font-size: 24px;
-    font-weight: 700;
     font-style: italic;
+    font-weight: 700;
+    word-break: break-all;
     transition: color 0.2s ease-out;
   }
 
   .destroy {
-    display: none;
     position: absolute;
     right: 0;
     bottom: 0;
-    background-color: inherit;
-    color: $primary-light;
+    display: none;
     font-size: 30px;
+    color: $primary-light;
+    background-color: inherit;
     transition: color 0.2s ease-out;
 
     &::after {
