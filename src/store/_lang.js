@@ -1,10 +1,15 @@
+import i18n from '@/i18n'
+
 export default {
   state: {
     lang: 'en',
+    langTitle: 'English',
   },
   mutations: {
-    SET_LANG(state, payload) {
-      state.lang = payload
+    SET_LANG(state, { val, title }) {
+      state.lang = val
+      state.langTitle = title
+      i18n.locale = val
     },
   },
   actions: {
@@ -15,6 +20,9 @@ export default {
   getters: {
     lang(state) {
       return state.lang
+    },
+    langTitle(state) {
+      return state.langTitle
     },
   },
 }
