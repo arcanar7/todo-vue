@@ -69,7 +69,7 @@ export default {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  transition: 1s box-shadow;
+  transition: 1s box-shadow, 0.4s border-radius linear;
   box-shadow: none;
   width: 150px;
   height: 40px;
@@ -92,7 +92,7 @@ export default {
     color: $primary;
     font-weight: 700;
     background-color: $background-input;
-    transition: 0.3s background-color;
+    transition: 0.3s background-color, 0.4s border-radius linear;
 
     &:hover {
       background-color: $background;
@@ -107,6 +107,7 @@ export default {
     margin: 0;
     position: absolute;
     box-shadow: inherit;
+    border-radius: 0 0 10px 10px;
     z-index: 1;
 
     li {
@@ -128,29 +129,20 @@ export default {
         background-color: $background;
       }
     }
+
+    :last-child {
+      border-radius: 0 0 10px 10px;
+    }
   }
-
-  // &:hover {
-  //   box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
-
-  //   &::after {
-  //     transform: rotate(-180deg);
-  //     top: 11px;
-  //   }
-
-  //   li {
-  //     height: 30px;
-  //     padding: 5px 0;
-  //     color: $primary;
-  //     transition: 0.5s height cubic-bezier(0.73, 0.32, 0.34, 1.5),
-  //       0.5s padding cubic-bezier(0.73, 0.32, 0.34, 1.5), 0.5s 0.2s color,
-  //       0.2s background-color;
-  //   }
-  // }
 }
 
 .expanded {
   box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
+  border-radius: 10px 10px 0 0;
+
+  .lang__title {
+    border-radius: 10px 10px 0 0;
+  }
 
   &::after {
     transform: rotate(-180deg);
