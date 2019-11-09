@@ -72,7 +72,7 @@ export default {
   height: 40px;
   cursor: pointer;
   box-shadow: none;
-  transition: 1s box-shadow, 0.4s border-radius linear;
+  transition: 0.4s box-shadow ease-out, 0.4s border-radius ease-in-out;
 
   &::after {
     position: absolute;
@@ -109,6 +109,7 @@ export default {
     list-style: none;
     border-radius: 0 0 10px 10px;
     box-shadow: inherit;
+    transition: 0.4s box-shadow ease-out;
 
     li {
       display: flex;
