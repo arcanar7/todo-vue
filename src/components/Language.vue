@@ -108,7 +108,7 @@ export default {
     margin: 0;
     list-style: none;
     border-radius: 0 0 10px 10px;
-    box-shadow: inherit;
+    box-shadow: none;
     transition: 0.4s box-shadow ease-out;
 
     li {
@@ -139,6 +139,10 @@ export default {
 
   .lang__title {
     border-radius: 10px 10px 0 0;
+  }
+
+  .lang__dropdown {
+    box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
   }
 
   &::after {
