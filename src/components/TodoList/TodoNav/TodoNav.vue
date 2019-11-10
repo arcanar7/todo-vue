@@ -123,11 +123,6 @@ export default {
   }
 }
 
-.completed {
-  color: $primary-lightest;
-  text-decoration: line-through;
-}
-
 @media screen and (max-width: $screen) {
   .todo-nav {
     flex-direction: column;

@@ -20,15 +20,17 @@ a {
 
 button {
   color: $primary-lightness;
+  cursor: pointer;
   background-color: $primary;
   border: none;
-  cursor: pointer;
+  border-radius: 5px;
+  outline: none !important;
   transition: background-color 0.3s linear;
 
   &:disabled {
-    opacity: 0.4;
-    cursor: default;
     pointer-events: none;
+    cursor: default;
+    opacity: 0.4;
   }
 
   &:hover,
@@ -44,16 +46,8 @@ button {
 input {
   height: 40px;
   padding-left: 10px;
-  border: 1px solid $primary-light;
   background-color: $background-input;
-}
-
-button,
-input {
+  border: 1px solid $primary-light;
   border-radius: 5px;
   outline: none !important;
-}
-
-.color-primary {
-  color: $primary;
 }

@@ -104,7 +104,7 @@ export default {
     font-style: italic;
     font-weight: 700;
     word-break: break-all;
-    transition: color 0.2s ease-out;
+    transition: color 0.5s ease-out;
   }
 
   .destroy {
@@ -131,5 +131,14 @@ export default {
       display: inline-block;
     }
   }
+}
+
+.completed {
+  color: $primary-lightest;
+  text-decoration: line-through;
+}
+
+.color-primary {
+  color: $primary;
 }
 </style>
