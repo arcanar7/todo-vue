@@ -84,10 +84,12 @@ export default {
           .ref(getters.user.id)
           .once('value')
         const todos = fbVal.val()
-        Object.keys(todos).forEach(key => {
-          const todo = todos[key]
-          resultTodos.push(new Todo(todo.title, todo.completed, key))
-        })
+        if (todos) {
+          Object.keys(todos).forEach(key => {
+            const todo = todos[key]
+            resultTodos.push(new Todo(todo.title, todo.completed, key))
+          })
+        }
         commit('loadTodos', resultTodos)
         commit('setLoading', false)
       } catch (error) {
