@@ -55,6 +55,7 @@ export default {
   padding: 5px;
 
   .checkbox {
+    position: relative;
     margin-right: 30px;
     color: $primary-lightest;
 
@@ -64,32 +65,32 @@ export default {
 
     .label {
       position: relative;
+      top: 5px;
       transition: color 0.2s ease-out;
-    }
 
-    .label::before {
-      width: 20px;
-      height: 20px;
-      content: '';
-      border: 1px solid;
-      border-radius: 50%;
-    }
+      &::before {
+        width: 20px;
+        height: 20px;
+        content: '';
+        border: 1px solid;
+        border-radius: 50%;
+      }
 
-    .label::after {
-      left: 3px;
-      width: 20px;
-      height: 8px;
-      content: none;
-      border-bottom: 2px solid;
-      border-left: 2px solid;
-      transform: rotate(-45deg);
-    }
+      &::after {
+        left: 3px;
+        width: 20px;
+        height: 8px;
+        content: none;
+        border-bottom: 2px solid;
+        border-left: 2px solid;
+        transform: rotate(-45deg);
+      }
 
-    .label::before,
-    .label::after {
-      position: absolute;
-      top: 18px;
-      display: inline-block;
+      &::before,
+      &::after {
+        position: absolute;
+        display: inline-block;
+      }
     }
 
     .toggle:checked + .label::after {
