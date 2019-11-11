@@ -1,7 +1,8 @@
 <template>
   <div class="todo-wrapper">
     <todo-new></todo-new>
-    <div class="empty-state" v-if="!todos.length && !loadingApp">
+    <p class="error-title" v-if="isError">{{ isError }}</p>
+    <div class="empty-state" v-else-if="!todos.length && !loadingApp">
       <p>
         {{ $t('todo-list.empty') }}
       </p>
@@ -34,9 +35,12 @@ export default {
     todos() {
       return this.$store.getters.todos
     },
+    isError() {
+      return this.$store.getters.error
+    },
   },
   created() {
-    this.$store.dispatch('fetchTodos')
+    this.$store.dispatch('fetchTodos').catch(() => {})
   },
 }
 </script>
@@ -46,6 +50,10 @@ export default {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  .error-title {
+    margin: 10px auto;
+  }
 }
 
 .empty-state {

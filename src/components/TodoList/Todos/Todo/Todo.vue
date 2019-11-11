@@ -34,14 +34,16 @@ export default {
   methods: {
     onToggleComplete(e) {
       const { checked, id } = e.target
-      this.$store.dispatch('updateCompleteTodo', { completed: checked, id })
+      this.$store
+        .dispatch('updateCompleteTodo', { completed: checked, id })
+        .catch(() => {})
     },
     editTodo(todo) {
       this.$store.dispatch('beforeEditTitle', todo.title)
       this.$store.dispatch('editTodo', todo)
     },
     removeTodo(id) {
-      this.$store.dispatch('removeTodo', id)
+      this.$store.dispatch('removeTodo', id).catch(() => {})
     },
   },
 }

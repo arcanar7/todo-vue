@@ -108,27 +108,27 @@ export default {
     font-weight: 900;
     color: $primary;
   }
+}
 
-  .error-title {
-    color: $error;
-    background-color: $error-lightness;
-    border: 1px solid $error-light;
-  }
+.error-title {
+  color: $error;
+  background-color: $error-lightness;
+  border: 1px solid $error-light;
+}
 
-  .success-title {
-    color: $success;
-    background-color: $success-lightness;
-    border: 1px solid $success-light;
-  }
+.success-title {
+  color: $success;
+  background-color: $success-lightness;
+  border: 1px solid $success-light;
+}
 
-  .error-title,
-  .success-title {
-    padding: 5px;
-    margin: 0 10px;
-    font-size: 14px;
-    font-weight: 400;
-    border-radius: 5px;
-  }
+.error-title,
+.success-title {
+  padding: 5px;
+  margin: 0 10px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 5px;
 }
 
 .login-form {

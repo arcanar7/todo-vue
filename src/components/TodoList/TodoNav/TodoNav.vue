@@ -52,7 +52,7 @@ export default {
   methods: {
     removeCompleted() {
       filters.completed(this.todos).map(item => {
-        this.$store.dispatch('removeTodo', item.id)
+        this.$store.dispatch('removeTodo', item.id).catch(() => {})
       })
     },
     onChangeVisibility(visibility) {

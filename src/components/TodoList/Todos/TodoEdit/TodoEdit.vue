@@ -40,9 +40,11 @@ export default {
           ? this.$store
               .dispatch('updateTitleTodo', { title, id })
               .then(() => this.$store.dispatch('editTodo', null))
+              .catch(() => {})
           : this.$store
               .dispatch('removeTodo', id)
               .then(() => this.$store.dispatch('editTodo', null))
+              .catch(() => {})
       else this.$store.dispatch('editTodo', null)
     },
     cancelEdit(todo) {

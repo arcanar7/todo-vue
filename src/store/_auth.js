@@ -67,9 +67,14 @@ export default {
       }
     },
     logoutUser({ commit }) {
-      fb.auth().signOut()
-      commit('setUser', null)
-      commit('setEmail', '')
+      try {
+        fb.auth().signOut()
+        commit('setUser', null)
+        commit('setEmail', '')
+      } catch (error) {
+        commit('setError', error.message)
+        throw error
+      }
     },
   },
   getters: {

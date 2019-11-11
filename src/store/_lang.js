@@ -6,7 +6,7 @@ export default {
     langTitle: 'English',
   },
   mutations: {
-    SET_LANG(state, { val, title }) {
+    setLang(state, { val, title }) {
       state.lang = val
       state.langTitle = title
       i18n.locale = val
@@ -14,7 +14,7 @@ export default {
   },
   actions: {
     setLang({ commit }, payload) {
-      commit('SET_LANG', payload)
+      commit('setLang', payload)
     },
   },
   getters: {
