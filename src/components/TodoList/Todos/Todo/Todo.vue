@@ -64,7 +64,7 @@ export default {
     }
 
     .label {
-      position: relative;
+      position: absolute;
       top: 5px;
       transition: color 0.2s ease-out;
 
