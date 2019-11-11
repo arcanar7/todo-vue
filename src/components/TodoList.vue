@@ -1,6 +1,6 @@
 <template>
   <div class="todo-wrapper">
-    <todo-new></todo-new>
+    <todo-list-new />
     <p class="error-title" v-if="isError">{{ isError }}</p>
     <div class="empty-state" v-else-if="!todos.length && !loadingApp">
       <p>
@@ -9,27 +9,28 @@
       <img src="@/assets/icons/arrow.svg" alt="" />
     </div>
     <section class="main" v-else>
-      <spinner :primary="'primary'" v-if="loadingApp"></spinner>
-      <todos v-else :todos="todos"></todos>
+      <app-spinner :primary="'primary'" v-if="loadingApp"></app-spinner>
+      <todo-list-items v-else :todos="todos"></todo-list-items>
     </section>
     <footer class="footer" v-show="todos.length && !loadingApp">
-      <todo-nav :todos="todos"></todo-nav>
+      <todo-list-nav :todos="todos"></todo-list-nav>
     </footer>
   </div>
 </template>
 
 <script>
-import Todos from './Todos/Todos'
-import TodoNew from './TodoNew/TodoNew'
-import TodoNav from './TodoNav/TodoNav'
-import Spinner from '@/components/Spinner'
+import TodoListItems from './TodoListItems'
+import TodoListNew from './TodoListNew'
+import TodoListNav from './TodoListNav'
+import AppSpinner from '@/components/AppSpinner'
 
 export default {
+  name: 'TodoList',
   components: {
-    Todos,
-    TodoNew,
-    TodoNav,
-    Spinner,
+    TodoListItems,
+    TodoListNew,
+    TodoListNav,
+    AppSpinner,
   },
   computed: {
     todos() {

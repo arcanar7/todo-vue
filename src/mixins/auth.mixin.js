@@ -6,6 +6,18 @@ export default {
       repeatPassword: null,
     }
   },
+  computed: {
+    isError() {
+      return this.$store.getters.error
+    },
+    isSuccess() {
+      return this.$store.getters.success
+    },
+  },
+  beforeCreate() {
+    this.$store.dispatch('clearError')
+    this.$store.dispatch('clearSuccess')
+  },
   methods: {
     onSubmit(act, query = '') {
       if (!this.$v.$invalid) {
@@ -33,17 +45,5 @@ export default {
         })
         .catch(() => {})
     },
-  },
-  computed: {
-    isError() {
-      return this.$store.getters.error
-    },
-    isSuccess() {
-      return this.$store.getters.success
-    },
-  },
-  beforeCreate() {
-    this.$store.dispatch('clearError')
-    this.$store.dispatch('clearSuccess')
   },
 }

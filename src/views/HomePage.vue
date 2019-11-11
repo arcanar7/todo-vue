@@ -7,7 +7,7 @@
           <img src="../assets/icons/exit.svg" alt="" />
         </button>
       </div>
-      <language />
+      <language-select />
       <h1 class="title">{{ $t('title') }}</h1>
     </header>
     <main class="app-inner">
@@ -17,24 +17,24 @@
 </template>
 
 <script>
-import TodoList from '@/components/TodoList/TodoList.vue'
-import Language from '@/components/Language.vue'
+import TodoList from '@/components/TodoList'
+import LanguageSelect from '@/components/LanguageSelect'
 
 export default {
-  name: 'home',
+  name: 'HomePage',
   components: {
     TodoList,
-    Language,
-  },
-  methods: {
-    onLogOut() {
-      this.$store.dispatch('logoutUser')
-      this.$router.push('/login')
-    },
+    LanguageSelect,
   },
   computed: {
     email() {
       return this.$store.getters.email
+    },
+  },
+  methods: {
+    onLogOut() {
+      this.$store.dispatch('logoutUser').catch(() => {})
+      this.$router.push('/login')
     },
   },
 }

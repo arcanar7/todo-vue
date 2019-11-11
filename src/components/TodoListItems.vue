@@ -6,24 +6,25 @@
       :class="{ editing: todo == editedTodo }"
       :key="todo.id"
     >
-      <todo :todo="todo"></todo>
-      <todo-edit :todo="todo"></todo-edit>
+      <todo-list-items-item :todo="todo"></todo-list-items-item>
+      <todo-list-items-edit :todo="todo"></todo-list-items-edit>
     </li>
   </ul>
 </template>
 
 <script>
-import Todo from './Todo/Todo'
-import TodoEdit from './TodoEdit/TodoEdit'
+import TodoListItemsItem from './TodoListItemsItem'
+import TodoListItemsEdit from './TodoListItemsEdit'
 import { filters } from '@/mixins/filter.mixin'
 
 export default {
-  mixins: [filters],
+  name: 'TodoListItems',
   components: {
-    Todo,
-    TodoEdit,
+    TodoListItemsItem,
+    TodoListItemsEdit,
   },
-  props: { todos: Array },
+  mixins: [filters],
+  props: { todos: { type: Array, required: true } },
   computed: {
     filteredTodos() {
       return filters[this.visibility](this.todos)

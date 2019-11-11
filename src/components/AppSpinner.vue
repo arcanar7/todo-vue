@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'AppSpinner',
   props: { primary: String },
 }
 </script>

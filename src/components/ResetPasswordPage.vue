@@ -30,7 +30,7 @@
         class="login-form__btn"
         :disabled="this.$v.$invalid"
       >
-        <spinner v-if="loadingApp"></spinner>
+        <app-spinner v-if="loadingApp"></app-spinner>
         {{ $t('reset.reset-pass') }}
       </button>
     </form>
@@ -41,11 +41,12 @@
 import { required, email } from 'vuelidate/lib/validators'
 
 import AuthMixin from '../mixins/auth.mixin'
-import Spinner from '@/components/Spinner'
+import AppSpinner from '@/components/AppSpinner'
 
 export default {
+  name: 'ResetPasswordPage',
+  components: { AppSpinner },
   mixins: [AuthMixin],
-  components: { Spinner },
   validations: {
     email: {
       required,

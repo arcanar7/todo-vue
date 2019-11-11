@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <header class="header">
-      <language />
+      <language-select />
       <h1 class="title">{{ $t('title') }}</h1>
     </header>
     <section class="inner">
@@ -25,11 +25,12 @@
 </template>
 
 <script>
-import Language from '@/components/Language.vue'
+import LanguageSelect from '@/components/LanguageSelect'
 
 export default {
+  name: 'AuthPage',
   components: {
-    Language,
+    LanguageSelect,
   },
 }
 </script>

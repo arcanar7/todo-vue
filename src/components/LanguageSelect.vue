@@ -22,12 +22,28 @@
 
 <script>
 export default {
-  name: 'locale-changer',
+  name: 'LanguageSelect',
+  directives: {
+    'click-outside': {
+      bind(el, binding) {
+        el.addEventListener('click', e => e.stopPropagation())
+        document.body.addEventListener('click', binding.value)
+      },
+      unbind(el, binding) {
+        document.body.removeEventListener('click', binding.value)
+      },
+    },
+  },
   data() {
     return {
       langs: [{ val: 'en', title: 'English' }, { val: 'ru', title: 'Русский' }],
       expand: false,
     }
+  },
+  computed: {
+    langTitle() {
+      return this.$store.getters.langTitle
+    },
   },
   methods: {
     onChangeLang(lang) {
@@ -38,22 +54,6 @@ export default {
     },
     onExpandHide() {
       this.expand = false
-    },
-  },
-  computed: {
-    langTitle() {
-      return this.$store.getters.langTitle
-    },
-  },
-  directives: {
-    'click-outside': {
-      bind(el, binding) {
-        el.addEventListener('click', e => e.stopPropagation())
-        document.body.addEventListener('click', binding.value)
-      },
-      unbind(el, binding) {
-        document.body.removeEventListener('click', binding.value)
-      },
     },
   },
 }

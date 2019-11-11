@@ -28,7 +28,23 @@
 
 <script>
 export default {
-  props: { todo: Object },
+  name: 'TodoListItemsEdit',
+  directives: {
+    'todo-focus': function(el, binding) {
+      if (binding.value) {
+        el.focus()
+      }
+    },
+  },
+  props: { todo: { type: Object, required: true } },
+  computed: {
+    editedTodo() {
+      return this.$store.getters.editedTodo
+    },
+    beforeEditTitle() {
+      return this.$store.getters.beforeEditTitle
+    },
+  },
   methods: {
     doneEdit({ title, completed, id }) {
       if (!this.editedTodo) {
@@ -50,21 +66,6 @@ export default {
     cancelEdit(todo) {
       todo.title = this.beforeEditTitle
       this.$store.dispatch('editTodo', null)
-    },
-  },
-  computed: {
-    editedTodo() {
-      return this.$store.getters.editedTodo
-    },
-    beforeEditTitle() {
-      return this.$store.getters.beforeEditTitle
-    },
-  },
-  directives: {
-    'todo-focus': function(el, binding) {
-      if (binding.value) {
-        el.focus()
-      }
     },
   },
 }

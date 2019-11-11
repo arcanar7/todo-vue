@@ -30,7 +30,8 @@
 
 <script>
 export default {
-  props: { todo: Object },
+  name: 'TodoListItemsItem',
+  props: { todo: { type: Object, required: true } },
   methods: {
     onToggleComplete(e) {
       const { checked, id } = e.target

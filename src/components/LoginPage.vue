@@ -51,7 +51,7 @@
         class="login-form__btn"
         :disabled="this.$v.$invalid"
       >
-        <spinner v-if="loadingApp"></spinner>
+        <app-spinner v-if="loadingApp"></app-spinner>
         {{ $t('login.log-in') }}
       </button>
       <span class="login-form__forgot">
@@ -67,11 +67,12 @@
 import { required, email, minLength } from 'vuelidate/lib/validators'
 
 import AuthMixin from '@/mixins/auth.mixin'
-import Spinner from '@/components/Spinner'
+import AppSpinner from '@/components/AppSpinner'
 
 export default {
+  name: 'LoginPage',
+  components: { AppSpinner },
   mixins: [AuthMixin],
-  components: { Spinner },
   validations: {
     email: {
       required,

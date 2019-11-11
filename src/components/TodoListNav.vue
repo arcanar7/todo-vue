@@ -47,8 +47,17 @@
 import { filters } from '@/mixins/filter.mixin'
 
 export default {
+  name: 'TodoListNav',
   mixins: [filters],
-  props: { todos: Array },
+  props: { todos: { type: Array, required: true } },
+  computed: {
+    remaining() {
+      return filters.active(this.todos).length
+    },
+    visibility() {
+      return this.$store.getters.visibility
+    },
+  },
   methods: {
     removeCompleted() {
       filters.completed(this.todos).map(item => {
@@ -57,14 +66,6 @@ export default {
     },
     onChangeVisibility(visibility) {
       this.$store.dispatch('setVisibility', visibility)
-    },
-  },
-  computed: {
-    remaining() {
-      return filters.active(this.todos).length
-    },
-    visibility() {
-      return this.$store.getters.visibility
     },
   },
 }

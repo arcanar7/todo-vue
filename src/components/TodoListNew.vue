@@ -14,21 +14,27 @@
       :title="$t('todo-new.add-title')"
       :disabled="localLoading"
     >
-      <spinner v-if="localLoading"></spinner>
+      <app-spinner v-if="localLoading"></app-spinner>
       <span v-else>+</span>
     </button>
   </div>
 </template>
 
 <script>
-import Spinner from '@/components/Spinner'
+import AppSpinner from '@/components/AppSpinner'
 
 export default {
-  components: { Spinner },
+  name: 'TodoListNew',
+  components: { AppSpinner },
   data() {
     return {
       newTodo: '',
     }
+  },
+  computed: {
+    localLoading() {
+      return this.$store.getters.localLoading
+    },
   },
   methods: {
     addTodo() {
@@ -38,11 +44,6 @@ export default {
           .catch(() => {})
         this.newTodo = ''
       }
-    },
-  },
-  computed: {
-    localLoading() {
-      return this.$store.getters.localLoading
     },
   },
 }
