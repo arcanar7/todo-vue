@@ -30,7 +30,7 @@
 export default {
   props: { todo: Object },
   methods: {
-    doneEdit({ title, id }) {
+    doneEdit({ title, completed, id }) {
       if (!this.editedTodo) {
         return
       }
@@ -38,7 +38,7 @@ export default {
       if (title !== this.beforeEditTitle)
         title
           ? this.$store
-              .dispatch('updateTitleTodo', { title, id })
+              .dispatch('updateTodo', { title, completed, id })
               .then(() => this.$store.dispatch('editTodo', null))
               .catch(() => {})
           : this.$store

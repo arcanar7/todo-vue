@@ -26,16 +26,11 @@ export default {
     loadTodos(state, payload) {
       state.todos = payload
     },
-    updateTitleTodo(state, { title, id }) {
+    updateTodo(state, { title, completed, id }) {
       const todo = state.todos.find(t => {
         return t.id === id
       })
       todo.title = title
-    },
-    updateCompleteTodo(state, { completed, id }) {
-      const todo = state.todos.find(t => {
-        return t.id === id
-      })
       todo.completed = completed
     },
     removeTodo(state, id) {
@@ -98,29 +93,15 @@ export default {
         throw error
       }
     },
-    async updateTitleTodo({ commit, getters }, { title, id }) {
+    async updateTodo({ commit, getters }, { title, completed, id }) {
       commit('clearError')
       try {
         await fb
           .database()
           .ref(getters.user.id)
           .child(id)
-          .update({ title })
-        commit('updateTitleTodo', { title, id })
-      } catch (error) {
-        commit('setError', error.message)
-        throw error
-      }
-    },
-    async updateCompleteTodo({ commit, getters }, { completed, id }) {
-      commit('clearError')
-      try {
-        await fb
-          .database()
-          .ref(getters.user.id)
-          .child(id)
-          .update({ completed })
-        commit('updateCompleteTodo', { completed, id })
+          .update({ title, completed })
+        commit('updateTodo', { title, completed, id })
       } catch (error) {
         commit('setError', error.message)
         throw error

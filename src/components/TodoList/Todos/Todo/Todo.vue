@@ -35,7 +35,11 @@ export default {
     onToggleComplete(e) {
       const { checked, id } = e.target
       this.$store
-        .dispatch('updateCompleteTodo', { completed: checked, id })
+        .dispatch('updateTodo', {
+          title: this.todo.title,
+          completed: checked,
+          id,
+        })
         .catch(() => {})
     },
     editTodo(todo) {
