@@ -109,7 +109,7 @@ export default {
     justify-content: center;
     width: 28px;
     height: 24px;
-    padding: 2px;
+    padding: 0;
     background-color: inherit;
 
     &:hover,
