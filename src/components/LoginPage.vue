@@ -64,13 +64,15 @@
 </template>
 
 <script>
-import { required, email, minLength } from 'vuelidate/lib/validators'
+import { email, minLength } from 'vuelidate/lib/validators'
 
 import AuthMixin from '@/mixins/auth.mixin'
 const AppSpinner = () =>
   import(
     /* webpackChunkName: "AppSpinner.component" */ '@/components/AppSpinner'
   )
+
+const required = () => import('vuelidate/lib/validators').then(m => m.required)
 
 export default {
   name: 'LoginPage',
@@ -86,16 +88,7 @@ export default {
       minLength: minLength(6),
     },
   },
-  // async beforeCreate() {
-  //   await import(
-  //     /* webpackChunkName: "validate" */ 'vuelidate/lib/validators'
-  //   ).then(({ required }) => {
-  //     appRequired = required
-  //   })
-  // },
   created() {
-    // console.log(() => validate1().then(({ required }) => required))
-    // validate().then(({ required }) => (this.required = required))
     if (this.$route.query['loginError']) {
       this.$store.dispatch('setError', 'Please log in to access this page.')
     }

@@ -19,18 +19,9 @@
 </template>
 
 <script>
-const TodoListItems = () =>
-  import(
-    /* webpackChunkName: "TodoListItems.component" */ '@/components/TodoListItems'
-  )
-const TodoListNew = () =>
-  import(
-    /* webpackChunkName: "TodoListNew.component" */ '@/components/TodoListNew'
-  )
-const TodoListNav = () =>
-  import(
-    /* webpackChunkName: "TodoListNav.component" */ '@/components/TodoListNav'
-  )
+import TodoListItems from '@/components/TodoListItems'
+import TodoListNew from '@/components/TodoListNew'
+import TodoListNav from '@/components/TodoListNav'
 const AppSpinner = () =>
   import(
     /* webpackChunkName: "AppSpinner.component" */ '@/components/AppSpinner'

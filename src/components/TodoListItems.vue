@@ -13,10 +13,8 @@
 </template>
 
 <script>
-const TodoListItemsItem = () =>
-  import(
-    /* webpackChunkName: "TodoListItemsItem.component" */ './TodoListItemsItem'
-  )
+import TodoListItemsItem from './TodoListItemsItem'
+
 const TodoListItemsEdit = () =>
   import(
     /* webpackChunkName: "TodoListItemsEdit.component" */ './TodoListItemsEdit'

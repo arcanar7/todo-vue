@@ -17,12 +17,8 @@
 </template>
 
 <script>
-const TodoList = () =>
-  import(/* webpackChunkName: "TodoList.component" */ '@/components/TodoList')
-const LanguageSelect = () =>
-  import(
-    /* webpackChunkName: "LanguageSelect.component" */ '@/components/LanguageSelect'
-  )
+import TodoList from '@/components/TodoList'
+import LanguageSelect from '@/components/LanguageSelect'
 
 export default {
   name: 'HomePage',

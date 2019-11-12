@@ -25,10 +25,7 @@
 </template>
 
 <script>
-const LanguageSelect = () =>
-  import(
-    /* webpackChunkName: "LanguageSelect.component" */ '@/components/LanguageSelect'
-  )
+import LanguageSelect from '@/components/LanguageSelect'
 
 export default {
   name: 'AuthPage',
