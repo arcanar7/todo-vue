@@ -16,4 +16,11 @@ module.exports = {
       enableInSFC: true,
     },
   },
+  configureWebpack: {
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
+  },
 }

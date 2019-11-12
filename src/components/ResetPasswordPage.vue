@@ -40,8 +40,11 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators'
 
-import AuthMixin from '../mixins/auth.mixin'
-import AppSpinner from '@/components/AppSpinner'
+import AuthMixin from '@/mixins/auth.mixin'
+const AppSpinner = () =>
+  import(
+    /* webpackChunkName: "AppSpinner.component" */ '@/components/AppSpinner'
+  )
 
 export default {
   name: 'ResetPasswordPage',

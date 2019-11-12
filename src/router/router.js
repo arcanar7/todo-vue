@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import AuthPage from '@/views/AuthPage'
-import LoginPage from '@/components/LoginPage'
 import AuthGuard from './auth-guard'
 
 Vue.use(Router)
@@ -15,33 +13,47 @@ export default new Router({
       path: '/',
       name: 'home',
       beforeEnter: AuthGuard,
-      component: () => import('@/views/HomePage'),
+      component: () =>
+        import(/* webpackChunkName: "HomePage.route" */ '@/views/HomePage'),
     },
     {
       path: '/login',
-      component: AuthPage,
+      component: () =>
+        import(/* webpackChunkName: "AuthPage.route" */ '@/views/AuthPage'),
       children: [
         {
           path: '',
           name: 'login',
-          component: LoginPage,
+          component: () =>
+            import(
+              /* webpackChunkName: "LoginPage.route" */ '@/components/LoginPage'
+            ),
         },
         {
           path: '/registration',
           name: 'registration',
-          component: () => import('@/components/RegistrationPage'),
+          component: () =>
+            import(
+              /* webpackChunkName: "RegistrationPage.route" */ '@/components/RegistrationPage'
+            ),
         },
         {
           path: '/reset',
           name: 'reset',
-          component: () => import('@/components/ResetPasswordPage'),
+          component: () =>
+            import(
+              /* webpackChunkName: "ResetPasswordPage.route" */ '@/components/ResetPasswordPage'
+            ),
         },
       ],
     },
     {
       path: '/404',
       name: '404',
-      component: () => import('@/components/NotFoundPage'),
+      component: () =>
+        import(
+          /* webpackChunkName: "NotFoundPage.route" */ '@/components/NotFoundPage'
+        ),
     },
     { path: '*', redirect: '/404' },
   ],

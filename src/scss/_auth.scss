@@ -1,0 +1,95 @@
+.center {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+
+  .title {
+    font-size: 24px;
+    font-weight: 900;
+    color: $primary;
+  }
+}
+
+.error-title {
+  color: $error;
+  background-color: $error-lightness;
+  border: 1px solid $error-light;
+}
+
+.success-title {
+  color: $success;
+  background-color: $success-lightness;
+  border: 1px solid $success-light;
+}
+
+.error-title,
+.success-title {
+  padding: 5px;
+  margin: 0 10px;
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 5px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 30px 0;
+
+  &__email,
+  &__password,
+  &__name {
+    &:focus {
+      height: 38px;
+      background-color: $primary-lightness;
+      border: 2px solid $primary;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 211px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 900;
+  }
+
+  input + input,
+  span + input,
+  &__btn,
+  &__forgot {
+    margin-top: 20px;
+  }
+
+  &__forgot {
+    font-size: 14px;
+    color: $primary;
+    text-align: end;
+  }
+}
+
+.has-error {
+  height: 38px;
+  background-color: $error-lightness;
+  border: 2px solid $error-light;
+}
+
+.valid-input {
+  height: 38px;
+  background-color: $success-lightness;
+  border: 2px solid $success-light;
+}
+
+.message-input {
+  max-width: 205px;
+  margin-top: 5px;
+}
+
+.text-error {
+  font-size: 12px;
+  color: $error;
+}

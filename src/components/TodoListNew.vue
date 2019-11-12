@@ -21,7 +21,10 @@
 </template>
 
 <script>
-import AppSpinner from '@/components/AppSpinner'
+const AppSpinner = () =>
+  import(
+    /* webpackChunkName: "AppSpinner.component" */ '@/components/AppSpinner'
+  )
 
 export default {
   name: 'TodoListNew',

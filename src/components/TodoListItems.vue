@@ -13,8 +13,14 @@
 </template>
 
 <script>
-import TodoListItemsItem from './TodoListItemsItem'
-import TodoListItemsEdit from './TodoListItemsEdit'
+const TodoListItemsItem = () =>
+  import(
+    /* webpackChunkName: "TodoListItemsItem.component" */ './TodoListItemsItem'
+  )
+const TodoListItemsEdit = () =>
+  import(
+    /* webpackChunkName: "TodoListItemsEdit.component" */ './TodoListItemsEdit'
+  )
 import { filters } from '@/mixins/filter.mixin'
 
 export default {
