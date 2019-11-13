@@ -9,19 +9,19 @@
         name="email"
         class="login-form__email"
         :class="{
-          'has-error': $v.email.$error,
-          'valid-input': !$v.email.$invalid,
+          'has-error': isValidErrorEmail,
+          'valid-input': !isInvalidEmail,
         }"
         :placeholder="$t('login.ph-email')"
-        v-model="email"
-        @blur="$v.email.$touch()"
+        v-model="email.title"
+        @blur="email.touch()"
       />
-      <span v-if="$v.email.$error" class="message-input text-error">
+      <span v-if="isValidErrorEmail" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
-        <template v-if="!$v.email.required">
+        <template v-if="!isRequiredEmail">
           {{ $t('validation.required') }}
         </template>
-        <template v-else-if="!$v.email.email">
+        <template v-else-if="!isEmail">
           {{ $t('validation.email') }}
         </template>
       </span>
@@ -30,27 +30,23 @@
         name="password"
         class="login-form__password"
         :class="{
-          'has-error': $v.password.$error,
-          'valid-input': !$v.password.$invalid,
+          'has-error': isValidErrorPassword,
+          'valid-input': !isInvalidPassword,
         }"
         :placeholder="$t('login.ph-password')"
-        v-model="password"
-        @blur="$v.password.$touch()"
+        v-model="password.title"
+        @blur="password.touch()"
       />
-      <span v-if="$v.password.$error" class="message-input text-error">
+      <span v-if="isValidErrorPassword" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
-        <template v-if="!$v.password.required">
+        <template v-if="!isRequiredPassword">
           {{ $t('validation.required') }}
         </template>
-        <template v-else-if="!$v.password.minLength">
+        <template v-else-if="!isMinLength">
           {{ $t('validation.password') }}
         </template>
       </span>
-      <button
-        type="submit"
-        class="login-form__btn"
-        :disabled="this.$v.$invalid"
-      >
+      <button type="submit" class="login-form__btn" :disabled="isLoginValid">
         <app-spinner v-if="loadingApp"></app-spinner>
         {{ $t('login.log-in') }}
       </button>
@@ -64,30 +60,16 @@
 </template>
 
 <script>
-import { email, minLength } from 'vuelidate/lib/validators'
-
 import AuthMixin from '@/mixins/auth.mixin'
 const AppSpinner = () =>
   import(
     /* webpackChunkName: "AppSpinner.component" */ '@/components/AppSpinner'
   )
 
-const required = () => import('vuelidate/lib/validators').then(m => m.required)
-
 export default {
   name: 'LoginPage',
   components: { AppSpinner },
   mixins: [AuthMixin],
-  validations: {
-    email: {
-      required,
-      email,
-    },
-    password: {
-      required,
-      minLength: minLength(6),
-    },
-  },
   created() {
     if (this.$route.query['loginError']) {
       this.$store.dispatch('setError', 'Please log in to access this page.')

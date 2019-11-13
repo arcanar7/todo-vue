@@ -91,6 +91,7 @@ export default {
     height: 100%;
     font-weight: 700;
     color: $primary;
+    user-select: none;
     background-color: $background-input;
     transition: 0.3s background-color, 0.4s border-radius linear;
 
@@ -122,6 +123,7 @@ export default {
       overflow: hidden;
       font-weight: 700;
       color: hsla(0, 0, 0, 0);
+      user-select: none;
       background-color: $background-input;
       transition: 0.4s 0.1s padding, 0.4s 0.1s height, 0.4s 0.1s margin,
         0.2s color;

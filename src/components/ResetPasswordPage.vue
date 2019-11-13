@@ -9,27 +9,23 @@
         name="email"
         class="login-form__email"
         :class="{
-          'has-error': $v.email.$error,
-          'valid-input': !$v.email.$invalid,
+          'has-error': isValidErrorEmail,
+          'valid-input': !isInvalidEmail,
         }"
         :placeholder="$t('login.ph-email')"
-        v-model="email"
-        @blur="$v.email.$touch()"
+        v-model="email.title"
+        @blur="email.touch()"
       />
-      <span v-if="$v.email.$error" class="message-input text-error">
+      <span v-if="isValidErrorEmail" class="message-input text-error">
         <img src="../assets/icons/warning.svg" alt="" />
-        <template v-if="!$v.email.required">
+        <template v-if="!isRequiredEmail">
           {{ $t('validation.required') }}
         </template>
-        <template v-else-if="!$v.email.email">
+        <template v-else-if="!isEmail">
           {{ $t('validation.email') }}
         </template>
       </span>
-      <button
-        type="submit"
-        class="login-form__btn"
-        :disabled="this.$v.$invalid"
-      >
+      <button type="submit" class="login-form__btn" :disabled="isInvalidEmail">
         <app-spinner v-if="loadingApp"></app-spinner>
         {{ $t('reset.reset-pass') }}
       </button>
@@ -38,8 +34,6 @@
 </template>
 
 <script>
-import { required, email } from 'vuelidate/lib/validators'
-
 import AuthMixin from '@/mixins/auth.mixin'
 const AppSpinner = () =>
   import(
@@ -50,11 +44,5 @@ export default {
   name: 'ResetPasswordPage',
   components: { AppSpinner },
   mixins: [AuthMixin],
-  validations: {
-    email: {
-      required,
-      email,
-    },
-  },
 }
 </script>

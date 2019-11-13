@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import 'normalize.css'
-import Vuelidate from 'vuelidate'
 import fb from 'firebase/app'
 
 import App from './App.vue'
@@ -9,7 +8,6 @@ import store from './store/store'
 import './registerServiceWorker'
 import i18n from './i18n'
 
-Vue.use(Vuelidate)
 Vue.config.productionTip = false
 Vue.mixin({
   computed: {
