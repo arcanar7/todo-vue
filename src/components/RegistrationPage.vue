@@ -84,10 +84,7 @@
 
 <script>
 import AuthMixin from '@/mixins/auth.mixin'
-const AppSpinner = () =>
-  import(
-    /* webpackChunkName: "AppSpinner.component" */ '@/components/AppSpinner'
-  )
+import AppSpinner from '@/components/AppSpinner'
 
 export default {
   name: 'RegistrationPage',

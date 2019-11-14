@@ -1,5 +1,5 @@
-<template>
-  <div class="lds-ring" :class="primary">
+<template functional>
+  <div class="lds-ring" :class="props.primary">
     <div></div>
     <div></div>
     <div></div>

@@ -16,11 +16,8 @@
 
 <script>
 import TodoListItemsItem from './TodoListItemsItem'
+import TodoListItemsEdit from './TodoListItemsEdit'
 
-const TodoListItemsEdit = () =>
-  import(
-    /* webpackChunkName: "TodoListItemsEdit.component" */ './TodoListItemsEdit'
-  )
 import { filters } from '@/mixins/filter.mixin'
 
 export default {

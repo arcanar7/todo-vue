@@ -22,10 +22,7 @@
 import TodoListItems from '@/components/TodoListItems'
 import TodoListNew from '@/components/TodoListNew'
 import TodoListNav from '@/components/TodoListNav'
-const AppSpinner = () =>
-  import(
-    /* webpackChunkName: "AppSpinner.component" */ '@/components/AppSpinner'
-  )
+import AppSpinner from '@/components/AppSpinner'
 
 export default {
   name: 'TodoList',

@@ -26,7 +26,7 @@ export default new Router({
           name: 'login',
           component: () =>
             import(
-              /* webpackChunkName: "LoginPage.route" */ '@/components/LoginPage'
+              /* webpackChunkName: "AuthPage.route" */ '@/components/LoginPage'
             ),
         },
         {
@@ -34,7 +34,7 @@ export default new Router({
           name: 'registration',
           component: () =>
             import(
-              /* webpackChunkName: "RegistrationPage.route" */ '@/components/RegistrationPage'
+              /* webpackChunkName: "AuthPage.route" */ '@/components/RegistrationPage'
             ),
         },
         {
@@ -42,7 +42,7 @@ export default new Router({
           name: 'reset',
           component: () =>
             import(
-              /* webpackChunkName: "ResetPasswordPage.route" */ '@/components/ResetPasswordPage'
+              /* webpackChunkName: "AuthPage.route" */ '@/components/ResetPasswordPage'
             ),
         },
       ],
