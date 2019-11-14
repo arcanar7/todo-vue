@@ -1,14 +1,16 @@
 <template>
   <ul class="todo-list">
-    <li
-      v-for="todo of filteredTodos"
-      class="todo"
-      :class="{ editing: todo == editedTodo }"
-      :key="todo.id"
-    >
-      <todo-list-items-item :todo="todo"></todo-list-items-item>
-      <todo-list-items-edit :todo="todo"></todo-list-items-edit>
-    </li>
+    <transition-group name="todo" mode="out-in">
+      <li
+        v-for="todo of filteredTodos"
+        class="todo"
+        :class="{ editing: todo == editedTodo }"
+        :key="todo.id"
+      >
+        <todo-list-items-item :todo="todo"></todo-list-items-item>
+        <todo-list-items-edit :todo="todo"></todo-list-items-edit>
+      </li>
+    </transition-group>
   </ul>
 </template>
 
@@ -64,5 +66,20 @@ export default {
       display: none;
     }
   }
+}
+
+.todo-enter-active,
+.todo-leave-active {
+  transition: all 0.3s;
+}
+
+.todo-enter,
+.todo-leave-to {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.todo-move {
+  transition: all 0.3s;
 }
 </style>
