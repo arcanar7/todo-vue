@@ -8,13 +8,6 @@ import store from './store/store'
 import './registerServiceWorker'
 import i18n from './i18n'
 
-import Roboto700 from './assets/fonts/roboto-v20-cyrillic_latin-700.woff'
-import Roboto7002 from './assets/fonts/roboto-v20-cyrillic_latin-700.woff2'
-import Roboto900 from './assets/fonts/roboto-v20-cyrillic_latin-900.woff'
-import Roboto9002 from './assets/fonts/roboto-v20-cyrillic_latin-900.woff2'
-
-console.log(Roboto700, Roboto7002, Roboto900, Roboto9002)
-
 Vue.config.productionTip = false
 Vue.mixin({
   computed: {

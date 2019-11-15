@@ -1,6 +1,44 @@
 @import './_variables.scss';
 @import './_auth.scss';
 
+$assets: '/assets/fonts';
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-display: fallback;
+  src: url('#{$assets}/subset-Roboto-Bold.woff2') format('woff2'),
+    url('#{$assets}/subset-Roboto-Bold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: fallback;
+  src: url('#{$assets}/subset-Roboto-Regular.woff2') format('woff2'),
+    url('#{$assets}/subset-Roboto-Regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 700;
+  font-display: fallback;
+  src: url('#{$assets}/subset-Roboto-BoldItalic.woff2') format('woff2'),
+    url('#{$assets}/subset-Roboto-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 900;
+  font-display: fallback;
+  src: url('#{$assets}/subset-Roboto-Black.woff2') format('woff2'),
+    url('#{$assets}/subset-Roboto-Black.woff') format('woff');
+}
+
 body {
   font-family: 'Roboto', sans-serif;
 }
