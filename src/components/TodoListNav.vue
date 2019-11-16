@@ -78,7 +78,7 @@ export default {
   flex-grow: 1;
   align-items: baseline;
   justify-content: space-between;
-  padding-left: 10px;
+  padding: 0 10px 10px 10px;
 
   &__count {
     padding: 5px;
@@ -126,12 +126,33 @@ export default {
 
 @media screen and (max-width: $screen) {
   .todo-nav {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    flex-wrap: wrap;
+
+    &__count {
+      padding: 14px 5px;
+      font-size: 20px;
+    }
 
     &-filters {
       position: initial;
+      order: 2;
+      width: 100%;
+      margin-top: 20px;
+
+      li {
+        display: flex;
+        flex-grow: 1;
+      }
+
+      &__btn {
+        flex-grow: 1;
+        height: 50px;
+      }
+    }
+
+    &__clear-completed {
+      order: 1;
+      height: 50px;
     }
   }
 }
