@@ -129,7 +129,7 @@ export default {
     flex-wrap: wrap;
 
     &__count {
-      padding: 14px 5px;
+      padding: 15px 5px;
       font-size: 20px;
     }
 
