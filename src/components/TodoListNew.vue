@@ -4,6 +4,7 @@
       class="new-todo__title"
       autofocus
       autocomplete="off"
+      ref="newTodo"
       :placeholder="$t('todo-new.ph-new')"
       v-model="newTodo"
       @keyup.enter="addTodo"
@@ -44,6 +45,7 @@ export default {
           .catch(() => {})
         this.newTodo = ''
       }
+      this.$refs.newTodo.focus()
     },
   },
 }

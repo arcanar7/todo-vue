@@ -121,8 +121,10 @@ export default {
       color: hsla(0, 0, 0, 0);
       user-select: none;
       background-color: $background-input;
-      transition: 0.3s 0.1s padding, 0.3s 0.1s height, 0.3s 0.1s margin,
-        0.2s color;
+      // transition: 0.3s 0.1s padding, 0.3s 0.1s height, 0.3s 0.1s margin,
+      //   0.2s color;
+      transition: 0.3s padding ease-in-out, 0.3s height ease-in-out,
+        0.3s color ease-in-out;
     }
 
     :last-child {
@@ -152,8 +154,6 @@ export default {
     height: 30px;
     padding: 5px 0;
     color: $primary;
-    transition: 0.3s height ease-in-out, 0.3s padding ease-in-out,
-      0.3s 0.2s color, 0.2s background-color;
   }
 }
 
@@ -161,6 +161,14 @@ export default {
   .lang__title:hover,
   .lang__dropdown > li:hover {
     background-color: $background;
+  }
+}
+
+@media (pointer: coarse) {
+  .lang__dropdown > li {
+    &:active {
+      background-color: $background-dark;
+    }
   }
 }
 </style>
