@@ -79,4 +79,12 @@ export default {
 .todo-move {
   transition: all 0.3s;
 }
+
+@media screen and (max-width: $screen) {
+  .todo {
+    display: flex;
+    align-items: center;
+    height: 60px;
+  }
+}
 </style>

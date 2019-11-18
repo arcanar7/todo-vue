@@ -151,6 +151,15 @@ export default {
   }
 }
 
+.completed {
+  color: $primary-lightest;
+  text-decoration: line-through;
+}
+
+.color-primary {
+  color: $primary;
+}
+
 @media (hover: hover) {
   .destroy:hover {
     color: $primary;
@@ -166,19 +175,23 @@ export default {
 @media (pointer: coarse) {
   .todo__view {
     .destroy {
-      bottom: -5px;
       display: inline-block;
       font-size: 40px;
     }
   }
 }
 
-.completed {
-  color: $primary-lightest;
-  text-decoration: line-through;
-}
+@media screen and (max-width: $screen) {
+  .todo__view {
+    .title {
+      font-size: 32px;
+    }
 
-.color-primary {
-  color: $primary;
+    .checkbox {
+      .label {
+        top: 7px;
+      }
+    }
+  }
 }
 </style>
