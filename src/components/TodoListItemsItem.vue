@@ -93,7 +93,7 @@ export default {
 
     .label {
       position: absolute;
-      top: 5px;
+      top: 2px;
       transition: color 0.2s ease-out;
 
       &::before {
@@ -185,6 +185,10 @@ export default {
   .todo__view {
     .title {
       font-size: 32px;
+    }
+
+    .destroy {
+      font-size: 40px;
     }
 
     .checkbox {
