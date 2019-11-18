@@ -94,10 +94,6 @@ export default {
     user-select: none;
     background-color: $background-input;
     transition: 0.3s background-color, 0.4s border-radius linear;
-
-    &:hover {
-      background-color: $background;
-    }
   }
 
   &__dropdown {
@@ -158,10 +154,13 @@ export default {
     color: $primary;
     transition: 0.3s height ease-in-out, 0.3s padding ease-in-out,
       0.3s 0.2s color, 0.2s background-color;
+  }
+}
 
-    &:hover {
-      background-color: $background;
-    }
+@media (hover: hover) {
+  .lang__title:hover,
+  .lang__dropdown > li:hover {
+    background-color: $background;
   }
 }
 </style>

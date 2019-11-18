@@ -103,7 +103,6 @@ export default {
       background-color: inherit;
     }
 
-    &__btn:hover,
     &__btn:focus,
     .selected {
       color: $primary-lightness;
@@ -116,11 +115,18 @@ export default {
     color: $primary;
     background-color: inherit;
 
-    &:hover,
     &:focus {
       color: $primary-lightness;
       background-color: $primary-light;
     }
+  }
+}
+
+@media (hover: hover) {
+  .todo-nav-filters__btn:hover,
+  .todo-nav__clear-completed:hover {
+    color: $primary-lightness;
+    background-color: $primary-light;
   }
 }
 

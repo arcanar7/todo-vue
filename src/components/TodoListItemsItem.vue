@@ -127,15 +127,27 @@ export default {
     &::after {
       content: '×';
     }
+  }
+}
 
-    &:hover {
-      color: $primary;
-    }
+@media (hover: hover) {
+  .destroy:hover {
+    color: $primary;
   }
 
-  &:hover {
+  .todo__view:hover {
     .destroy {
       display: inline-block;
+    }
+  }
+}
+
+@media (pointer: coarse) {
+  .todo__view {
+    .destroy {
+      bottom: -5px;
+      display: inline-block;
+      font-size: 40px;
     }
   }
 }

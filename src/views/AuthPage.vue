@@ -87,14 +87,16 @@ export default {
       font-size: 18px;
       font-weight: 400;
       color: $primary-lightness;
-      background-color: $primary-light;
+      background-color: $primary;
       transition: background-color 0.3s ease;
     }
+  }
+}
 
-    &__login:hover,
-    &__registration:hover {
-      background-color: $primary-light;
-    }
+@media (hover: hover) {
+  .nav__login:hover,
+  .nav__registration:hover {
+    background-color: $primary-light;
   }
 }
 

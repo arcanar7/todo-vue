@@ -47,7 +47,6 @@ a {
   text-decoration: none;
   outline: none;
 
-  &:hover,
   &:focus {
     text-decoration: underline;
   }
@@ -72,7 +71,6 @@ button {
     opacity: 0.4;
   }
 
-  &:hover,
   &:focus {
     background-color: $primary-light;
   }
@@ -89,4 +87,14 @@ input {
   border: 1px solid $primary-light;
   border-radius: 5px;
   outline: none !important;
+}
+
+@media (hover: hover) {
+  button:hover {
+    background-color: $primary-light;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
 }

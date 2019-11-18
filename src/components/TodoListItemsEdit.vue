@@ -112,10 +112,16 @@ export default {
     padding: 0;
     background-color: inherit;
 
-    &:hover,
     &:focus {
       background-color: inherit;
     }
+  }
+}
+
+@media (hover: hover) {
+  .edit-done:hover,
+  .edit-cancel:hover {
+    background-color: inherit;
   }
 }
 </style>
