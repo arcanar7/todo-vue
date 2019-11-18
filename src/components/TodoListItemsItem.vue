@@ -2,6 +2,7 @@
   <div class="todo__view">
     <div class="checkbox">
       <input
+        ref="checkBoxToggle"
         class="toggle"
         type="checkbox"
         v-model="todo.completed"
@@ -17,7 +18,7 @@
     <label
       class="title"
       :class="todo.completed ? 'completed' : 'color-primary'"
-      @dblclick="editTodo(todo)"
+      @click="onClickTitle($event, todo)"
       >{{ todo.title }}</label
     >
     <button
@@ -32,9 +33,29 @@
 export default {
   name: 'TodoListItemsItem',
   props: { todo: { type: Object, required: true } },
+  data() {
+    return {
+      clickCount: 0,
+      clickTimer: null,
+    }
+  },
   methods: {
+    onClickTitle(e, todo) {
+      this.clickCount++
+      if (this.clickCount === 1) {
+        this.clickTimer = setTimeout(() => {
+          this.clickCount = 0
+          this.onToggleComplete(e)
+        }, 250)
+      } else if (this.clickCount === 2) {
+        clearTimeout(this.clickTimer)
+        this.clickCount = 0
+        this.editTodo(todo)
+      }
+    },
     onToggleComplete(e) {
-      const { checked, id } = e.target
+      let { checked, id } = this.$refs.checkBoxToggle
+      e.target.tagName === 'LABEL' ? (checked = !checked) : null
       this.$store
         .dispatch('updateTodo', {
           title: this.todo.title,

@@ -141,6 +141,8 @@ export default {
 
     &-filters {
       position: initial;
+      display: flex;
+      flex-wrap: wrap;
       order: 2;
       width: 100%;
       margin-top: 20px;

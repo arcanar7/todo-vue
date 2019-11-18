@@ -99,22 +99,3 @@ input {
     text-decoration: underline;
   }
 }
-
-// @media (pointer: coarse) {
-//   button,
-//   a {
-//     background-position: center;
-//     transition: background 0.3s;
-
-//     &:hover {
-//       background: $primary radial-gradient(circle, transparent 1%, $primary 1%)
-//         center/15000%;
-//     }
-
-//     &:active {
-//       background-color: $primary-light;
-//       background-size: 100%;
-//       transition: background 0s;
-//     }
-//   }
-// }

@@ -75,13 +75,14 @@ export default {
 .edit {
   position: relative;
   display: none;
-  flex-grow: 1;
+  width: 100%;
 
   &-title {
-    flex-grow: 1;
+    width: 100%;
     height: auto;
     padding: 3px 0 3px 10px;
     margin-left: 23px;
+    overflow: hidden;
     font-size: 24px;
     font-style: italic;
     font-weight: 700;
