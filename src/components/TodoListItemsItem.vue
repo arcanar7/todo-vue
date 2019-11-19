@@ -80,6 +80,7 @@ export default {
   position: relative;
   display: flex;
   flex-grow: 1;
+  height: 27px;
   padding: 5px;
 
   .checkbox {
@@ -127,7 +128,7 @@ export default {
   }
 
   .title {
-    flex-grow: 1;
+    width: 100%;
     font-size: 24px;
     font-style: italic;
     font-weight: 700;
@@ -183,12 +184,18 @@ export default {
 
 @media screen and (max-width: $screen) {
   .todo__view {
+    height: 36px;
+
     .title {
       font-size: 32px;
     }
 
     .destroy {
       font-size: 40px;
+
+      &:active {
+        color: $primary-lightest;
+      }
     }
 
     .checkbox {

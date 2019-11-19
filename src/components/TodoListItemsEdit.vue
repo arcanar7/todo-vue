@@ -76,6 +76,7 @@ export default {
   position: relative;
   display: none;
   width: 100%;
+  height: 37px;
 
   &-title {
     width: 100%;
@@ -104,14 +105,19 @@ export default {
   &-done,
   &-cancel {
     position: absolute;
-    top: 7px;
+    top: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 28px;
-    height: 24px;
+    height: 25px;
     padding: 0;
     background-color: inherit;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
 
     &:focus {
       background-color: inherit;
@@ -123,6 +129,27 @@ export default {
   .edit-done:hover,
   .edit-cancel:hover {
     background-color: inherit;
+  }
+}
+
+@media screen and (max-width: $screen) {
+  .edit {
+    height: 46px;
+
+    &-title {
+      padding-top: 4px;
+      font-size: 32px;
+    }
+
+    &-done {
+      right: 47px;
+    }
+
+    &-done,
+    &-cancel {
+      width: 40px;
+      height: 34px;
+    }
   }
 }
 </style>
