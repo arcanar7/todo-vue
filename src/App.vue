@@ -9,7 +9,7 @@
 <style lang="scss">
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.5s;
+  transition: 0.5s opacity;
 }
 
 .fade-enter,

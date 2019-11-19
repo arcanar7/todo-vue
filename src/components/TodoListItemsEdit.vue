@@ -91,7 +91,7 @@ export default {
     word-break: break-all;
     background-color: $primary-lightness;
     border: 2px solid $primary;
-    transition: color 0.2s ease-out;
+    transition: 0.2s color ease-out;
   }
 
   &-done {

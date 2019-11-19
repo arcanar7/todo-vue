@@ -67,7 +67,7 @@ export default {
 
 .todo-enter-active,
 .todo-leave-active {
-  transition: all 0.3s;
+  transition: 0.3s all;
 }
 
 .todo-enter,
@@ -77,7 +77,7 @@ export default {
 }
 
 .todo-move {
-  transition: all 0.3s;
+  transition: 0.3s all;
 }
 
 @media screen and (max-width: $screen) {

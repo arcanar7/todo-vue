@@ -88,7 +88,7 @@ export default {
       font-weight: 400;
       color: $primary-lightness;
       background-color: $primary;
-      transition: background-color 0.3s ease;
+      transition: 0.3s background-color ease;
     }
   }
 }
@@ -108,7 +108,7 @@ export default {
 
 .component-fade-enter-active,
 .component-fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: 0.3s opacity ease;
 }
 
 .component-fade-enter,

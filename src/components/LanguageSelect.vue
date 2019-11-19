@@ -81,7 +81,7 @@ export default {
     content: '';
     border: 6px solid $primary;
     border-color: $primary transparent transparent transparent;
-    transition: 0.3s all ease-in-out;
+    transition: 0.3s transform ease-in-out;
   }
 
   &__title {
@@ -121,8 +121,6 @@ export default {
       color: hsla(0, 0, 0, 0);
       user-select: none;
       background-color: $background-input;
-      // transition: 0.3s 0.1s padding, 0.3s 0.1s height, 0.3s 0.1s margin,
-      //   0.2s color;
       transition: 0.3s padding ease-in-out, 0.3s height ease-in-out,
         0.3s color ease-in-out;
     }
@@ -146,8 +144,7 @@ export default {
   }
 
   &::after {
-    top: 11px;
-    transform: rotate(-180deg);
+    transform: rotate(-180deg) translateY(6px);
   }
 
   li {
