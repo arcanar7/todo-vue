@@ -4,7 +4,9 @@
       <div class="logout">
         {{ email }}
         <button class="exit" title="Log out" @click="onLogOut">
-          <img src="../assets/icons/exit.svg" alt="" />
+          <icon-base icon-name="exit">
+            <icon-exit />
+          </icon-base>
         </button>
       </div>
       <language-select />
@@ -19,12 +21,16 @@
 <script>
 import TodoList from '@/components/TodoList'
 import LanguageSelect from '@/components/LanguageSelect'
+import IconBase from '@/components/IconBase'
+import IconExit from '@/components/icons/IconExit'
 
 export default {
   name: 'HomePage',
   components: {
     TodoList,
     LanguageSelect,
+    IconBase,
+    IconExit,
   },
   computed: {
     email() {

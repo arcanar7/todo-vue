@@ -17,7 +17,14 @@
         @blur="email.touch()"
       />
       <span v-if="isValidErrorEmail" class="message-input text-error">
-        <img src="../assets/icons/warning.svg" alt="" />
+        <icon-base
+          icon-name="warning"
+          width="10px"
+          height="10px"
+          viewBox="0 0 192 512"
+        >
+          <icon-warning />
+        </icon-base>
         <template v-if="!isRequiredEmail">
           {{ $t('validation.required') }}
         </template>
@@ -36,10 +43,16 @@
 <script>
 import AuthMixin from '@/mixins/auth.mixin'
 import AppSpinner from '@/components/AppSpinner'
+import IconBase from '@/components/IconBase'
+import IconWarning from '@/components/icons/IconWarning'
 
 export default {
   name: 'ResetPasswordPage',
-  components: { AppSpinner },
+  components: {
+    AppSpinner,
+    IconBase,
+    IconWarning,
+  },
   mixins: [AuthMixin],
 }
 </script>

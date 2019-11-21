@@ -14,21 +14,34 @@
       @mousedown="doneEdit(todo)"
       :title="$t('todo-edit.edit-title')"
     >
-      <img src="@/assets/icons/edit.svg" alt="" />
+      <icon-base width="100%" height="100%" iconColor="hsl(158, 10%, 50%)">
+        <icon-checkmark />
+      </icon-base>
     </button>
     <button
       class="edit-cancel"
       @mousedown="cancelEdit(todo)"
       :title="$t('todo-edit.cancel-edit-title')"
     >
-      <img src="@/assets/icons/cancel.svg" alt="" />
+      <icon-base width="100%" height="100%" iconColor="hsl(158, 10%, 50%)">
+        <icon-cancel />
+      </icon-base>
     </button>
   </div>
 </template>
 
 <script>
+import IconBase from '@/components/IconBase'
+import IconCheckmark from '@/components/icons/IconCheckmark'
+import IconCancel from '@/components/icons/IconCancel'
+
 export default {
   name: 'TodoListItemsEdit',
+  components: {
+    IconBase,
+    IconCheckmark,
+    IconCancel,
+  },
   directives: {
     'todo-focus': function(el, binding) {
       if (binding.value) {

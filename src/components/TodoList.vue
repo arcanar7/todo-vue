@@ -6,7 +6,14 @@
       <p>
         {{ $t('todo-list.empty') }}
       </p>
-      <img src="@/assets/icons/arrow.svg" alt="" />
+      <icon-base
+        icon-name="arrow"
+        width="120px"
+        height="120px"
+        viewBox="0 0 256 512"
+      >
+        <icon-arrow />
+      </icon-base>
     </div>
     <section class="main" v-else>
       <app-spinner :primary="'primary'" v-if="loadingApp"></app-spinner>
@@ -23,6 +30,8 @@ import TodoListItems from '@/components/TodoListItems'
 import TodoListNew from '@/components/TodoListNew'
 import TodoListNav from '@/components/TodoListNav'
 import AppSpinner from '@/components/AppSpinner'
+import IconBase from '@/components/IconBase'
+import IconArrow from '@/components/icons/IconArrow'
 
 export default {
   name: 'TodoList',
@@ -31,6 +40,8 @@ export default {
     TodoListNew,
     TodoListNav,
     AppSpinner,
+    IconBase,
+    IconArrow,
   },
   computed: {
     todos() {

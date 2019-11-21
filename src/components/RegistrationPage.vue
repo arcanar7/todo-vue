@@ -20,7 +20,14 @@
         @blur="email.touch()"
       />
       <span v-if="isValidErrorEmail" class="message-input text-error">
-        <img src="../assets/icons/warning.svg" alt="" />
+        <icon-base
+          icon-name="warning"
+          width="10px"
+          height="10px"
+          viewBox="0 0 192 512"
+        >
+          <icon-warning />
+        </icon-base>
         <template v-if="!isRequiredEmail">
           {{ $t('validation.required') }}
         </template>
@@ -41,7 +48,14 @@
         @blur="password.touch()"
       />
       <span v-if="isValidErrorPassword" class="message-input text-error">
-        <img src="../assets/icons/warning.svg" alt="" />
+        <icon-base
+          icon-name="warning"
+          width="10px"
+          height="10px"
+          viewBox="0 0 192 512"
+        >
+          <icon-warning />
+        </icon-base>
         <template v-if="!isRequiredPassword">
           {{ $t('validation.required') }}
         </template>
@@ -62,7 +76,14 @@
         @blur="repeatPassword.touch()"
       />
       <span v-if="isValidErrorRepeatPassword" class="message-input text-error">
-        <img src="../assets/icons/warning.svg" alt="" />
+        <icon-base
+          icon-name="warning"
+          width="10px"
+          height="10px"
+          viewBox="0 0 192 512"
+        >
+          <icon-warning />
+        </icon-base>
         <template v-if="!isRequiredRepeatPassword">
           {{ $t('validation.required') }}
         </template>
@@ -85,10 +106,16 @@
 <script>
 import AuthMixin from '@/mixins/auth.mixin'
 import AppSpinner from '@/components/AppSpinner'
+import IconBase from '@/components/IconBase'
+import IconWarning from '@/components/icons/IconWarning'
 
 export default {
   name: 'RegistrationPage',
-  components: { AppSpinner },
+  components: {
+    AppSpinner,
+    IconBase,
+    IconWarning,
+  },
   mixins: [AuthMixin],
 }
 </script>
