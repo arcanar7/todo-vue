@@ -64,18 +64,18 @@ export default {
     display: flex;
     justify-content: flex-end;
     font-size: 20px;
-    color: $primary;
+    color: $text-primary;
 
     .exit {
       margin-left: 5px;
-      color: $primary;
+      color: $text-primary;
       background-color: inherit;
     }
   }
 
   .title {
     font-weight: 900;
-    color: $primary;
+    color: $text-primary;
     text-align: center;
   }
 }

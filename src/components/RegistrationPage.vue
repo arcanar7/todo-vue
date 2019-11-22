@@ -7,15 +7,18 @@
       @submit.prevent="onSubmit('registerUser', 'login?registerSuccess=true')"
       novalidate
     >
+      <label class="login-form__label" for="email">
+        {{ $t('login.ph-email') }}
+      </label>
       <input
         type="email"
         name="email"
+        id="email"
         class="login-form__email"
         :class="{
           'has-error': isValidErrorEmail,
           'valid-input': !isInvalidEmail,
         }"
-        :placeholder="$t('login.ph-email')"
         v-model="email.title"
         @blur="email.touch()"
       />
@@ -35,15 +38,18 @@
           {{ $t('validation.email') }}
         </template>
       </span>
+      <label class="login-form__label" for="password">
+        {{ $t('login.ph-password') }}
+      </label>
       <input
         type="password"
         name="password"
+        id="password"
         class="login-form__password"
         :class="{
           'has-error': isValidErrorPassword,
           'valid-input': !isInvalidPassword,
         }"
-        :placeholder="$t('login.ph-password')"
         v-model="password.title"
         @blur="password.touch()"
       />
@@ -63,15 +69,18 @@
           {{ $t('validation.password') }}
         </template>
       </span>
+      <label class="login-form__label" for="repeatPassword">
+        {{ $t('register.ph-repeat-password') }}
+      </label>
       <input
         type="password"
         name="repeatPassword"
+        id="repeatPassword"
         class="login-form__password"
         :class="{
           'has-error': isValidErrorRepeatPassword,
           'valid-input': !isInvalidRepeatPassword,
         }"
-        :placeholder="$t('register.ph-repeat-password')"
         v-model="repeatPassword.title"
         @blur="repeatPassword.touch()"
       />

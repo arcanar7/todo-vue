@@ -51,7 +51,7 @@ export default {
 
   .title {
     font-weight: 900;
-    color: $primary;
+    color: $text-primary;
     text-align: center;
   }
 }
@@ -85,9 +85,9 @@ export default {
       width: 150px;
       height: 50px;
       font-size: 18px;
-      font-weight: 400;
-      color: $primary-lightness;
-      background-color: $primary;
+      font-weight: 700;
+      color: $text;
+      background-color: $primary-light;
       transition: 0.3s background-color ease;
     }
   }
@@ -96,13 +96,13 @@ export default {
 @media (hover: hover) {
   .nav__login:hover,
   .nav__registration:hover {
-    background-color: $primary-light;
+    background-color: $primary-lightest;
   }
 }
 
 .active {
-  font-weight: 900 !important;
-  color: $primary !important;
+  font-weight: 400 !important;
+  color: $text-primary !important;
   background-color: $background !important;
 }
 

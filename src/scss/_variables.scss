@@ -1,22 +1,23 @@
-$primary: hsl(158, 10, 50%);
-$primary-light: hsl(158, 10, 60%);
-$primary-lightest: hsl(158, 10, 80%);
-$primary-lightness: hsl(158, 10, 100%);
-$primary-dark: hsl(158, 10, 30%);
-$primary-darkness: hsl(158, 10, 10%);
+$primary: hsl(153, 6%, 50%);
+$primary-light: hsl(153, 6%, 70%);
+$primary-lightest: hsl(153, 6%, 80%);
+$primary-lightness: hsl(0, 0%, 100%);
+$primary-darkness: hsl(153, 6%, 10%);
 
 $success: hsl(115, 42%, 50%);
 $success-light: hsl(115, 42%, 79%);
 $success-lightness: hsl(115, 100%, 98%);
-$success-dark: hsl(115, 88%, 40%);
-$success-darkness: hsl(115, 88%, 30%);
 
 $error: hsl(0, 42%, 50%);
 $error-light: hsl(0, 42%, 79%);
 $error-lightness: hsl(0, 100%, 98%);
 
-$background-dark: hsl(0, 0, 80%);
-$background: hsl(0, 0, 94%);
-$background-input: hsl(0, 0, 97%);
+$background-dark: hsl(0, 0%, 80%);
+$background: hsl(0, 0%, 94%);
+$background-input: hsl(0, 0%, 97%);
 
 $screen: 615px;
+
+$text: hsl(170, 51%, 20%);
+$text-accent: hsl(167, 47%, 23%);
+$text-primary: hsl(167, 49%, 31%);

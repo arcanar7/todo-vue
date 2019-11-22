@@ -90,7 +90,7 @@ export default {
     justify-content: center;
     height: 100%;
     font-weight: 700;
-    color: $primary;
+    color: $text-primary;
     user-select: none;
     background-color: $background-input;
     transition: 0.3s background-color, 0.4s border-radius linear;
@@ -150,7 +150,7 @@ export default {
   li {
     height: 30px;
     padding: 5px 0;
-    color: $primary;
+    color: $text-primary;
   }
 }
 

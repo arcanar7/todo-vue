@@ -86,7 +86,7 @@ export default {
   .checkbox {
     position: relative;
     margin-right: 30px;
-    color: $primary-lightest;
+    color: $text-primary;
 
     .toggle {
       display: none;
@@ -158,12 +158,12 @@ export default {
 }
 
 .color-primary {
-  color: $primary;
+  color: $text-primary;
 }
 
 @media (hover: hover) {
   .destroy:hover {
-    color: $primary;
+    color: $text-primary;
   }
 
   .todo__view:hover {

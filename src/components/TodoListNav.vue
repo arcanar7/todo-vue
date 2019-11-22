@@ -82,7 +82,7 @@ export default {
 
   &__count {
     padding: 5px;
-    color: $primary;
+    color: $text-primary;
   }
 
   &-filters {
@@ -99,25 +99,25 @@ export default {
 
     &__btn {
       padding: 5px;
-      color: $primary;
+      color: $text-primary;
       background-color: inherit;
     }
 
     &__btn:focus,
     .selected {
       color: $primary-lightness;
-      background-color: $primary-light;
+      background-color: $text-primary;
     }
   }
 
   &__clear-completed {
     padding: 5px;
-    color: $primary;
+    color: $text-primary;
     background-color: inherit;
 
     &:focus {
       color: $primary-lightness;
-      background-color: $primary-light;
+      background-color: $text-primary;
     }
   }
 }
@@ -126,7 +126,7 @@ export default {
   .todo-nav-filters__btn:hover,
   .todo-nav__clear-completed:hover {
     color: $primary-lightness;
-    background-color: $primary-light;
+    background-color: $text-primary;
   }
 }
 
