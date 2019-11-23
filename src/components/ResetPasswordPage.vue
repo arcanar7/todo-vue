@@ -5,7 +5,7 @@
     <p class="success-title" v-if="isSuccess">{{ isSuccess }}</p>
     <form class="login-form" @submit.prevent="onResetPass" novalidate>
       <label class="login-form__label" for="email">
-        {{ $t('login.ph-email') }}
+        {{ $t('login.label-email') }}
       </label>
       <input
         type="email"

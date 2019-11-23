@@ -14,13 +14,13 @@
     "log-in": "Log in",
     "title": "Log in account",
     "forgot-password": "Forgot password?",
-    "ph-email": "Email",
-    "ph-password": "Password"
+    "label-email": "Email",
+    "label-password": "Password"
   },
   "register": {
     "title": "Register account",
     "create": "Create account",
-    "ph-repeat-password": "Repeat password"
+    "label-repeat-password": "Repeat password"
   },
   "reset": {
     "title": "Recover account",

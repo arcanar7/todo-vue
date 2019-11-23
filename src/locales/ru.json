@@ -14,13 +14,13 @@
     "log-in": "Войти",
     "title": "Войти в аккаунт",
     "forgot-password": "Забыли пароль?",
-    "ph-email": "Email",
-    "ph-password": "Пароль"
+    "label-email": "Email",
+    "label-password": "Пароль"
   },
   "register": {
     "title": "Регистрация аккаунта",
     "create": "Создать аккаунт",
-    "ph-repeat-password": "Повторите пароль"
+    "label-repeat-password": "Повторите пароль"
   },
   "reset": {
     "title": "Восстановить аккаунт",

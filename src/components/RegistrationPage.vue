@@ -8,7 +8,7 @@
       novalidate
     >
       <label class="login-form__label" for="email">
-        {{ $t('login.ph-email') }}
+        {{ $t('login.label-email') }}
       </label>
       <input
         type="email"
@@ -39,7 +39,7 @@
         </template>
       </span>
       <label class="login-form__label" for="password">
-        {{ $t('login.ph-password') }}
+        {{ $t('login.label-password') }}
       </label>
       <input
         type="password"
@@ -70,7 +70,7 @@
         </template>
       </span>
       <label class="login-form__label" for="repeatPassword">
-        {{ $t('register.ph-repeat-password') }}
+        {{ $t('register.label-repeat-password') }}
       </label>
       <input
         type="password"
