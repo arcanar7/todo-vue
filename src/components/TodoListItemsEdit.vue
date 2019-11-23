@@ -117,6 +117,7 @@ export default {
     resize: none;
     background-color: $primary-lightness;
     border: 2px solid $primary;
+    outline: none;
     transition: 0.2s color ease-out;
   }
 
