@@ -51,6 +51,7 @@ export default {
 
   .todo {
     display: flex;
+    min-height: 38px;
     border-bottom: 1px solid $primary-lightest;
   }
 
@@ -82,9 +83,8 @@ export default {
 
 @media screen and (max-width: $screen) {
   .todo {
-    display: flex;
     align-items: center;
-    height: 60px;
+    min-height: 60px;
   }
 }
 </style>

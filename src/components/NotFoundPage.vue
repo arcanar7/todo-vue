@@ -36,7 +36,7 @@ export default {
 
   &__title {
     font-weight: 900;
-    color: $primary;
+    color: $text-primary;
     text-align: center;
   }
 }
@@ -46,7 +46,7 @@ export default {
 
   &__title {
     font-weight: 900;
-    color: $primary;
+    color: $text-primary;
     text-align: center;
   }
 }
@@ -57,7 +57,7 @@ export default {
   &__home {
     padding: 10px;
     color: $primary-lightness;
-    background-color: $primary;
+    background-color: $text-primary;
     border-radius: 5px;
     box-shadow: 4px 4px 4px hsla(0, 0, 0, 0.5);
 

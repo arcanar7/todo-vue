@@ -80,7 +80,7 @@ export default {
   position: relative;
   display: flex;
   flex-grow: 1;
-  height: 27px;
+  min-height: 27px;
   padding: 5px;
 
   .checkbox {
@@ -184,7 +184,7 @@ export default {
 
 @media screen and (max-width: $screen) {
   .todo__view {
-    height: 36px;
+    min-height: 36px;
 
     .title {
       font-size: 32px;

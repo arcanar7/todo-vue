@@ -73,7 +73,7 @@ export default {
   align-items: center;
   align-self: center;
   width: 300px;
-  color: $primary;
+  color: $text-primary;
   text-align: center;
 }
 

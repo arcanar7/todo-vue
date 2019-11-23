@@ -46,7 +46,7 @@ export default {
     width: 50px;
     height: 50px;
     border: 4px solid $primary-lightness;
-    border-color: $primary transparent transparent transparent;
+    border-color: $text-primary transparent transparent transparent;
   }
 }
 

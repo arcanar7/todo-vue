@@ -1,8 +1,10 @@
 <template>
   <div class="edit">
-    <input
+    <span ref="fake" class="edit-title__fake">{{ todo.title }}</span>
+    <textarea
       class="edit-title"
       type="text"
+      :style="{ height: textHeight }"
       v-model="todo.title"
       v-todo-focus="todo == editedTodo"
       @blur="doneEdit(todo)"
@@ -14,7 +16,7 @@
       @mousedown="doneEdit(todo)"
       :title="$t('todo-edit.edit-title')"
     >
-      <icon-base width="100%" height="100%" iconColor="hsl(158, 10%, 50%)">
+      <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-checkmark />
       </icon-base>
     </button>
@@ -23,7 +25,7 @@
       @mousedown="cancelEdit(todo)"
       :title="$t('todo-edit.cancel-edit-title')"
     >
-      <icon-base width="100%" height="100%" iconColor="hsl(158, 10%, 50%)">
+      <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-cancel />
       </icon-base>
     </button>
@@ -50,6 +52,11 @@ export default {
     },
   },
   props: { todo: { type: Object, required: true } },
+  data() {
+    return {
+      textHeight: '27px',
+    }
+  },
   computed: {
     editedTodo() {
       return this.$store.getters.editedTodo
@@ -57,6 +64,9 @@ export default {
     beforeEditTitle() {
       return this.$store.getters.beforeEditTitle
     },
+  },
+  updated() {
+    this.textHeight = getComputedStyle(this.$refs.fake).height
   },
   methods: {
     doneEdit({ title, completed, id }) {
@@ -89,22 +99,32 @@ export default {
   position: relative;
   display: none;
   width: 100%;
-  height: 37px;
 
-  &-title {
-    width: 100%;
-    height: auto;
-    padding: 3px 0 3px 10px;
+  &-title,
+  &-title__fake {
     margin-left: 23px;
-    overflow: hidden;
     font-size: 24px;
     font-style: italic;
     font-weight: 700;
-    color: $primary;
     word-break: break-all;
+  }
+
+  &-title {
+    width: 100%;
+    padding: 3px 70px 3px 10px;
+    overflow: hidden;
+    color: $text-primary;
+    resize: none;
     background-color: $primary-lightness;
     border: 2px solid $primary;
     transition: 0.2s color ease-out;
+  }
+
+  &-title__fake {
+    position: absolute;
+    width: 485px;
+    padding: 3px 0 3px 10px;
+    visibility: hidden;
   }
 
   &-done {
@@ -147,10 +167,13 @@ export default {
 
 @media screen and (max-width: $screen) {
   .edit {
-    height: 46px;
-
     &-title {
-      padding-top: 4px;
+      padding-right: 100px;
+      font-size: 32px;
+    }
+
+    &-title__fake {
+      width: calc(100% - 137px);
       font-size: 32px;
     }
 
