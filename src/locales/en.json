@@ -49,7 +49,7 @@
     "remove-title": "Remove todo"
   },
   "todo-edit": {
-    "edit-title": "Edit todo",
-    "cancel-edit-title": "Cancel edit"
+    "submit-edit": "Submit changes",
+    "cancel-edit": "Cancel changes"
   }
 }

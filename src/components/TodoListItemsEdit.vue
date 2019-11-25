@@ -14,7 +14,7 @@
     <button
       class="edit-done"
       @mousedown="doneEdit(todo)"
-      :title="$t('todo-edit.edit-title')"
+      :title="$t('todo-edit.submit-edit')"
     >
       <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-checkmark />
@@ -23,7 +23,7 @@
     <button
       class="edit-cancel"
       @mousedown="cancelEdit(todo)"
-      :title="$t('todo-edit.cancel-edit-title')"
+      :title="$t('todo-edit.cancel-edit')"
     >
       <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-cancel />
