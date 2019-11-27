@@ -36,7 +36,10 @@ export default {
   },
   data() {
     return {
-      langs: [{ val: 'en', title: 'English' }, { val: 'ru', title: 'Русский' }],
+      langs: [
+        { val: 'en', title: 'English' },
+        { val: 'ru', title: 'Русский' },
+      ],
       expand: false,
     }
   },
