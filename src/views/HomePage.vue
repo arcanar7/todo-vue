@@ -9,6 +9,7 @@
           </icon-base>
         </button>
       </div>
+      <indicator />
       <language-select />
       <h1 class="title">{{ $t('title') }}</h1>
     </header>
@@ -23,6 +24,7 @@ import TodoList from '@/components/TodoList'
 import LanguageSelect from '@/components/LanguageSelect'
 import IconBase from '@/components/IconBase'
 import IconExit from '@/components/icons/IconExit'
+import Indicator from '@/components/Indicator'
 
 export default {
   name: 'HomePage',
@@ -31,6 +33,11 @@ export default {
     LanguageSelect,
     IconBase,
     IconExit,
+    Indicator,
+  },
+  mounted() {
+    window.addEventListener('online', this.setOnline)
+    window.addEventListener('offline', this.setOnline)
   },
   computed: {
     email() {
@@ -41,6 +48,9 @@ export default {
     onLogOut() {
       this.$store.dispatch('logoutUser').catch(() => {})
       this.$router.push('/login')
+    },
+    setOnline() {
+      this.$store.dispatch('setIsOnLine', navigator.onLine)
     },
   },
 }

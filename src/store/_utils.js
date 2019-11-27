@@ -4,6 +4,7 @@ export default {
     localLoading: false,
     error: null,
     success: null,
+    isOnLine: true,
   },
   mutations: {
     setLoading(state, payload) {
@@ -23,6 +24,9 @@ export default {
     },
     clearSuccess(state) {
       state.success = null
+    },
+    setIsOnLine(state, payload) {
+      state.isOnLine = payload
     },
   },
   actions: {
@@ -44,6 +48,9 @@ export default {
     clearSuccess({ commit }) {
       commit('clearSuccess')
     },
+    setIsOnLine({ commit }, payload) {
+      commit('setIsOnLine', payload)
+    },
   },
   getters: {
     loading(state) {
@@ -57,6 +64,9 @@ export default {
     },
     success(state) {
       return state.success
+    },
+    isOnLine(state) {
+      return state.isOnLine
     },
   },
 }
