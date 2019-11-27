@@ -22,4 +22,19 @@ module.exports = {
       },
     },
   },
+  pwa: {
+    themeColor: '#287665',
+    name: 'ToDo List',
+    workboxPluginMode: 'GenerateSW',
+    workboxOptions: {
+      navigateFallback: '/',
+      skipWaiting: true,
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('.(?:png|gif|jpg|jpeg|webp|svg)$'),
+          handler: 'cacheFirst',
+        },
+      ],
+    },
+  },
 }
