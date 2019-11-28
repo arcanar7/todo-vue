@@ -77,7 +77,8 @@ export default {
     color: $text-primary;
 
     .exit {
-      margin-left: 5px;
+      padding: 0;
+      margin-left: 10px;
       color: $text-primary;
       background-color: inherit;
     }

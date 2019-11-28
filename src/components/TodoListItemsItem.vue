@@ -133,7 +133,6 @@ export default {
     font-size: 24px;
     font-style: italic;
     font-weight: 700;
-    word-break: break-all;
     transition: 0.5s color ease-out;
   }
 
