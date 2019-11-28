@@ -70,27 +70,29 @@ export default {
       }
     },
     async fetchTodos({ commit, getters }) {
-      commit('clearError')
-      commit('setLoading', true)
-      const resultTodos = []
-      try {
-        const fbVal = await fb
-          .database()
-          .ref(getters.user.id)
-          .once('value')
-        const todos = fbVal.val()
-        if (todos) {
-          Object.keys(todos).forEach(key => {
-            const todo = todos[key]
-            resultTodos.push(new Todo(todo.title, todo.completed, key))
-          })
+      if (getters.isOnLine) {
+        commit('clearError')
+        commit('setLoading', true)
+        const resultTodos = []
+        try {
+          const fbVal = await fb
+            .database()
+            .ref(getters.user.id)
+            .once('value')
+          const todos = fbVal.val()
+          if (todos) {
+            Object.keys(todos).forEach(key => {
+              const todo = todos[key]
+              resultTodos.push(new Todo(todo.title, todo.completed, key))
+            })
+          }
+          commit('loadTodos', resultTodos)
+          commit('setLoading', false)
+        } catch (error) {
+          commit('setError', error.message)
+          commit('setLoading', false)
+          throw error
         }
-        commit('loadTodos', resultTodos)
-        commit('setLoading', false)
-      } catch (error) {
-        commit('setError', error.message)
-        commit('setLoading', false)
-        throw error
       }
     },
     async updateTodo({ commit, getters }, { title, completed, id }) {

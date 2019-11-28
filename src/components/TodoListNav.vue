@@ -37,6 +37,7 @@
       class="todo-nav__clear-completed"
       @click="removeCompleted"
       v-show="todos.length > remaining"
+      :disabled="!isOnline"
     >
       {{ $t('todo-nav.clear') }}
     </button>

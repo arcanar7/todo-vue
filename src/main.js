@@ -14,6 +14,9 @@ Vue.mixin({
     loadingApp() {
       return this.$store.getters.loading
     },
+    isOnline() {
+      return this.$store.getters.isOnLine
+    },
   },
 })
 

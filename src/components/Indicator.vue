@@ -9,13 +9,7 @@
 </template>
 
 <script>
-export default {
-  computed: {
-    isOnline() {
-      return this.$store.getters.isOnLine
-    },
-  },
-}
+export default {}
 </script>
 
 <style lang="scss">

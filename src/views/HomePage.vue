@@ -12,6 +12,7 @@
       <indicator />
       <language-select />
       <h1 class="title">{{ $t('title') }}</h1>
+      <h4 class="offline-title" v-if="!isOnline">{{ $t('offline') }}</h4>
     </header>
     <main class="app-inner">
       <todo-list />
@@ -88,6 +89,10 @@ export default {
     font-weight: 900;
     color: $text-primary;
     text-align: center;
+  }
+
+  .offline-title {
+    color: $error;
   }
 }
 

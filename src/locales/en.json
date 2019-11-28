@@ -1,5 +1,6 @@
 {
   "title": "My ToDo List",
+  "offline": "Unable to connect to the Internet. Some features may be unavailable.",
   "auth": {
     "login": "Login",
     "registration": "Register"

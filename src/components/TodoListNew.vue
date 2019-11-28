@@ -8,12 +8,13 @@
       :placeholder="$t('todo-new.ph-new')"
       v-model="newTodo"
       @keyup.enter="addTodo"
+      :disabled="!isOnline"
     />
     <button
       class="new-todo__btn"
       @click="addTodo"
       :title="$t('todo-new.add-title')"
-      :disabled="localLoading"
+      :disabled="localLoading || !isOnline"
     >
       <app-spinner v-if="localLoading"></app-spinner>
       <span v-else>+</span>

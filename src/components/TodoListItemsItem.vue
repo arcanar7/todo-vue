@@ -8,6 +8,7 @@
         v-model="todo.completed"
         :id="todo.id"
         @change="onToggleComplete"
+        :disabled="!isOnline"
       />
       <label
         :for="todo.id"
@@ -25,6 +26,7 @@
       class="destroy"
       @click="removeTodo(todo.id)"
       :title="$t('todo.remove-title')"
+      :disabled="!isOnline"
     ></button>
   </div>
 </template>
@@ -41,16 +43,18 @@ export default {
   },
   methods: {
     onClickTitle(e, todo) {
-      this.clickCount++
-      if (this.clickCount === 1) {
-        this.clickTimer = setTimeout(() => {
+      if (this.isOnline) {
+        this.clickCount++
+        if (this.clickCount === 1) {
+          this.clickTimer = setTimeout(() => {
+            this.clickCount = 0
+            this.onToggleComplete(e)
+          }, 250)
+        } else if (this.clickCount === 2) {
+          clearTimeout(this.clickTimer)
           this.clickCount = 0
-          this.onToggleComplete(e)
-        }, 250)
-      } else if (this.clickCount === 2) {
-        clearTimeout(this.clickTimer)
-        this.clickCount = 0
-        this.editTodo(todo)
+          this.editTodo(todo)
+        }
       }
     },
     onToggleComplete(e) {
