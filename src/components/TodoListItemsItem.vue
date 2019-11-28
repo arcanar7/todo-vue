@@ -129,6 +129,7 @@ export default {
 
   .title {
     width: 100%;
+    padding-right: 30px;
     font-size: 24px;
     font-style: italic;
     font-weight: 700;
