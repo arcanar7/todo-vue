@@ -37,6 +37,7 @@ export default {
     Indicator,
   },
   mounted() {
+    this.setOnline()
     window.addEventListener('online', this.setOnline)
     window.addEventListener('offline', this.setOnline)
   },
