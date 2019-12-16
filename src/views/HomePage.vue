@@ -17,6 +17,15 @@
     <main class="app-inner">
       <todo-list />
     </main>
+    <footer>
+      <button
+        class="app-install"
+        @click="installer()"
+        :style="{ display: installBtn }"
+      >
+        Install
+      </button>
+    </footer>
   </div>
 </template>
 
@@ -35,6 +44,33 @@ export default {
     IconBase,
     IconExit,
     Indicator,
+  },
+  data() {
+    return {
+      installBtn: 'none',
+      installer: null,
+    }
+  },
+  created() {
+    let installPrompt
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault()
+      installPrompt = e
+      this.installBtn = 'block'
+    })
+
+    this.installer = () => {
+      this.installBtn = 'none'
+      installPrompt.prompt()
+      installPrompt.userChoice.then(result => {
+        if (result.outcome === 'accepted') {
+          console.log('User accepted')
+        } else {
+          console.log('User denied')
+        }
+        installPrompt = null
+      })
+    }
   },
   mounted() {
     this.setOnline()
@@ -105,6 +141,11 @@ export default {
   border: 1px solid $primary;
   border-radius: 10px;
   box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
+}
+
+.app-install {
+  padding: 10px;
+  margin-top: 20px;
 }
 
 @media screen and (max-width: $screen) {
