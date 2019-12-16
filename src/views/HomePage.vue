@@ -17,13 +17,13 @@
     <main class="app-inner">
       <todo-list />
     </main>
-    <footer>
+    <footer class="footer">
       <button
         class="app-install"
         @click="installer()"
         :style="{ display: installBtn }"
       >
-        Install
+        {{ $t('pwa') }}
       </button>
     </footer>
   </div>
@@ -63,10 +63,8 @@ export default {
       this.installBtn = 'none'
       installPrompt.prompt()
       installPrompt.userChoice.then(result => {
-        if (result.outcome === 'accepted') {
-          console.log('User accepted')
-        } else {
-          console.log('User denied')
+        if (result.outcome !== 'accepted') {
+          this.installBtn = 'block'
         }
         installPrompt = null
       })
@@ -145,7 +143,8 @@ export default {
 
 .app-install {
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 30px;
+  font-size: 14px;
 }
 
 @media screen and (max-width: $screen) {

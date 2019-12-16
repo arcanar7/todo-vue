@@ -19,9 +19,9 @@
       <app-spinner :primary="'primary'" v-if="loadingApp"></app-spinner>
       <todo-list-items v-else :todos="todos"></todo-list-items>
     </section>
-    <footer class="footer" v-show="todos.length && !loadingApp">
+    <section class="nav-wrapper" v-show="todos.length && !loadingApp">
       <todo-list-nav :todos="todos"></todo-list-nav>
-    </footer>
+    </section>
   </div>
 </template>
 

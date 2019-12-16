@@ -1,6 +1,7 @@
 {
   "title": "My ToDo List",
   "offline": "Unable to connect to the Internet. Some features may be unavailable.",
+  "pwa": "Add to Home Screen",
   "auth": {
     "login": "Login",
     "registration": "Register"
