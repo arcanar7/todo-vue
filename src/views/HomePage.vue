@@ -159,6 +159,22 @@ export default {
     width: 90%;
   }
 
+  .header-app,
+  .indicator {
+    margin-top: 5px;
+  }
+
+  .header-app {
+    .locale-changer,
+    .title {
+      margin: 5px 0;
+    }
+  }
+
+  .indicator {
+    position: absolute;
+  }
+
   .notification {
     margin: 0 20px;
   }
