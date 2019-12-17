@@ -1,13 +1,11 @@
 <template>
-  <!-- <transition name="fade" mode="out-in"> -->
   <div class="notification">
-    <div class="notification__text">New version available!</div>
+    <div class="notification__text">{{ $t('app-notify.text') }}</div>
     <button class="notification__refreshBtn" @click="onRefresh">
-      Refresh
+      {{ $t('app-notify.refresh') }}
     </button>
     <button class="notification__close" @click="onClose"></button>
   </div>
-  <!-- </transition> -->
 </template>
 
 <script>

@@ -53,5 +53,9 @@
   "todo-edit": {
     "submit-edit": "Submit changes",
     "cancel-edit": "Cancel changes"
+  },
+  "app-notify": {
+    "text": "New version available!",
+    "refresh": "Refresh"
   }
 }
