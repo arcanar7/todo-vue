@@ -5,6 +5,7 @@ export default {
     error: null,
     success: null,
     isOnLine: true,
+    notification: false,
   },
   mutations: {
     setLoading(state, payload) {
@@ -27,6 +28,9 @@ export default {
     },
     setIsOnLine(state, payload) {
       state.isOnLine = payload
+    },
+    setNotification(state, payload) {
+      state.notification = payload
     },
   },
   actions: {
@@ -51,6 +55,9 @@ export default {
     setIsOnLine({ commit }, payload) {
       commit('setIsOnLine', payload)
     },
+    setNotification({ commit }, payload) {
+      commit('setNotification', payload)
+    },
   },
   getters: {
     loading(state) {
@@ -67,6 +74,9 @@ export default {
     },
     isOnLine(state) {
       return state.isOnLine
+    },
+    notification(state) {
+      return state.notification
     },
   },
 }

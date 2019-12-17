@@ -20,12 +20,13 @@
     <footer class="footer">
       <button
         class="app-install"
-        @click="installer()"
+        @click="installer"
         :style="{ display: installBtn }"
       >
         {{ $t('pwa') }}
       </button>
     </footer>
+    <AppNotify v-if="notification" />
   </div>
 </template>
 
@@ -35,6 +36,7 @@ import LanguageSelect from '@/components/LanguageSelect'
 import IconBase from '@/components/IconBase'
 import IconExit from '@/components/icons/IconExit'
 import Indicator from '@/components/Indicator'
+import AppNotify from '@/components/AppNotify'
 
 export default {
   name: 'HomePage',
@@ -44,6 +46,7 @@ export default {
     IconBase,
     IconExit,
     Indicator,
+    AppNotify,
   },
   data() {
     return {
@@ -78,6 +81,9 @@ export default {
   computed: {
     email() {
       return this.$store.getters.email
+    },
+    notification() {
+      return this.$store.getters.notification
     },
   },
   methods: {
@@ -148,12 +154,13 @@ export default {
 }
 
 @media screen and (max-width: $screen) {
-  .header-app {
+  .header-app,
+  .app-inner {
     width: 90%;
   }
 
-  .app-inner {
-    width: 90%;
+  .notification {
+    margin: 0 20px;
   }
 }
 </style>
