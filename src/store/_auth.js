@@ -30,11 +30,11 @@ export default {
           .auth()
           .createUserWithEmailAndPassword(email, password)
         commit('setUser', new User(user.uid))
-        commit('setLoading', false)
       } catch (error) {
-        commit('setLoading', false)
         commit('setError', error.message)
         throw error
+      } finally {
+        commit('setLoading', false)
       }
     },
     async loginUser({ commit }, { email, password }) {
@@ -46,11 +46,11 @@ export default {
         commit('setUser', new User(user.user.uid))
         commit('setEmail', email)
         commit('loadTodos', [])
-        commit('setLoading', false)
       } catch (error) {
-        commit('setLoading', false)
         commit('setError', error.message)
         throw error
+      } finally {
+        commit('setLoading', false)
       }
     },
     async resetPassword({ commit }, email) {
@@ -59,18 +59,18 @@ export default {
       commit('setLoading', true)
       try {
         await fb.auth().sendPasswordResetEmail(email)
-        commit('setLoading', false)
       } catch (error) {
-        commit('setLoading', false)
         commit('setError', error.message)
         throw error
+      } finally {
+        commit('setLoading', false)
       }
     },
     logoutUser({ commit }) {
       try {
-        fb.auth().signOut()
         commit('setUser', null)
         commit('setEmail', '')
+        fb.auth().signOut()
       } catch (error) {
         commit('setError', error.message)
         throw error

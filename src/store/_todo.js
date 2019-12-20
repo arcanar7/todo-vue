@@ -62,11 +62,11 @@ export default {
           .ref(getters.user.id)
           .push(newTodo)
         commit('createTodo', { ...newTodo, id: todo.key })
-        commit('setLocalLoading', false)
       } catch (error) {
         commit('setError', error.message)
-        commit('setLocalLoading', false)
         throw error
+      } finally {
+        commit('setLocalLoading', false)
       }
     },
     async fetchTodos({ commit, getters }) {
@@ -87,11 +87,11 @@ export default {
             })
           }
           commit('loadTodos', resultTodos)
-          commit('setLoading', false)
         } catch (error) {
           commit('setError', error.message)
-          commit('setLoading', false)
           throw error
+        } finally {
+          commit('setLoading', false)
         }
       }
     },
