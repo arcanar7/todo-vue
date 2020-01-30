@@ -57,7 +57,7 @@ export default {
       commit('setLocalLoading', true)
       try {
         // const newTodo = new Todo(title)
-        const todo = await fetch('http://localhost:8081/todo', {
+        const todo = await fetch(`${process.env.VUE_APP_api}todo`, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export default {
         commit('beforeEditTitle', '')
         const resultTodos = []
         try {
-          const todos = await fetch('http://localhost:8081/todo', {
+          const todos = await fetch(`${process.env.VUE_APP_api}todo`, {
             method: 'get',
             headers: {
               'Content-Type': 'application/json',
@@ -117,7 +117,7 @@ export default {
     async updateTodo({ commit, getters }, { title, completed, id }) {
       commit('clearError')
       try {
-        const todo = await fetch(`http://localhost:8081/todo/${id}`, {
+        const todo = await fetch(`${process.env.VUE_APP_api}todo/${id}`, {
           method: 'put',
           headers: {
             'Content-Type': 'application/json',
@@ -140,7 +140,7 @@ export default {
     async removeTodo({ commit, getters }, id) {
       commit('clearError')
       try {
-        const todo = await fetch(`http://localhost:8081/todo/${id}`, {
+        const todo = await fetch(`${process.env.VUE_APP_api}todo/${id}`, {
           method: 'delete',
           headers: {
             'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ export default {
       commit('clearSuccess')
       commit('setLoading', true)
       try {
-        const user = await fetch('http://localhost:8081/auth/register', {
+        const user = await fetch(`${process.env.VUE_APP_api}auth/register`, {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
@@ -52,7 +52,7 @@ export default {
       commit('clearSuccess')
       commit('setLoading', true)
       try {
-        const user = await fetch('http://localhost:8081/auth/login', {
+        const user = await fetch(`${process.env.VUE_APP_api}auth/login`, {
           method: 'post',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password }),
