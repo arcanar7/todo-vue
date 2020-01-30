@@ -56,12 +56,22 @@ export default {
       commit('clearError')
       commit('setLocalLoading', true)
       try {
-        const newTodo = new Todo(title)
-        const todo = await fb
-          .database()
-          .ref(getters.user.id)
-          .push(newTodo)
-        commit('createTodo', { ...newTodo, id: todo.key })
+        // const newTodo = new Todo(title)
+        const todo = await fetch('http://localhost:8081/todo', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${getters.token}`,
+          },
+          body: JSON.stringify({ title }),
+        }).then(res => res.json())
+        // const todo = await fb
+        //   .database()
+        //   .ref(getters.user.id)
+        //   .push(newTodo)
+        if (todo.message) throw new Error(todo.message)
+        commit('createTodo', new Todo(title, false, todo._id))
+        // commit('createTodo', { ...newTodo, id: todo.key })
       } catch (error) {
         commit('setError', error.message)
         throw error
@@ -73,17 +83,26 @@ export default {
       if (getters.isOnLine) {
         commit('clearError')
         commit('setLoading', true)
+        commit('beforeEditTitle', '')
         const resultTodos = []
         try {
-          const fbVal = await fb
-            .database()
-            .ref(getters.user.id)
-            .once('value')
-          const todos = fbVal.val()
+          const todos = await fetch('http://localhost:8081/todo', {
+            method: 'get',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getters.token}`,
+            },
+          }).then(res => res.json())
+          if (todos.message) throw new Error(todos.message)
+          // const fbVal = await fb
+          //   .database()
+          //   .ref(getters.user.id)
+          //   .once('value')
+          // const todos = fbVal.val()
           if (todos) {
             Object.keys(todos).forEach(key => {
               const todo = todos[key]
-              resultTodos.push(new Todo(todo.title, todo.completed, key))
+              resultTodos.push(new Todo(todo.title, todo.completed, todo._id))
             })
           }
           commit('loadTodos', resultTodos)
@@ -98,11 +117,20 @@ export default {
     async updateTodo({ commit, getters }, { title, completed, id }) {
       commit('clearError')
       try {
-        await fb
-          .database()
-          .ref(getters.user.id)
-          .child(id)
-          .update({ title, completed })
+        const todo = await fetch(`http://localhost:8081/todo/${id}`, {
+          method: 'put',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${getters.token}`,
+          },
+          body: JSON.stringify({ title, completed }),
+        }).then(res => res.json())
+        if (todo.message) throw new Error(todo.message)
+        // await fb
+        //   .database()
+        //   .ref(getters.user.id)
+        //   .child(id)
+        //   .update({ title, completed })
         commit('updateTodo', { title, completed, id })
       } catch (error) {
         commit('setError', error.message)
@@ -112,11 +140,19 @@ export default {
     async removeTodo({ commit, getters }, id) {
       commit('clearError')
       try {
-        await fb
-          .database()
-          .ref(getters.user.id)
-          .child(id)
-          .remove()
+        const todo = await fetch(`http://localhost:8081/todo/${id}`, {
+          method: 'delete',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${getters.token}`,
+          },
+        }).then(res => res.json())
+        if (todo.message) throw new Error(todo.message)
+        // await fb
+        //   .database()
+        //   .ref(getters.user.id)
+        //   .child(id)
+        //   .remove()
         commit('removeTodo', id)
       } catch (error) {
         commit('setError', error.message)

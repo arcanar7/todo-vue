@@ -2,7 +2,7 @@
   <div class="todo-wrapper">
     <todo-list-new />
     <p class="error-title" v-if="isError">{{ isError }}</p>
-    <div class="empty-state" v-else-if="!todos.length && !loadingApp">
+    <div class="empty-state" v-if="!todos.length && !loadingApp">
       <p>
         {{ $t('todo-list.empty') }}
       </p>
