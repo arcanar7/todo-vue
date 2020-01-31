@@ -11,7 +11,11 @@ export default {
   state: {
     user: null,
     email: '',
-    token: '',
+    tokens: {
+      accessToken: '',
+      refreshToken: '',
+      expDate: null,
+    },
   },
   mutations: {
     setUser(state, payload) {
@@ -21,7 +25,9 @@ export default {
       state.email = payload
     },
     setToken(state, payload) {
-      state.token = payload
+      state.tokens.accessToken = payload.newAccessToken
+      state.tokens.refreshToken = payload.newRefreshToken
+      state.tokens.expDate = payload.expDate
     },
   },
   actions: {
@@ -59,8 +65,7 @@ export default {
         }).then(res => res.json())
         // const user = await fb.auth().signInWithEmailAndPassword(email, password)
         if (user.message) throw new Error(user.message)
-        console.log(user)
-        commit('setToken', user.token)
+        commit('setToken', user)
         commit('setUser', new User(user.uid))
         commit('setEmail', email)
         commit('loadTodos', [])
@@ -87,7 +92,11 @@ export default {
     logoutUser({ commit }) {
       try {
         commit('setUser', null)
-        commit('setEmail', '')
+        commit('setEmail', {
+          newAccessToken: '',
+          newRefreshToken: '',
+          expDate: null,
+        })
         commit('setToken', '')
         // fb.auth().signOut()
       } catch (error) {
@@ -103,8 +112,14 @@ export default {
     email(state) {
       return state.email
     },
-    token(state) {
-      return state.token
+    accessToken(state) {
+      return state.tokens.accessToken
+    },
+    refreshToken(state) {
+      return state.tokens.refreshToken
+    },
+    expDate(state) {
+      return state.tokens.expDate
     },
   },
 }
