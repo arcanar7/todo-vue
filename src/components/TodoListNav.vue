@@ -35,7 +35,7 @@
     </ul>
     <button
       class="todo-nav__clear-completed"
-      @click="removeCompleted"
+      @click="deleteCompleted"
       v-show="todos.length > remaining"
       :disabled="!isOnline"
     >
@@ -60,10 +60,11 @@ export default {
     },
   },
   methods: {
-    removeCompleted() {
-      filters.completed(this.todos).map(item => {
-        this.$store.dispatch('removeTodo', item.id).catch(() => {})
-      })
+    deleteCompleted() {
+      // filters.completed(this.todos).map(item => {
+      //   this.$store.dispatch('removeTodo', item.id).catch(() => {})
+      // })
+      this.$store.dispatch('deleteCompleted')
     },
     onChangeVisibility(visibility) {
       this.$store.dispatch('setVisibility', visibility)

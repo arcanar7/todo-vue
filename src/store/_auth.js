@@ -92,17 +92,20 @@ export default {
     logoutUser({ commit }) {
       try {
         commit('setUser', null)
-        commit('setEmail', {
+        commit('setToken', {
           newAccessToken: '',
           newRefreshToken: '',
           expDate: null,
         })
-        commit('setToken', '')
+        commit('setEmail', '')
         // fb.auth().signOut()
       } catch (error) {
         commit('setError', error.message)
         throw error
       }
+    },
+    setToken({ commit }, payload) {
+      commit('setToken', payload)
     },
   },
   getters: {

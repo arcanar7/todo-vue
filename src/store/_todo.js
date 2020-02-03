@@ -39,6 +39,11 @@ export default {
         return todo.id !== id
       })
     },
+    deleteCompleted(state) {
+      state.todos = state.todos.filter(todo => {
+        return todo.completed === false
+      })
+    },
     editTodo(state, payload) {
       state.editedTodo = payload
     },
@@ -58,7 +63,7 @@ export default {
       commit('setLocalLoading', true)
       try {
         // const newTodo = new Todo(title)
-        const todo = await fetch(`${process.env.VUE_APP_api}todo`, {
+        const todo = await fetchWithAuth(`${process.env.VUE_APP_api}todo`, {
           method: 'post',
           headers: {
             'Content-Type': 'application/json',
@@ -119,14 +124,17 @@ export default {
     async updateTodo({ commit, getters }, { title, completed, id }) {
       commit('clearError')
       try {
-        const todo = await fetch(`${process.env.VUE_APP_api}todo/${id}`, {
-          method: 'put',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${getters.accessToken}`,
-          },
-          body: JSON.stringify({ title, completed }),
-        }).then(res => res.json())
+        const todo = await fetchWithAuth(
+          `${process.env.VUE_APP_api}todo/${id}`,
+          {
+            method: 'put',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getters.accessToken}`,
+            },
+            body: JSON.stringify({ title, completed }),
+          }
+        ).then(res => res.json())
         if (todo.message) throw new Error(todo.message)
         // await fb
         //   .database()
@@ -142,13 +150,16 @@ export default {
     async removeTodo({ commit, getters }, id) {
       commit('clearError')
       try {
-        const todo = await fetch(`${process.env.VUE_APP_api}todo/${id}`, {
-          method: 'delete',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${getters.accessToken}`,
-          },
-        }).then(res => res.json())
+        const todo = await fetchWithAuth(
+          `${process.env.VUE_APP_api}todo/${id}`,
+          {
+            method: 'delete',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${getters.accessToken}`,
+            },
+          }
+        ).then(res => res.json())
         if (todo.message) throw new Error(todo.message)
         // await fb
         //   .database()
@@ -156,6 +167,30 @@ export default {
         //   .child(id)
         //   .remove()
         commit('removeTodo', id)
+      } catch (error) {
+        commit('setError', error.message)
+        throw error
+      }
+    },
+    async deleteCompleted({ commit, getters }) {
+      commit('clearError')
+      try {
+        const id = getters.user.id
+        const todo = await fetchWithAuth(`${process.env.VUE_APP_api}todo`, {
+          method: 'delete',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${getters.accessToken}`,
+          },
+          body: JSON.stringify({ id }),
+        }).then(res => res.json())
+        if (todo.message) throw new Error(todo.message)
+        // await fb
+        //   .database()
+        //   .ref(getters.user.id)
+        //   .child(id)
+        //   .remove()
+        commit('deleteCompleted')
       } catch (error) {
         commit('setError', error.message)
         throw error
