@@ -121,5 +121,8 @@ export default {
     expDate(state) {
       return state.tokens.expDate
     },
+    tokens(state) {
+      return state.tokens
+    },
   },
 }

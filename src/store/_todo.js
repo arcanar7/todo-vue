@@ -1,6 +1,6 @@
 import fb from 'firebase/app'
 import 'firebase/database'
-import router from '../router/router'
+import { fetchWithAuth } from '../api/jwt-refresh'
 
 class Todo {
   constructor(title, completed = false, id = null) {
@@ -87,7 +87,7 @@ export default {
         commit('beforeEditTitle', '')
         const resultTodos = []
         try {
-          const todos = await fetch(`${process.env.VUE_APP_api}todo`, {
+          const todos = await fetchWithAuth(`${process.env.VUE_APP_api}todo`, {
             method: 'get',
             headers: {
               'Content-Type': 'application/json',
@@ -182,38 +182,4 @@ export default {
       return state.beforeEditTitle
     },
   },
-}
-
-async function fetchWithAuth(url, options) {
-  const loginUrl = '/login' // url страницы для авторизации
-  let tokenData = null // объявляем локальную переменную tokenData
-
-  if (sessionStorage.authToken) {
-    // если в sessionStorage присутствует tokenData, то берем её
-    tokenData = JSON.parse(localStorage.tokenData)
-  } else {
-    return window.location.replace(loginUrl) // если токен отсутствует, то перенаправляем пользователя на страницу авторизации
-  }
-
-  if (!options.headers) {
-    // если в запросе отсутствует headers, то задаем их
-    options.headers = {}
-  }
-
-  if (tokenData) {
-    if (Date.now() >= tokenData.expires_on * 1000) {
-      // проверяем не истек ли срок жизни токена
-      try {
-        const newToken = await refreshToken(tokenData.refresh_token) // если истек, то обновляем токен с помощью refresh_token
-        saveToken(newToken)
-      } catch (e) {
-        // если тут что-то пошло не так, то перенаправляем пользователя на страницу авторизации
-        return window.location.replace(loginUrl)
-      }
-    }
-
-    options.headers.Authorization = `Bearer ${tokenData.token}` // добавляем токен в headers запроса
-  }
-
-  return fetch(url, options) // возвращаем изначальную функцию, но уже с валидным токеном в headers
 }
