@@ -1,7 +1,6 @@
 <template>
   <section class="center">
     <h1 class="title">{{ $t('register.title') }}</h1>
-    <p class="error-title" v-if="isError">{{ isError }}</p>
     <form
       class="login-form"
       @submit.prevent="onSubmit('registerUser', 'login?registerSuccess=true')"

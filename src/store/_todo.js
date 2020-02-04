@@ -1,5 +1,5 @@
-import fb from 'firebase/app'
-import 'firebase/database'
+// import fb from 'firebase/app'
+// import 'firebase/database'
 import { fetchWithAuth } from '../api/jwt-refresh'
 
 class Todo {
@@ -113,7 +113,6 @@ export default {
           }
           commit('loadTodos', resultTodos)
         } catch (error) {
-          // router.push('/login?loginError=true')
           commit('setError', error.message)
           throw error
         } finally {

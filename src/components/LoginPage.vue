@@ -1,7 +1,6 @@
 <template>
   <section class="center">
     <h1 class="title">{{ $t('login.title') }}</h1>
-    <p class="error-title" v-if="isError">{{ isError }}</p>
     <p class="success-title" v-if="isSuccess">{{ isSuccess }}</p>
     <form class="login-form" @submit.prevent="onSubmit('loginUser')" novalidate>
       <label class="login-form__label" for="email">
