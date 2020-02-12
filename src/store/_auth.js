@@ -98,6 +98,7 @@ export default {
           expDate: null,
         })
         commit('setEmail', '')
+        localStorage.clear()
         // fb.auth().signOut()
       } catch (error) {
         commit('setError', error.message)
