@@ -1,29 +1,29 @@
-import Vue from 'vue'
-import 'normalize.css'
-import fb from 'firebase/app'
+import Vue from 'vue';
+import 'normalize.css';
+import fb from 'firebase/app';
 
-import App from './App.vue'
-import router from './router/router'
-import store from './store/store'
-import './registerServiceWorker'
-import i18n from './i18n'
+import App from './App.vue';
+import router from './router/router';
+import store from './store/store';
+import './registerServiceWorker';
+import i18n from './i18n';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 Vue.mixin({
   computed: {
     loadingApp() {
-      return this.$store.getters.loading
+      return this.$store.getters.loading;
     },
     isOnline() {
-      return this.$store.getters.isOnLine
+      return this.$store.getters.isOnLine;
     },
   },
-})
+});
 
 new Vue({
   router,
   store,
-  render: h => h(App),
+  render: (h) => h(App),
   i18n,
 
   created() {
@@ -36,8 +36,8 @@ new Vue({
       messagingSenderId: process.env.VUE_APP_messagingSenderId,
       appId: process.env.VUE_APP_appId,
       measurementId: process.env.VUE_APP_measurementId,
-    }
-    fb.initializeApp(firebaseConfig)
-    i18n.locale = this.$store.getters.lang
+    };
+    fb.initializeApp(firebaseConfig);
+    i18n.locale = this.$store.getters.lang;
   },
-}).$mount('#app')
+}).$mount('#app');

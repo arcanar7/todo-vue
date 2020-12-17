@@ -1,15 +1,12 @@
 <template>
   <span class="indicator">
-    <span
-      class="indicator__led"
-      :class="[isOnline ? 'online' : 'offline']"
-    ></span>
+    <span class="indicator__led" :class="[isOnline ? 'online' : 'offline']"></span>
     {{ isOnline ? 'Online' : 'Offline' }}
   </span>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style lang="scss">

@@ -11,20 +11,12 @@
       @keyup.enter="doneEdit(todo)"
       @keyup.esc="cancelEdit(todo)"
     />
-    <button
-      class="edit-done"
-      @mousedown="doneEdit(todo)"
-      :title="$t('todo-edit.submit-edit')"
-    >
+    <button class="edit-done" @mousedown="doneEdit(todo)" :title="$t('todo-edit.submit-edit')">
       <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-checkmark />
       </icon-base>
     </button>
-    <button
-      class="edit-cancel"
-      @mousedown="cancelEdit(todo)"
-      :title="$t('todo-edit.cancel-edit')"
-    >
+    <button class="edit-cancel" @mousedown="cancelEdit(todo)" :title="$t('todo-edit.cancel-edit')">
       <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-cancel />
       </icon-base>
@@ -33,9 +25,9 @@
 </template>
 
 <script>
-import IconBase from '@/components/IconBase'
-import IconCheckmark from '@/components/icons/IconCheckmark'
-import IconCancel from '@/components/icons/IconCancel'
+import IconBase from '@/components/IconBase.vue';
+import IconCheckmark from '@/components/icons/IconCheckmark.vue';
+import IconCancel from '@/components/icons/IconCancel.vue';
 
 export default {
   name: 'TodoListItemsEdit',
@@ -45,9 +37,9 @@ export default {
     IconCancel,
   },
   directives: {
-    'todo-focus': function(el, binding) {
+    'todo-focus': (el, binding) => {
       if (binding.value) {
-        el.focus()
+        el.focus();
       }
     },
   },
@@ -55,43 +47,45 @@ export default {
   data() {
     return {
       textHeight: '27px',
-    }
+    };
   },
   computed: {
     editedTodo() {
-      return this.$store.getters.editedTodo
+      return this.$store.getters.editedTodo;
     },
     beforeEditTitle() {
-      return this.$store.getters.beforeEditTitle
+      return this.$store.getters.beforeEditTitle;
     },
   },
   updated() {
-    this.textHeight = getComputedStyle(this.$refs.fake).height
+    this.textHeight = getComputedStyle(this.$refs.fake).height;
   },
   methods: {
     doneEdit({ title, completed, id }) {
       if (!this.editedTodo) {
-        return
+        return;
       }
-      title = title.trim()
-      if (title !== this.beforeEditTitle)
-        title
-          ? this.$store
-              .dispatch('updateTodo', { title, completed, id })
-              .then(() => this.$store.dispatch('editTodo', null))
-              .catch(() => {})
-          : this.$store
-              .dispatch('removeTodo', id)
-              .then(() => this.$store.dispatch('editTodo', null))
-              .catch(() => {})
-      else this.$store.dispatch('editTodo', null)
+      const newTitle = title.trim();
+      if (newTitle !== this.beforeEditTitle) {
+        if (newTitle) {
+          this.$store
+            .dispatch('updateTodo', { newTitle, completed, id })
+            .then(() => this.$store.dispatch('editTodo', null))
+            .catch(() => {});
+        } else {
+          this.$store
+            .dispatch('removeTodo', id)
+            .then(() => this.$store.dispatch('editTodo', null))
+            .catch(() => {});
+        }
+      } else this.$store.dispatch('editTodo', null);
     },
     cancelEdit(todo) {
-      todo.title = this.beforeEditTitle
-      this.$store.dispatch('editTodo', null)
+      todo.title = this.beforeEditTitle;
+      this.$store.dispatch('editTodo', null);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

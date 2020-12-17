@@ -11,7 +11,7 @@
 export default {
   name: 'AppSpinner',
   props: { primary: String },
-}
+};
 </script>
 
 <style lang="scss">

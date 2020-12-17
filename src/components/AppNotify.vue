@@ -13,14 +13,14 @@ export default {
   name: 'AppNotify',
   methods: {
     onRefresh() {
-      this.$store.dispatch('setNotification', false)
-      window.location.reload()
+      this.$store.dispatch('setNotification', false);
+      window.location.reload();
     },
     onClose() {
-      this.$store.dispatch('setNotification', false)
+      this.$store.dispatch('setNotification', false);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

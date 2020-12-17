@@ -19,12 +19,7 @@
         @blur="email.touch()"
       />
       <span v-if="isValidErrorEmail" class="message-input text-error">
-        <icon-base
-          icon-name="warning"
-          width="10px"
-          height="10px"
-          viewBox="0 0 192 512"
-        >
+        <icon-base icon-name="warning" width="10px" height="10px" viewBox="0 0 192 512">
           <icon-warning />
         </icon-base>
         <template v-if="!isRequiredEmail">
@@ -50,12 +45,7 @@
         @blur="password.touch()"
       />
       <span v-if="isValidErrorPassword" class="message-input text-error">
-        <icon-base
-          icon-name="warning"
-          width="10px"
-          height="10px"
-          viewBox="0 0 192 512"
-        >
+        <icon-base icon-name="warning" width="10px" height="10px" viewBox="0 0 192 512">
           <icon-warning />
         </icon-base>
         <template v-if="!isRequiredPassword">
@@ -79,10 +69,10 @@
 </template>
 
 <script>
-import AuthMixin from '@/mixins/auth.mixin'
-import AppSpinner from '@/components/AppSpinner'
-import IconBase from '@/components/IconBase'
-import IconWarning from '@/components/icons/IconWarning'
+import AuthMixin from '@/mixins/auth.mixin';
+import AppSpinner from '@/components/AppSpinner.vue';
+import IconBase from '@/components/IconBase.vue';
+import IconWarning from '@/components/icons/IconWarning.vue';
 
 export default {
   name: 'LoginPage',
@@ -93,15 +83,12 @@ export default {
   },
   mixins: [AuthMixin],
   created() {
-    if (this.$route.query['loginError']) {
-      this.$store.dispatch('setError', 'Please log in to access this page.')
+    if (this.$route.query.loginError) {
+      this.$store.dispatch('setError', 'Please log in to access this page.');
     }
-    if (this.$route.query['registerSuccess']) {
-      this.$store.dispatch(
-        'setSuccess',
-        'Success! Your account has been created.'
-      )
+    if (this.$route.query.registerSuccess) {
+      this.$store.dispatch('setSuccess', 'Success! Your account has been created.');
     }
   },
-}
+};
 </script>

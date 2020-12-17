@@ -1,18 +1,9 @@
 <template>
   <div class="locale-changer">
-    <span
-      class="lang"
-      :class="[{ expanded: expand }]"
-      @click="onExpand"
-      v-click-outside="onExpandHide"
-    >
+    <span class="lang" :class="[{ expanded: expand }]" @click="onExpand" v-click-outside="onExpandHide">
       <span class="lang__title">{{ langTitle }}</span>
       <ul class="lang__dropdown">
-        <li
-          v-for="(lang, i) in langs"
-          :key="`Lang${i}`"
-          @click="onChangeLang(lang)"
-        >
+        <li v-for="(lang, i) in langs" :key="`Lang${i}`" @click="onChangeLang(lang)">
           {{ lang.title }}
         </li>
       </ul>
@@ -26,11 +17,11 @@ export default {
   directives: {
     'click-outside': {
       bind(el, binding) {
-        el.addEventListener('click', e => e.stopPropagation())
-        document.body.addEventListener('click', binding.value)
+        el.addEventListener('click', (e) => e.stopPropagation());
+        document.body.addEventListener('click', binding.value);
       },
       unbind(el, binding) {
-        document.body.removeEventListener('click', binding.value)
+        document.body.removeEventListener('click', binding.value);
       },
     },
   },
@@ -41,25 +32,25 @@ export default {
         { val: 'ru', title: 'Русский' },
       ],
       expand: false,
-    }
+    };
   },
   computed: {
     langTitle() {
-      return this.$store.getters.langTitle
+      return this.$store.getters.langTitle;
     },
   },
   methods: {
     onChangeLang(lang) {
-      this.$store.dispatch('setLang', lang)
+      this.$store.dispatch('setLang', lang);
     },
     onExpand() {
-      this.expand = !this.expand
+      this.expand = !this.expand;
     },
     onExpandHide() {
-      this.expand = false
+      this.expand = false;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
@@ -124,8 +115,7 @@ export default {
       color: hsla(0, 0, 0, 0);
       user-select: none;
       background-color: $background-input;
-      transition: 0.3s padding ease-in-out, 0.3s height ease-in-out,
-        0.3s color ease-in-out;
+      transition: 0.3s padding ease-in-out, 0.3s height ease-in-out, 0.3s color ease-in-out;
     }
 
     :last-child {

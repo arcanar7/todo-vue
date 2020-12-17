@@ -10,16 +10,16 @@
 </template>
 
 <script>
-import AppError from '@/components/AppError'
+import AppError from '@/components/AppError.vue';
 
 export default {
   components: { AppError },
   computed: {
     errors() {
-      return this.$store.getters.error
+      return this.$store.getters.error;
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

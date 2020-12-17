@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { filters } from '@/mixins/filter.mixin'
+import filters from '@/mixins/filter.mixin';
 
 export default {
   name: 'TodoListNav',
@@ -53,10 +53,10 @@ export default {
   props: { todos: { type: Array, required: true } },
   computed: {
     remaining() {
-      return filters.active(this.todos).length
+      return filters.active(this.todos).length;
     },
     visibility() {
-      return this.$store.getters.visibility
+      return this.$store.getters.visibility;
     },
   },
   methods: {
@@ -64,13 +64,13 @@ export default {
       // filters.completed(this.todos).map(item => {
       //   this.$store.dispatch('removeTodo', item.id).catch(() => {})
       // })
-      this.$store.dispatch('deleteCompleted')
+      this.$store.dispatch('deleteCompleted');
     },
     onChangeVisibility(visibility) {
-      this.$store.dispatch('setVisibility', visibility)
+      this.$store.dispatch('setVisibility', visibility);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

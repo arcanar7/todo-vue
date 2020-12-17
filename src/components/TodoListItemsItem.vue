@@ -10,18 +10,11 @@
         @change="onToggleComplete"
         :disabled="!isOnline"
       />
-      <label
-        :for="todo.id"
-        class="label"
-        :class="{ 'color-primary': todo.completed }"
-      ></label>
+      <label :for="todo.id" class="label" :class="{ 'color-primary': todo.completed }"></label>
     </div>
-    <label
-      class="title"
-      :class="todo.completed ? 'completed' : 'color-primary'"
-      @click="onClickTitle($event, todo)"
-      >{{ todo.title }}</label
-    >
+    <label class="title" :class="todo.completed ? 'completed' : 'color-primary'" @click="onClickTitle($event, todo)">{{
+      todo.title
+    }}</label>
     <button
       class="destroy"
       @click="removeTodo(todo.id)"
@@ -39,44 +32,47 @@ export default {
     return {
       clickCount: 0,
       clickTimer: null,
-    }
+    };
   },
   methods: {
     onClickTitle(e, todo) {
       if (this.isOnline) {
-        this.clickCount++
+        this.clickCount += 1;
         if (this.clickCount === 1) {
           this.clickTimer = setTimeout(() => {
-            this.clickCount = 0
-            this.onToggleComplete(e)
-          }, 250)
+            this.clickCount = 0;
+            this.onToggleComplete(e);
+          }, 250);
         } else if (this.clickCount === 2) {
-          clearTimeout(this.clickTimer)
-          this.clickCount = 0
-          this.editTodo(todo)
+          clearTimeout(this.clickTimer);
+          this.clickCount = 0;
+          this.editTodo(todo);
         }
       }
     },
     onToggleComplete(e) {
-      let { checked, id } = this.$refs.checkBoxToggle
-      e.target.tagName === 'LABEL' ? (checked = !checked) : null
+      let { checked } = this.$refs.checkBoxToggle;
+      const { id } = this.$refs.checkBoxToggle;
+      if (e.target.tagName === 'LABEL') {
+        checked = !checked;
+      }
       this.$store
         .dispatch('updateTodo', {
           title: this.todo.title,
           completed: checked,
           id,
         })
-        .catch(() => {})
+        .catch(() => {});
     },
     editTodo(todo) {
-      this.$store.dispatch('beforeEditTitle', todo.title)
-      this.$store.dispatch('editTodo', todo)
+      this.$store.dispatch('beforeEditTitle', todo.title);
+      this.$store.dispatch('editTodo', todo);
     },
     removeTodo(id) {
-      this.$store.dispatch('removeTodo', id).catch(() => {})
+      this.$store.dispatch('removeTodo', id).catch(() => {});
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -19,12 +19,7 @@
         @blur="email.touch()"
       />
       <span v-if="isValidErrorEmail" class="message-input text-error">
-        <icon-base
-          icon-name="warning"
-          width="10px"
-          height="10px"
-          viewBox="0 0 192 512"
-        >
+        <icon-base icon-name="warning" width="10px" height="10px" viewBox="0 0 192 512">
           <icon-warning />
         </icon-base>
         <template v-if="!isRequiredEmail">
@@ -43,10 +38,10 @@
 </template>
 
 <script>
-import AuthMixin from '@/mixins/auth.mixin'
-import AppSpinner from '@/components/AppSpinner'
-import IconBase from '@/components/IconBase'
-import IconWarning from '@/components/icons/IconWarning'
+import AuthMixin from '@/mixins/auth.mixin';
+import AppSpinner from '@/components/AppSpinner.vue';
+import IconBase from '@/components/IconBase.vue';
+import IconWarning from '@/components/icons/IconWarning.vue';
 
 export default {
   name: 'ResetPasswordPage',
@@ -56,5 +51,5 @@ export default {
     IconWarning,
   },
   mixins: [AuthMixin],
-}
+};
 </script>

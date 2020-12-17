@@ -18,11 +18,7 @@
       <todo-list />
     </main>
     <footer class="footer">
-      <button
-        class="app-install"
-        @click="installer"
-        :style="{ display: installBtn }"
-      >
+      <button class="app-install" @click="installer" :style="{ display: installBtn }">
         {{ $t('pwa') }}
       </button>
     </footer>
@@ -31,12 +27,17 @@
 </template>
 
 <script>
-import TodoList from '@/components/TodoList'
-import LanguageSelect from '@/components/LanguageSelect'
-import IconBase from '@/components/IconBase'
-import IconExit from '@/components/icons/IconExit'
-import Indicator from '@/components/Indicator'
-import AppNotify from '@/components/AppNotify'
+import TodoList from '@/components/TodoList.vue';
+import LanguageSelect from '@/components/LanguageSelect.vue';
+import IconBase from '@/components/IconBase.vue';
+import IconExit from '@/components/icons/IconExit.vue';
+import Indicator from '@/components/Indicator.vue';
+import AppNotify from '@/components/AppNotify.vue';
+
+const DISPLAY = {
+  block: 'block',
+  none: 'none',
+};
 
 export default {
   name: 'HomePage',
@@ -50,52 +51,52 @@ export default {
   },
   data() {
     return {
-      installBtn: 'none',
+      installBtn: DISPLAY.none,
       installer: null,
-    }
+    };
   },
   created() {
-    let installPrompt
-    window.addEventListener('beforeinstallprompt', e => {
-      e.preventDefault()
-      installPrompt = e
-      this.installBtn = 'block'
-    })
+    let installPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      installPrompt = e;
+      this.installBtn = DISPLAY.block;
+    });
 
     this.installer = () => {
-      this.installBtn = 'none'
-      installPrompt.prompt()
-      installPrompt.userChoice.then(result => {
+      this.installBtn = 'none';
+      installPrompt.prompt();
+      installPrompt.userChoice.then((result) => {
         if (result.outcome !== 'accepted') {
-          this.installBtn = 'block'
+          this.installBtn = DISPLAY.block;
         }
-        installPrompt = null
-      })
-    }
+        installPrompt = null;
+      });
+    };
   },
   mounted() {
-    this.setOnline()
-    window.addEventListener('online', this.setOnline)
-    window.addEventListener('offline', this.setOnline)
+    this.setOnline();
+    window.addEventListener('online', this.setOnline);
+    window.addEventListener('offline', this.setOnline);
   },
   computed: {
     email() {
-      return this.$store.getters.email
+      return this.$store.getters.email;
     },
     notification() {
-      return this.$store.getters.notification
+      return this.$store.getters.notification;
     },
   },
   methods: {
     onLogOut() {
-      this.$store.dispatch('logoutUser').catch(() => {})
-      this.$router.push('/login')
+      this.$store.dispatch('logoutUser').catch(() => {});
+      this.$router.push('/login');
     },
     setOnline() {
-      this.$store.dispatch('setIsOnLine', navigator.onLine)
+      this.$store.dispatch('setIsOnLine', navigator.onLine);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

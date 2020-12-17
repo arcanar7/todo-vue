@@ -9,74 +9,74 @@ export default {
   },
   mutations: {
     setLoading(state, payload) {
-      state.loading = payload
+      state.loading = payload;
     },
     setLocalLoading(state, payload) {
-      state.localLoading = payload
+      state.localLoading = payload;
     },
     setError(state, payload) {
-      state.error = payload
+      state.error = payload;
     },
     clearError(state) {
-      state.error = null
+      state.error = null;
     },
     setSuccess(state, payload) {
-      state.success = payload
+      state.success = payload;
     },
     clearSuccess(state) {
-      state.success = null
+      state.success = null;
     },
     setIsOnLine(state, payload) {
-      state.isOnLine = payload
+      state.isOnLine = payload;
     },
     setNotification(state, payload) {
-      state.notification = payload
+      state.notification = payload;
     },
   },
   actions: {
     setLoading({ commit }, payload) {
-      commit('setLoading', payload)
+      commit('setLoading', payload);
     },
     setLocalLoading({ commit }, payload) {
-      commit('setLocalLoading', payload)
+      commit('setLocalLoading', payload);
     },
     setError({ commit }, payload) {
-      commit('setError', payload)
+      commit('setError', payload);
     },
     clearError({ commit }) {
-      commit('clearError')
+      commit('clearError');
     },
     setSuccess({ commit }, payload) {
-      commit('setSuccess', payload)
+      commit('setSuccess', payload);
     },
     clearSuccess({ commit }) {
-      commit('clearSuccess')
+      commit('clearSuccess');
     },
     setIsOnLine({ commit }, payload) {
-      commit('setIsOnLine', payload)
+      commit('setIsOnLine', payload);
     },
     setNotification({ commit }, payload) {
-      commit('setNotification', payload)
+      commit('setNotification', payload);
     },
   },
   getters: {
     loading(state) {
-      return state.loading
+      return state.loading;
     },
     localLoading(state) {
-      return state.localLoading
+      return state.localLoading;
     },
     error(state) {
-      return state.error
+      return state.error;
     },
     success(state) {
-      return state.success
+      return state.success;
     },
     isOnLine(state) {
-      return state.isOnLine
+      return state.isOnLine;
     },
     notification(state) {
-      return state.notification
+      return state.notification;
     },
   },
-}
+};

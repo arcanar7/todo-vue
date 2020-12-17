@@ -10,20 +10,20 @@ export default {
   name: 'AppError',
   mounted() {
     setTimeout(() => {
-      this.onClose()
-    }, 4000)
+      this.onClose();
+    }, 4000);
   },
   computed: {
     errors() {
-      return this.$store.getters.error
+      return this.$store.getters.error;
     },
   },
   methods: {
     onClose() {
-      this.$store.dispatch('setError', null)
+      this.$store.dispatch('setError', null);
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -17,7 +17,7 @@
 <script>
 export default {
   name: 'NotFoundPage',
-}
+};
 </script>
 
 <style lang="scss">

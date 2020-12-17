@@ -1,7 +1,9 @@
-import store from '../store/store'
+import store from '../store/store';
 
-export default function(to, from, next) {
-  store.getters.user && store.getters.refreshToken
-    ? next()
-    : next('/login?loginError=true')
+export default function authGuard(to, from, next) {
+  if (store.getters.user && store.getters.refreshToken) {
+    next();
+  } else {
+    next('/login?loginError=true');
+  }
 }

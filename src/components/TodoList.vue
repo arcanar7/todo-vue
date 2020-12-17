@@ -5,12 +5,7 @@
       <p>
         {{ $t('todo-list.empty') }}
       </p>
-      <icon-base
-        icon-name="arrow"
-        width="120px"
-        height="120px"
-        viewBox="0 0 256 512"
-      >
+      <icon-base icon-name="arrow" width="120px" height="120px" viewBox="0 0 256 512">
         <icon-arrow />
       </icon-base>
     </div>
@@ -25,12 +20,12 @@
 </template>
 
 <script>
-import TodoListItems from '@/components/TodoListItems'
-import TodoListNew from '@/components/TodoListNew'
-import TodoListNav from '@/components/TodoListNav'
-import AppSpinner from '@/components/AppSpinner'
-import IconBase from '@/components/IconBase'
-import IconArrow from '@/components/icons/IconArrow'
+import TodoListItems from '@/components/TodoListItems.vue';
+import TodoListNew from '@/components/TodoListNew.vue';
+import TodoListNav from '@/components/TodoListNav.vue';
+import AppSpinner from '@/components/AppSpinner.vue';
+import IconBase from '@/components/IconBase.vue';
+import IconArrow from '@/components/icons/IconArrow.vue';
 
 export default {
   name: 'TodoList',
@@ -44,16 +39,16 @@ export default {
   },
   computed: {
     todos() {
-      return this.$store.getters.todos
+      return this.$store.getters.todos;
     },
     isError() {
-      return this.$store.getters.error
+      return this.$store.getters.error;
     },
   },
   created() {
-    this.$store.dispatch('fetchTodos').catch(() => {})
+    this.$store.dispatch('fetchTodos').catch(() => {});
   },
-}
+};
 </script>
 
 <style lang="scss">

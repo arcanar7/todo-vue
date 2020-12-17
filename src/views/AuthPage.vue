@@ -9,11 +9,7 @@
         <router-link to="/login" class="nav__login" active-class="active">
           {{ $t('auth.login') }}
         </router-link>
-        <router-link
-          to="/registration"
-          class="nav__registration"
-          active-class="active"
-        >
+        <router-link to="/registration" class="nav__registration" active-class="active">
           {{ $t('auth.registration') }}
         </router-link>
       </div>
@@ -25,14 +21,14 @@
 </template>
 
 <script>
-import LanguageSelect from '@/components/LanguageSelect'
+import LanguageSelect from '@/components/LanguageSelect.vue';
 
 export default {
   name: 'AuthPage',
   components: {
     LanguageSelect,
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import AppSpinner from '@/components/AppSpinner'
+import AppSpinner from '@/components/AppSpinner.vue';
 
 export default {
   name: 'TodoListNew',
@@ -31,25 +31,23 @@ export default {
   data() {
     return {
       newTodo: '',
-    }
+    };
   },
   computed: {
     localLoading() {
-      return this.$store.getters.localLoading
+      return this.$store.getters.localLoading;
     },
   },
   methods: {
     addTodo() {
       if (this.newTodo) {
-        this.$store
-          .dispatch('createTodo', { title: this.newTodo })
-          .catch(() => {})
-        this.newTodo = ''
+        this.$store.dispatch('createTodo', { title: this.newTodo }).catch(() => {});
+        this.newTodo = '';
       }
-      this.$refs.newTodo.focus()
+      this.$refs.newTodo.focus();
     },
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-import AuthGuard from './auth-guard'
-import HomePage from '@/views/HomePage'
-import AuthPage from '@/views/AuthPage'
-import LoginPage from '@/components/LoginPage'
-import RegistrationPage from '@/components/RegistrationPage'
-import ResetPasswordPage from '@/components/ResetPasswordPage'
-import NotFoundPage from '@/components/NotFoundPage'
+import HomePage from '@/views/HomePage.vue';
+import AuthPage from '@/views/AuthPage.vue';
+import LoginPage from '@/components/LoginPage.vue';
+import RegistrationPage from '@/components/RegistrationPage.vue';
+import ResetPasswordPage from '@/components/ResetPasswordPage.vue';
+import NotFoundPage from '@/components/NotFoundPage.vue';
+import AuthGuard from './auth-guard';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -49,4 +49,4 @@ export default new Router({
     },
     { path: '*', redirect: '/404' },
   ],
-})
+});
