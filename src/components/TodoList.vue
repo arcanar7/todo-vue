@@ -39,7 +39,7 @@ export default {
   },
   computed: {
     todos() {
-      return this.$store.getters.todos;
+      return [...this.$store.getters.todos.map((item) => ({ ...item }))];
     },
     isError() {
       return this.$store.getters.error;

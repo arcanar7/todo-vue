@@ -1,7 +1,7 @@
 <template>
   <div class="errors">
     <div class="errors__text">{{ errors }}</div>
-    <button class="errors__close" @click="onClose"></button>
+    <button class="errors__close" @click="onClose">&times;</button>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
   position: absolute;
   top: 10px;
   right: 0;
-  z-index: 2;
+  z-index: 1000;
   display: flex;
   align-items: center;
   padding: 10px 10px 10px 20px;
@@ -54,10 +54,6 @@ export default {
 
     &:hover {
       background-color: $error-light;
-    }
-
-    &::after {
-      content: '×';
     }
   }
 }

@@ -84,10 +84,10 @@ export default {
   mixins: [AuthMixin],
   created() {
     if (this.$route.query.loginError) {
-      this.$store.dispatch('setError', 'Please log in to access this page.');
+      this.$store.dispatch('setError', this.$t('login.error-message'));
     }
     if (this.$route.query.registerSuccess) {
-      this.$store.dispatch('setSuccess', 'Success! Your account has been created.');
+      this.$store.dispatch('setSuccess', this.$t('register.success-message'));
     }
   },
 };

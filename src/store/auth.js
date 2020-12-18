@@ -1,6 +1,7 @@
 import fb from 'firebase/app';
 import 'firebase/auth';
-import { CONTENT_TYPES } from './constants';
+import { clearStorage } from '../helpers/localStorage.helper';
+// import { CONTENT_TYPES } from './constants';
 
 class User {
   constructor(id) {
@@ -37,14 +38,12 @@ export default {
       commit('clearSuccess');
       commit('setLoading', true);
       try {
-        const user = await fetch(`${process.env.VUE_APP_api}auth/register`, {
-          method: 'post',
-          headers: { 'Content-Type': CONTENT_TYPES.application },
-          body: JSON.stringify({ email, password }),
-        }).then((res) => res.json());
-        // const user = await fb
-        //   .auth()
-        //   .createUserWithEmailAndPassword(email, password)
+        // const user = await fetch(`${process.env.VUE_APP_api}auth/register`, {
+        //   method: 'post',
+        //   headers: { 'Content-Type': CONTENT_TYPES.application },
+        //   body: JSON.stringify({ email, password }),
+        // }).then((res) => res.json());
+        const user = await fb.auth().createUserWithEmailAndPassword(email, password);
         if (user.message) throw new Error(user.message);
         commit('setUser', new User(user.uid));
       } catch (error) {
@@ -59,14 +58,16 @@ export default {
       commit('clearSuccess');
       commit('setLoading', true);
       try {
-        const user = await fetch(`${process.env.VUE_APP_api}auth/login`, {
-          method: 'post',
-          headers: { 'Content-Type': CONTENT_TYPES.application },
-          body: JSON.stringify({ email, password }),
-        }).then((res) => res.json());
-        // const user = await fb.auth().signInWithEmailAndPassword(email, password)
-        if (user.message) throw new Error(user.message);
-        commit('setToken', user);
+        // const user = await fetch(`${process.env.VUE_APP_api}auth/login`, {
+        //   method: 'post',
+        //   headers: { 'Content-Type': CONTENT_TYPES.application },
+        //   body: JSON.stringify({ email, password }),
+        // }).then((res) => res.json());
+        const { user } = await fb.auth().signInWithEmailAndPassword(email, password);
+        if (user.message) {
+          throw new Error(user.message);
+        }
+        // commit('setToken', user);
         commit('setUser', new User(user.uid));
         commit('setEmail', email);
         commit('loadTodos', []);
@@ -99,8 +100,8 @@ export default {
           expDate: null,
         });
         commit('setEmail', '');
-        localStorage.clear();
-        // fb.auth().signOut()
+        clearStorage();
+        fb.auth().signOut();
       } catch (error) {
         commit('setError', error.message);
         throw error;

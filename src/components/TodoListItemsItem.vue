@@ -12,15 +12,10 @@
       />
       <label :for="todo.id" class="label" :class="{ 'color-primary': todo.completed }"></label>
     </div>
-    <label class="title" :class="todo.completed ? 'completed' : 'color-primary'" @click="onClickTitle($event, todo)">{{
-      todo.title
-    }}</label>
-    <button
-      class="destroy"
-      @click="removeTodo(todo.id)"
-      :title="$t('todo.remove-title')"
-      :disabled="!isOnline"
-    ></button>
+    <label class="title" :class="todo.completed ? 'completed' : 'color-primary'" @click="onClickTitle">
+      {{ todo.title }}
+    </label>
+    <button class="destroy" @click="removeTodo" :title="$t('todo.remove-title')" :disabled="!isOnline"></button>
   </div>
 </template>
 
@@ -35,7 +30,7 @@ export default {
     };
   },
   methods: {
-    onClickTitle(e, todo) {
+    onClickTitle(e) {
       if (this.isOnline) {
         this.clickCount += 1;
         if (this.clickCount === 1) {
@@ -46,7 +41,7 @@ export default {
         } else if (this.clickCount === 2) {
           clearTimeout(this.clickTimer);
           this.clickCount = 0;
-          this.editTodo(todo);
+          this.editTodo();
         }
       }
     },
@@ -64,12 +59,12 @@ export default {
         })
         .catch(() => {});
     },
-    editTodo(todo) {
-      this.$store.dispatch('beforeEditTitle', todo.title);
-      this.$store.dispatch('editTodo', todo);
+    editTodo() {
+      this.$store.dispatch('beforeEditTitle', this.todo.title);
+      this.$store.dispatch('editTodo', this.todo);
     },
-    removeTodo(id) {
-      this.$store.dispatch('removeTodo', id).catch(() => {});
+    removeTodo() {
+      this.$store.dispatch('removeTodo', this.todo.id).catch(() => {});
     },
   },
 };

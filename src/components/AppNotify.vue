@@ -4,7 +4,7 @@
     <button class="notification__refreshBtn" @click="onRefresh">
       {{ $t('app-notify.refresh') }}
     </button>
-    <button class="notification__close" @click="onClose"></button>
+    <button class="notification__close" @click="onClose">&times;</button>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
 .notification {
   position: absolute;
   bottom: 10px;
-  z-index: 2;
+  z-index: 1000;
   display: flex;
   align-items: center;
   padding: 10px 30px;
@@ -51,10 +51,6 @@ export default {
   &__close {
     font-size: 30px;
     background-color: inherit;
-
-    &::after {
-      content: '×';
-    }
   }
 }
 </style>

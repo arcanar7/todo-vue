@@ -1,14 +1,14 @@
-<template>
+<template functional>
   <div class="not-found-wrapper">
     <header class="not-found-header">
-      <h1 class="not-found-header__title">{{ $t('title') }}</h1>
+      <h1 class="not-found-header__title">{{ parent.$t('title') }}</h1>
     </header>
     <main class="not-found-main">
-      <h2 class="not-found-main__title">{{ $t('not-found.title') }}</h2>
+      <h2 class="not-found-main__title">{{ parent.$t('not-found.title') }}</h2>
     </main>
     <nav class="not-found-nav">
       <router-link to="/" class="not-found-nav__home">
-        {{ $t('not-found.home') }}
+        {{ parent.$t('not-found.home') }}
       </router-link>
     </nav>
   </div>
@@ -59,7 +59,7 @@ export default {
     color: $primary-lightness;
     background-color: $text-primary;
     border-radius: 5px;
-    box-shadow: 4px 4px 4px hsla(0, 0, 0, 0.5);
+    box-shadow: 4px 4px 4px $overlay-color;
 
     &:hover,
     &:focus {
@@ -68,7 +68,7 @@ export default {
 
     &:active {
       color: $primary-lightness;
-      box-shadow: 2px 2px 2px hsla(0, 0, 0, 0.5);
+      box-shadow: 2px 2px 2px $overlay-color;
     }
   }
 }

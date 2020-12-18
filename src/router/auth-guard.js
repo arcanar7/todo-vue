@@ -1,7 +1,9 @@
-import store from '../store/store';
+import { getLocalStorageData } from '@/helpers/localStorage.helper';
 
 export default function authGuard(to, from, next) {
-  if (store.getters.user && store.getters.refreshToken) {
+  const { data } = getLocalStorageData();
+
+  if (data?.Auth?.user) {
     next();
   } else {
     next('/login?loginError=true');

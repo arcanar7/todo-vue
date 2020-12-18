@@ -61,10 +61,10 @@ export default {
   },
   methods: {
     deleteCompleted() {
-      // filters.completed(this.todos).map(item => {
-      //   this.$store.dispatch('removeTodo', item.id).catch(() => {})
-      // })
-      this.$store.dispatch('deleteCompleted');
+      filters.completed(this.todos).forEach((item) => {
+        this.$store.dispatch('removeTodo', item.id).catch(() => {});
+      });
+      // this.$store.dispatch('deleteCompleted');
     },
     onChangeVisibility(visibility) {
       this.$store.dispatch('setVisibility', visibility);

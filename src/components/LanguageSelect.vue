@@ -72,33 +72,39 @@ export default {
     position: absolute;
     top: 17px;
     right: 10%;
+    z-index: 3;
     content: '';
     border: 6px solid $primary;
     border-color: $primary transparent transparent transparent;
-    transition: 0.3s transform ease-in-out;
+    transition: transform 0.3s ease-in-out, border-color 0.3s;
   }
 
   &__title {
+    position: absolute;
+    top: 0;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
     height: 100%;
     font-weight: 700;
     color: $text-primary;
     user-select: none;
     background-color: $background-input;
-    transition: 0.3s background-color, 0.4s border-radius linear;
+    border-radius: 5px;
+    transition: background-color 0.3s, border-radius 0.4s linear, color 0.3s;
   }
 
   &__dropdown {
     position: absolute;
-    right: 0;
+    top: 40px;
     z-index: 1;
     width: 100%;
     padding: 0;
     margin: 0;
     list-style: none;
-    border-radius: 0 0 10px 10px;
+    border-radius: 0 0 5px 5px;
     box-shadow: none;
     transition: 0.4s box-shadow ease-out;
 
@@ -112,28 +118,29 @@ export default {
       margin: 0;
       overflow: hidden;
       font-weight: 700;
-      color: hsla(0, 0, 0, 0);
+      color: $tap-highlight-color;
       user-select: none;
       background-color: $background-input;
       transition: 0.3s padding ease-in-out, 0.3s height ease-in-out, 0.3s color ease-in-out;
     }
 
     :last-child {
-      border-radius: 0 0 10px 10px;
+      border-radius: 0 0 5px 5px;
     }
   }
 }
 
 .expanded {
-  border-radius: 10px 10px 0 0;
-  box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
+  border-radius: 5px 5px 0 0;
+  box-shadow: 0 0 5px $overlay-color;
 
   .lang__title {
-    border-radius: 10px 10px 0 0;
+    border-radius: 5px 5px 0 0;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   .lang__dropdown {
-    box-shadow: 0 0 5px hsla(0, 0, 0, 0.5);
+    box-shadow: 0 0 5px $overlay-color;
   }
 
   &::after {
@@ -150,7 +157,14 @@ export default {
 @media (hover: hover) {
   .lang__title:hover,
   .lang__dropdown > li:hover {
+    color: $text-primary;
     background-color: $background;
+  }
+
+  .lang:hover {
+    &::after {
+      border-color: $text-primary transparent transparent transparent;
+    }
   }
 }
 

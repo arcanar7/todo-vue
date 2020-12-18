@@ -1,7 +1,7 @@
-<template>
+<template functional>
   <span class="indicator">
-    <span class="indicator__led" :class="[isOnline ? 'online' : 'offline']"></span>
-    {{ isOnline ? 'Online' : 'Offline' }}
+    <span class="indicator__led" :class="[parent.isOnline ? 'online' : 'offline']"></span>
+    {{ parent.isOnline ? 'Online' : 'Offline' }}
   </span>
 </template>
 

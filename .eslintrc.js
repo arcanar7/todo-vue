@@ -18,4 +18,12 @@ module.exports = {
     'object-curly-newline': ['off'],
     'max-len': ['off'],
   },
+  settings: {
+    'import/resolver': {
+      alias: {
+        map: [['@', './src']],
+        extensions: ['.js', '.vue'],
+      },
+    },
+  },
 };

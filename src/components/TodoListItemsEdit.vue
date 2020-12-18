@@ -6,17 +6,18 @@
       type="text"
       :style="{ height: textHeight }"
       v-model="todo.title"
-      v-todo-focus="todo == editedTodo"
-      @blur="doneEdit(todo)"
-      @keyup.enter="doneEdit(todo)"
-      @keyup.esc="cancelEdit(todo)"
+      v-todo-focus="todo === editedTodo"
+      @blur="doneEdit"
+      @keyup.enter="doneEdit"
+      @keydown.enter.prevent=""
+      @keyup.esc="cancelEdit"
     />
-    <button class="edit-done" @mousedown="doneEdit(todo)" :title="$t('todo-edit.submit-edit')">
+    <button class="edit-done" @mousedown="doneEdit" :title="$t('todo-edit.submit-edit')">
       <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-checkmark />
       </icon-base>
     </button>
-    <button class="edit-cancel" @mousedown="cancelEdit(todo)" :title="$t('todo-edit.cancel-edit')">
+    <button class="edit-cancel" @mousedown="cancelEdit" :title="$t('todo-edit.cancel-edit')">
       <icon-base width="100%" height="100%" iconColor="hsl(167, 49%, 31%)">
         <icon-cancel />
       </icon-base>
@@ -61,7 +62,8 @@ export default {
     this.textHeight = getComputedStyle(this.$refs.fake).height;
   },
   methods: {
-    doneEdit({ title, completed, id }) {
+    doneEdit() {
+      const { title, completed, id } = this.todo;
       if (!this.editedTodo) {
         return;
       }
@@ -69,7 +71,7 @@ export default {
       if (newTitle !== this.beforeEditTitle) {
         if (newTitle) {
           this.$store
-            .dispatch('updateTodo', { newTitle, completed, id })
+            .dispatch('updateTodo', { title: newTitle, completed, id })
             .then(() => this.$store.dispatch('editTodo', null))
             .catch(() => {});
         } else {
@@ -80,8 +82,8 @@ export default {
         }
       } else this.$store.dispatch('editTodo', null);
     },
-    cancelEdit(todo) {
-      todo.title = this.beforeEditTitle;
+    cancelEdit() {
+      this.todo.title = this.beforeEditTitle;
       this.$store.dispatch('editTodo', null);
     },
   },

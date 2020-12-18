@@ -95,10 +95,7 @@ export default {
       this.$store
         .dispatch('resetPassword', email)
         .then(() => {
-          this.$store.dispatch(
-            'setSuccess',
-            'Please check your email and click on the provided link to reset your password.',
-          );
+          this.$store.dispatch('setSuccess', this.$t('reset.success-message'));
         })
         .catch(() => {});
     },

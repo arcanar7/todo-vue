@@ -17,16 +17,19 @@
     "title": "Log in account",
     "forgot-password": "Forgot password?",
     "label-email": "Email",
-    "label-password": "Password"
+    "label-password": "Password",
+    "error-message": "Please log in to access this page."
   },
   "register": {
     "title": "Register account",
     "create": "Create account",
-    "label-repeat-password": "Repeat password"
+    "label-repeat-password": "Repeat password",
+    "success-message": "Success! Your account has been created."
   },
   "reset": {
     "title": "Recover account",
-    "reset-pass": "Reset password"
+    "reset-pass": "Reset password",
+    "success-message": "Please check your email and click on the provided link to reset your password."
   },
   "not-found": {
     "title": "(404 error) Page not found!",

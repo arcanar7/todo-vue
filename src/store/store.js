@@ -2,10 +2,10 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-import Auth from './_auth';
-import Utils from './_utils';
-import Todo from './_todo';
-import Lang from './_lang';
+import Auth from './auth';
+import Utils from './utils';
+import Todo from './todo';
+import Lang from './lang';
 
 Vue.use(Vuex);
 

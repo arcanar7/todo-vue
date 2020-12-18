@@ -1,7 +1,7 @@
 <template>
   <ul class="todo-list">
     <transition-group name="todo" mode="out-in">
-      <li v-for="todo of filteredTodos" class="todo" :class="{ editing: todo == editedTodo }" :key="todo.id">
+      <li v-for="todo of filteredTodos" class="todo" :class="{ editing: todo.id === editedTodo }" :key="todo.id">
         <todo-list-items-item :todo="todo"></todo-list-items-item>
         <todo-list-items-edit :todo="todo"></todo-list-items-edit>
       </li>
@@ -30,7 +30,7 @@ export default {
       return this.$store.getters.visibility;
     },
     editedTodo() {
-      return this.$store.getters.editedTodo;
+      return this.$store.getters.editedTodo?.id;
     },
   },
 };
