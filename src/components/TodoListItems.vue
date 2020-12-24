@@ -1,7 +1,7 @@
 <template>
   <ul class="todo-list">
     <transition-group name="todo" mode="out-in">
-      <li v-for="todo of filteredTodos" class="todo" :class="{ editing: todo.id === editedTodo }" :key="todo.id">
+      <li v-for="todo of filteredTodos" class="todo" :class="{ editing: todo.id === editedTodoId }" :key="todo.id">
         <todo-list-items-item :todo="todo"></todo-list-items-item>
         <todo-list-items-edit :todo="todo"></todo-list-items-edit>
       </li>
@@ -10,9 +10,10 @@
 </template>
 
 <script>
-import filters from '@/mixins/filter.mixin';
-import TodoListItemsItem from './TodoListItemsItem.vue';
-import TodoListItemsEdit from './TodoListItemsEdit.vue';
+import { mapState } from 'vuex';
+import filters from '@/helpers/filter.helper';
+import TodoListItemsItem from '@/components/TodoListItemsItem.vue';
+import TodoListItemsEdit from '@/components/TodoListItemsEdit.vue';
 
 export default {
   name: 'TodoListItems',
@@ -20,17 +21,15 @@ export default {
     TodoListItemsItem,
     TodoListItemsEdit,
   },
-  mixins: [filters],
   props: { todos: { type: Array, required: true } },
   computed: {
+    ...mapState('Todo', ['visibility', 'editedTodo']),
+
     filteredTodos() {
       return filters[this.visibility](this.todos);
     },
-    visibility() {
-      return this.$store.getters.visibility;
-    },
-    editedTodo() {
-      return this.$store.getters.editedTodo?.id;
+    editedTodoId() {
+      return this.editedTodo?.id;
     },
   },
 };

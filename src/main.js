@@ -2,23 +2,27 @@ import Vue from 'vue';
 import 'normalize.css';
 import fb from 'firebase/app';
 
-import App from './App.vue';
-import router from './router/router';
-import store from './store/store';
-import './registerServiceWorker';
-import i18n from './i18n';
+import App from '@/App.vue';
+import router from '@/router';
+import store from '@/store';
+import '@/registerServiceWorker';
+import i18n from '@/i18n';
+import { mapState } from 'vuex';
 
 Vue.config.productionTip = false;
-Vue.mixin({
+
+const mixin = {
   computed: {
+    ...mapState('Utils', ['loading', 'isOnLine']),
+    ...mapState('Lang', ['lang']),
+
     loadingApp() {
-      return this.$store.getters.loading;
-    },
-    isOnline() {
-      return this.$store.getters.isOnLine;
+      return this.loading;
     },
   },
-});
+};
+
+Vue.mixin(mixin);
 
 new Vue({
   router,
@@ -38,6 +42,6 @@ new Vue({
       measurementId: process.env.VUE_APP_measurementId,
     };
     fb.initializeApp(firebaseConfig);
-    i18n.locale = this.$store.getters.lang;
+    i18n.locale = this.lang;
   },
 }).$mount('#app');

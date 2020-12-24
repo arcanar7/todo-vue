@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from 'vuex';
 import IconBase from '@/components/IconBase.vue';
 import IconCheckmark from '@/components/icons/IconCheckmark.vue';
 import IconCancel from '@/components/icons/IconCancel.vue';
@@ -50,41 +51,43 @@ export default {
       textHeight: '27px',
     };
   },
-  computed: {
-    editedTodo() {
-      return this.$store.getters.editedTodo;
-    },
-    beforeEditTitle() {
-      return this.$store.getters.beforeEditTitle;
-    },
-  },
   updated() {
     this.textHeight = getComputedStyle(this.$refs.fake).height;
   },
+  computed: {
+    ...mapState('Todo', ['editedTodo', 'beforeEditTitle']),
+  },
   methods: {
-    doneEdit() {
-      const { title, completed, id } = this.todo;
+    ...mapMutations('Todo', ['editTodo']),
+    ...mapActions('Todo', ['updateTodo', 'removeTodo']),
+    ...mapMutations('Utils', ['setError', 'clearError']),
+
+    async doneEdit() {
       if (!this.editedTodo) {
         return;
       }
+
+      const { title, completed, id } = this.todo;
       const newTitle = title.trim();
+
       if (newTitle !== this.beforeEditTitle) {
-        if (newTitle) {
-          this.$store
-            .dispatch('updateTodo', { title: newTitle, completed, id })
-            .then(() => this.$store.dispatch('editTodo', null))
-            .catch(() => {});
-        } else {
-          this.$store
-            .dispatch('removeTodo', id)
-            .then(() => this.$store.dispatch('editTodo', null))
-            .catch(() => {});
+        this.clearError();
+        try {
+          if (newTitle) {
+            await this.updateTodo({ title: newTitle, completed, id });
+          } else {
+            await this.removeTodo(id);
+          }
+        } catch (error) {
+          this.setError(error.message);
         }
-      } else this.$store.dispatch('editTodo', null);
+      }
+
+      this.editTodo(null);
     },
     cancelEdit() {
       this.todo.title = this.beforeEditTitle;
-      this.$store.dispatch('editTodo', null);
+      this.editTodo(null);
     },
   },
 };

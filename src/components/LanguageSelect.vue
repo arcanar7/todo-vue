@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'LanguageSelect',
   directives: {
@@ -35,13 +37,13 @@ export default {
     };
   },
   computed: {
-    langTitle() {
-      return this.$store.getters.langTitle;
-    },
+    ...mapState('Lang', ['langTitle']),
   },
   methods: {
+    ...mapMutations('Lang', ['setLang']),
+
     onChangeLang(lang) {
-      this.$store.dispatch('setLang', lang);
+      this.setLang(lang);
     },
     onExpand() {
       this.expand = !this.expand;

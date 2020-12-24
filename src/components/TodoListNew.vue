@@ -8,13 +8,13 @@
       :placeholder="$t('todo-new.ph-new')"
       v-model="newTodo"
       @keyup.enter="addTodo"
-      :disabled="!isOnline"
+      :disabled="!isOnLine"
     />
     <button
       class="new-todo__btn"
       @click="addTodo"
       :title="$t('todo-new.add-title')"
-      :disabled="localLoading || !isOnline"
+      :disabled="localLoading || !isOnLine"
     >
       <app-spinner v-if="localLoading"></app-spinner>
       <span v-else>+</span>
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from 'vuex';
 import AppSpinner from '@/components/AppSpinner.vue';
 
 export default {
@@ -34,14 +35,23 @@ export default {
     };
   },
   computed: {
-    localLoading() {
-      return this.$store.getters.localLoading;
-    },
+    ...mapState('Utils', ['localLoading']),
   },
   methods: {
-    addTodo() {
+    ...mapActions('Todo', ['createTodo']),
+    ...mapMutations('Utils', ['setLocalLoading', 'setError', 'clearError']),
+
+    async addTodo() {
       if (this.newTodo) {
-        this.$store.dispatch('createTodo', { title: this.newTodo }).catch(() => {});
+        this.clearError();
+        this.setLocalLoading(true);
+        try {
+          await this.createTodo({ title: this.newTodo });
+        } catch (error) {
+          this.setError(error.message);
+        } finally {
+          this.setLocalLoading(false);
+        }
         this.newTodo = '';
       }
       this.$refs.newTodo.focus();

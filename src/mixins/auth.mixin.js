@@ -1,3 +1,5 @@
+import { mapState, mapMutations, mapActions } from 'vuex';
+
 class ValidField {
   constructor(title) {
     this.title = title;
@@ -19,11 +21,13 @@ export default {
     };
   },
   computed: {
+    ...mapState('Utils', ['error', 'success']),
+
     isError() {
-      return this.$store.getters.error;
+      return Boolean(this.error);
     },
     isSuccess() {
-      return this.$store.getters.success;
+      return Boolean(this.success);
     },
     isRequiredEmail() {
       return this.isRequired(this.email.title);
@@ -68,36 +72,49 @@ export default {
       return this.isInvalidEmail || this.isInvalidPassword || this.isInvalidRepeatPassword;
     },
   },
-  beforeCreate() {
-    this.$store.dispatch('clearError');
-    this.$store.dispatch('clearSuccess');
+  created() {
+    this.clearError();
+    this.clearSuccess();
   },
   methods: {
+    ...mapMutations('Utils', ['clearError', 'clearSuccess', 'setSuccess', 'setError', 'setLoading']),
+    ...mapActions('Auth', ['resetPassword', 'loginUser', 'registerUser']),
+
     isRequired(field) {
       return Boolean(field);
     },
-    onSubmit(act, query = '') {
+    async onSubmit(act, query = '') {
       if (!this.isLoginValid) {
         const user = {
           email: this.email.title,
           password: this.password.title,
         };
-        this.$store
-          .dispatch(act, user)
-          .then(() => {
-            this.$router.push(`/${query}`);
-          })
-          .catch(() => {});
+        this.clearError();
+        this.clearSuccess();
+        this.setLoading(true);
+        try {
+          await this[act](user);
+          this.$router.push(`/${query}`);
+        } catch (error) {
+          this.setError(error.message);
+        } finally {
+          this.setLoading(false);
+        }
       }
     },
-    onResetPass() {
+    async onResetPass() {
       const email = this.email.title;
-      this.$store
-        .dispatch('resetPassword', email)
-        .then(() => {
-          this.$store.dispatch('setSuccess', this.$t('reset.success-message'));
-        })
-        .catch(() => {});
+      this.clearError();
+      this.clearSuccess();
+      this.setLoading(true);
+      try {
+        await this.resetPassword(email);
+        this.setSuccess(this.$t('reset.success-message'));
+      } catch (error) {
+        this.setError(error.message);
+      } finally {
+        this.setLoading(false);
+      }
     },
   },
 };

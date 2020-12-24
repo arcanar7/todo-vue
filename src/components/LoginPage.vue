@@ -73,6 +73,7 @@ import AuthMixin from '@/mixins/auth.mixin';
 import AppSpinner from '@/components/AppSpinner.vue';
 import IconBase from '@/components/IconBase.vue';
 import IconWarning from '@/components/icons/IconWarning.vue';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'LoginPage',
@@ -84,11 +85,14 @@ export default {
   mixins: [AuthMixin],
   created() {
     if (this.$route.query.loginError) {
-      this.$store.dispatch('setError', this.$t('login.error-message'));
+      this.setError(this.$t('login.error-message'));
     }
     if (this.$route.query.registerSuccess) {
-      this.$store.dispatch('setSuccess', this.$t('register.success-message'));
+      this.setSuccess(this.$t('register.success-message'));
     }
+  },
+  methods: {
+    ...mapMutations('Utils', ['setError', 'setSuccess']),
   },
 };
 </script>

@@ -7,7 +7,7 @@
     :aria-labelledby="props.iconName"
     role="img"
   >
-    <title v-if="props.iconName" :id="props.iconName" lang="en">{{ props.iconName }} icon</title>
+    <title v-if="props.iconName" :id="props.iconName" lang="en">{{ props.iconName }}</title>
     <g :fill="props.iconColor">
       <slot />
     </g>

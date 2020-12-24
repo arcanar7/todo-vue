@@ -35,9 +35,9 @@
     </ul>
     <button
       class="todo-nav__clear-completed"
-      @click="deleteCompleted"
+      @click="removeCompleted"
       v-show="todos.length > remaining"
-      :disabled="!isOnline"
+      :disabled="!isOnLine"
     >
       {{ $t('todo-nav.clear') }}
     </button>
@@ -45,29 +45,34 @@
 </template>
 
 <script>
-import filters from '@/mixins/filter.mixin';
+import { mapState, mapMutations, mapActions } from 'vuex';
+import filters from '@/helpers/filter.helper';
 
 export default {
   name: 'TodoListNav',
-  mixins: [filters],
   props: { todos: { type: Array, required: true } },
   computed: {
+    ...mapState('Todo', ['visibility']),
+
     remaining() {
       return filters.active(this.todos).length;
     },
-    visibility() {
-      return this.$store.getters.visibility;
-    },
   },
   methods: {
-    deleteCompleted() {
-      filters.completed(this.todos).forEach((item) => {
-        this.$store.dispatch('removeTodo', item.id).catch(() => {});
-      });
-      // this.$store.dispatch('deleteCompleted');
+    ...mapMutations('Todo', ['setVisibility']),
+    ...mapActions('Todo', ['removeTodo', 'deleteCompleted']),
+    ...mapMutations('Utils', ['setError', 'clearError']),
+
+    async removeCompleted() {
+      this.clearError();
+      try {
+        await this.deleteCompleted();
+      } catch (error) {
+        this.setError(error.message);
+      }
     },
     onChangeVisibility(visibility) {
-      this.$store.dispatch('setVisibility', visibility);
+      this.setVisibility(visibility);
     },
   },
 };

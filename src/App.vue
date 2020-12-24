@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name="fade" mode="out-in">
-      <app-error v-if="errors" />
+      <app-error v-if="error" />
     </transition>
     <transition name="fade" mode="out-in">
       <router-view />
@@ -10,14 +10,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import AppError from '@/components/AppError.vue';
 
 export default {
   components: { AppError },
   computed: {
-    errors() {
-      return this.$store.getters.error;
-    },
+    ...mapState('Utils', ['error']),
   },
 };
 </script>

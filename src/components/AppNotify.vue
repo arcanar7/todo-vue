@@ -9,15 +9,19 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
+
 export default {
   name: 'AppNotify',
   methods: {
+    ...mapMutations('Utils', ['setNotification']),
+
     onRefresh() {
-      this.$store.dispatch('setNotification', false);
+      this.setNotification(false);
       window.location.reload();
     },
     onClose() {
-      this.$store.dispatch('setNotification', false);
+      this.setNotification(false);
     },
   },
 };

@@ -7,7 +7,7 @@ import LoginPage from '@/components/LoginPage.vue';
 import RegistrationPage from '@/components/RegistrationPage.vue';
 import ResetPasswordPage from '@/components/ResetPasswordPage.vue';
 import NotFoundPage from '@/components/NotFoundPage.vue';
-import AuthGuard from './auth-guard';
+import AuthGuard from '@/router/auth-guard';
 
 Vue.use(Router);
 

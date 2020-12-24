@@ -1,12 +1,14 @@
 <template functional>
   <span class="indicator">
-    <span class="indicator__led" :class="[parent.isOnline ? 'online' : 'offline']"></span>
-    {{ parent.isOnline ? 'Online' : 'Offline' }}
+    <span class="indicator__led" :class="[parent.isOnLine ? 'online' : 'offline']"></span>
+    {{ parent.isOnLine ? 'Online' : 'Offline' }}
   </span>
 </template>
 
 <script>
-export default {};
+export default {
+  name: 'AppIndicator',
+};
 </script>
 
 <style lang="scss">

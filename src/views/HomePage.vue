@@ -12,32 +12,28 @@
       <indicator />
       <language-select />
       <h1 class="title">{{ $t('title') }}</h1>
-      <h4 class="offline-title" v-if="!isOnline">{{ $t('offline') }}</h4>
+      <h4 class="offline-title" v-if="!isOnLine">{{ $t('offline') }}</h4>
     </header>
     <main class="app-inner">
       <todo-list />
     </main>
     <footer class="footer">
-      <button class="app-install" @click="installer" :style="{ display: installBtn }">
+      <button class="app-install" :class="[{ isButtonVisible: 'app-install_show' }]" @click="installer">
         {{ $t('pwa') }}
       </button>
     </footer>
-    <AppNotify v-if="notification" />
+    <app-notify v-if="notification" />
   </div>
 </template>
 
 <script>
+import { mapActions, mapMutations, mapState } from 'vuex';
 import TodoList from '@/components/TodoList.vue';
 import LanguageSelect from '@/components/LanguageSelect.vue';
 import IconBase from '@/components/IconBase.vue';
 import IconExit from '@/components/icons/IconExit.vue';
 import Indicator from '@/components/Indicator.vue';
 import AppNotify from '@/components/AppNotify.vue';
-
-const DISPLAY = {
-  block: 'block',
-  none: 'none',
-};
 
 export default {
   name: 'HomePage',
@@ -51,49 +47,52 @@ export default {
   },
   data() {
     return {
-      installBtn: DISPLAY.none,
-      installer: null,
+      isButtonVisible: false,
+      installPrompt: null,
     };
   },
   created() {
-    let installPrompt;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      installPrompt = e;
-      this.installBtn = DISPLAY.block;
-    });
-
-    this.installer = () => {
-      this.installBtn = 'none';
-      installPrompt.prompt();
-      installPrompt.userChoice.then((result) => {
-        if (result.outcome !== 'accepted') {
-          this.installBtn = DISPLAY.block;
-        }
-        installPrompt = null;
-      });
-    };
+    window.addEventListener('beforeinstallprompt', this.beforeInstallHandler);
   },
   mounted() {
     this.setOnline();
     window.addEventListener('online', this.setOnline);
     window.addEventListener('offline', this.setOnline);
   },
+  destroyed() {
+    window.removeEventListener('beforeinstallprompt', this.beforeInstallHandler);
+    window.removeEventListener('online', this.setOnline);
+    window.removeEventListener('offline', this.setOnline);
+  },
   computed: {
-    email() {
-      return this.$store.getters.email;
-    },
-    notification() {
-      return this.$store.getters.notification;
-    },
+    ...mapState('Auth', ['email']),
+    ...mapState('Utils', ['notification']),
   },
   methods: {
+    ...mapActions('Auth', ['logoutUser']),
+    ...mapMutations('Utils', ['setIsOnLine']),
+
     onLogOut() {
-      this.$store.dispatch('logoutUser').catch(() => {});
+      this.logoutUser();
       this.$router.push('/login');
     },
     setOnline() {
-      this.$store.dispatch('setIsOnLine', navigator.onLine);
+      this.setIsOnLine(navigator.onLine);
+    },
+    beforeInstallHandler(event) {
+      event.preventDefault();
+      this.installPrompt = event;
+      this.isButtonVisible = true;
+    },
+    installer() {
+      this.isButtonVisible = false;
+      this.installPrompt.prompt();
+      this.installPrompt.userChoice.then((result) => {
+        if (result.outcome !== 'accepted') {
+          this.isButtonVisible = true;
+        }
+        this.installPrompt = null;
+      });
     },
   },
 };
@@ -124,6 +123,7 @@ export default {
       margin-left: 10px;
       color: $text-primary;
       background-color: inherit;
+      transition: color 0.3s;
     }
   }
 
@@ -145,13 +145,18 @@ export default {
   background-color: $background;
   border: 1px solid $primary;
   border-radius: 10px;
-  box-shadow: 0 0 10px hsla(0, 0, 0, 0.5);
+  box-shadow: 0 0 10px $overlay-color;
 }
 
 .app-install {
+  display: none;
   padding: 10px;
   margin-top: 30px;
   font-size: 14px;
+
+  &_show {
+    display: block;
+  }
 }
 
 @media screen and (max-width: $screen) {
@@ -178,6 +183,16 @@ export default {
 
   .notification {
     margin: 0 20px;
+  }
+}
+
+@media (hover: hover) {
+  .header-app {
+    .logout {
+      .exit:hover {
+        color: $error;
+      }
+    }
   }
 }
 </style>

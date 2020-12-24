@@ -8,18 +8,20 @@
         v-model="todo.completed"
         :id="todo.id"
         @change="onToggleComplete"
-        :disabled="!isOnline"
+        :disabled="!isOnLine"
       />
       <label :for="todo.id" class="label" :class="{ 'color-primary': todo.completed }"></label>
     </div>
     <label class="title" :class="todo.completed ? 'completed' : 'color-primary'" @click="onClickTitle">
       {{ todo.title }}
     </label>
-    <button class="destroy" @click="removeTodo" :title="$t('todo.remove-title')" :disabled="!isOnline"></button>
+    <button class="destroy" @click="onRemoveTodo" :title="$t('todo.remove-title')" :disabled="!isOnLine"></button>
   </div>
 </template>
 
 <script>
+import { mapActions, mapMutations } from 'vuex';
+
 export default {
   name: 'TodoListItemsItem',
   props: { todo: { type: Object, required: true } },
@@ -30,8 +32,12 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('Todo', ['beforeEditTitle', 'editTodo']),
+    ...mapActions('Todo', ['updateTodo', 'removeTodo']),
+    ...mapMutations('Utils', ['setError', 'clearError']),
+
     onClickTitle(e) {
-      if (this.isOnline) {
+      if (this.isOnLine) {
         this.clickCount += 1;
         if (this.clickCount === 1) {
           this.clickTimer = setTimeout(() => {
@@ -41,30 +47,40 @@ export default {
         } else if (this.clickCount === 2) {
           clearTimeout(this.clickTimer);
           this.clickCount = 0;
-          this.editTodo();
+          this.editTodoHandler();
         }
       }
     },
-    onToggleComplete(e) {
+    async onToggleComplete(e) {
       let { checked } = this.$refs.checkBoxToggle;
       const { id } = this.$refs.checkBoxToggle;
+
       if (e.target.tagName === 'LABEL') {
         checked = !checked;
       }
-      this.$store
-        .dispatch('updateTodo', {
+
+      this.clearError();
+      try {
+        await this.updateTodo({
           title: this.todo.title,
           completed: checked,
           id,
-        })
-        .catch(() => {});
+        });
+      } catch (error) {
+        this.setError(error.message);
+      }
     },
-    editTodo() {
-      this.$store.dispatch('beforeEditTitle', this.todo.title);
-      this.$store.dispatch('editTodo', this.todo);
+    editTodoHandler() {
+      this.beforeEditTitle(this.todo.title);
+      this.editTodo(this.todo);
     },
-    removeTodo() {
-      this.$store.dispatch('removeTodo', this.todo.id).catch(() => {});
+    async onRemoveTodo() {
+      this.clearError();
+      try {
+        await this.removeTodo(this.todo.id);
+      } catch (error) {
+        this.setError(error.message);
+      }
     },
   },
 };

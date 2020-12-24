@@ -1,11 +1,13 @@
 <template>
   <div class="errors">
-    <div class="errors__text">{{ errors }}</div>
+    <div class="errors__text">{{ error }}</div>
     <button class="errors__close" @click="onClose">&times;</button>
   </div>
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'AppError',
   mounted() {
@@ -14,13 +16,13 @@ export default {
     }, 4000);
   },
   computed: {
-    errors() {
-      return this.$store.getters.error;
-    },
+    ...mapState('Utils', ['error']),
   },
   methods: {
+    ...mapMutations('Utils', ['setError']),
+
     onClose() {
-      this.$store.dispatch('setError', null);
+      this.setError(null);
     },
   },
 };

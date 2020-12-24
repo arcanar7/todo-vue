@@ -1,7 +1,7 @@
 <template>
   <div class="todo-wrapper">
     <todo-list-new />
-    <div class="empty-state" v-if="!todos.length && !loadingApp">
+    <div class="empty-state" v-if="!todosArray.length && !loadingApp">
       <p>
         {{ $t('todo-list.empty') }}
       </p>
@@ -11,15 +11,16 @@
     </div>
     <section class="main" v-else>
       <app-spinner :primary="'primary'" v-if="loadingApp"></app-spinner>
-      <todo-list-items v-else :todos="todos"></todo-list-items>
+      <todo-list-items v-else :todos="todosArray"></todo-list-items>
     </section>
-    <section class="nav-wrapper" v-show="todos.length && !loadingApp">
-      <todo-list-nav :todos="todos"></todo-list-nav>
+    <section class="nav-wrapper" v-show="todosArray.length && !loadingApp">
+      <todo-list-nav :todos="todosArray"></todo-list-nav>
     </section>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions, mapMutations } from 'vuex';
 import TodoListItems from '@/components/TodoListItems.vue';
 import TodoListNew from '@/components/TodoListNew.vue';
 import TodoListNav from '@/components/TodoListNav.vue';
@@ -37,16 +38,29 @@ export default {
     IconBase,
     IconArrow,
   },
+  async created() {
+    this.clearError();
+    if (this.isOnLine) {
+      this.setLoading(true);
+      try {
+        await this.fetchTodos();
+      } catch (error) {
+        this.setError(error.message);
+      } finally {
+        this.setLoading(false);
+      }
+    }
+  },
   computed: {
-    todos() {
-      return [...this.$store.getters.todos.map((item) => ({ ...item }))];
-    },
-    isError() {
-      return this.$store.getters.error;
+    ...mapState('Todo', ['todos']),
+
+    todosArray() {
+      return [...this.todos.map((item) => ({ ...item }))];
     },
   },
-  created() {
-    this.$store.dispatch('fetchTodos').catch(() => {});
+  methods: {
+    ...mapActions('Todo', ['fetchTodos']),
+    ...mapMutations('Utils', ['setLoading', 'setError', 'clearError']),
   },
 };
 </script>
