@@ -114,11 +114,15 @@ export default {
 
   .logout {
     display: flex;
+    align-items: center;
     justify-content: flex-end;
     font-size: 20px;
     color: $text-primary;
 
     .exit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       padding: 0;
       margin-left: 10px;
       color: $text-primary;
@@ -174,6 +178,10 @@ export default {
     .locale-changer,
     .title {
       margin: 5px 0;
+    }
+
+    .logout {
+      font-size: 16px;
     }
   }
 

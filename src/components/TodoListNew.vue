@@ -8,22 +8,17 @@
       :placeholder="$t('todo-new.ph-new')"
       v-model="newTodo"
       @keyup.enter="addTodo"
-      :disabled="!isOnLine"
+      :disabled="!isOnLine || isLoading"
     />
-    <button
-      class="new-todo__btn"
-      @click="addTodo"
-      :title="$t('todo-new.add-title')"
-      :disabled="localLoading || !isOnLine"
-    >
-      <app-spinner v-if="localLoading"></app-spinner>
+    <button class="new-todo__btn" @click="addTodo" :title="$t('todo-new.add-title')" :disabled="isLoading || !isOnLine">
+      <app-spinner v-if="isLoading"></app-spinner>
       <span v-else>+</span>
     </button>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 import AppSpinner from '@/components/AppSpinner.vue';
 
 export default {
@@ -32,25 +27,23 @@ export default {
   data() {
     return {
       newTodo: '',
+      isLoading: false,
     };
-  },
-  computed: {
-    ...mapState('Utils', ['localLoading']),
   },
   methods: {
     ...mapActions('Todo', ['createTodo']),
-    ...mapMutations('Utils', ['setLocalLoading', 'setError', 'clearError']),
+    ...mapMutations('Utils', ['setError', 'clearError']),
 
     async addTodo() {
       if (this.newTodo) {
         this.clearError();
-        this.setLocalLoading(true);
+        this.isLoading = true;
         try {
           await this.createTodo({ title: this.newTodo });
         } catch (error) {
           this.setError(error.message);
         } finally {
-          this.setLocalLoading(false);
+          this.isLoading = false;
         }
         this.newTodo = '';
       }
@@ -78,6 +71,7 @@ export default {
   &__btn {
     position: absolute;
     right: 0;
+    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -69,7 +69,7 @@ export default {
 .todo-wrapper {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  width: 100%;
 
   .error-title {
     margin: 10px auto;

@@ -37,20 +37,28 @@
       class="todo-nav__clear-completed"
       @click="removeCompleted"
       v-show="todos.length > remaining"
-      :disabled="!isOnLine"
+      :disabled="!isOnLine || isLoading"
     >
-      {{ $t('todo-nav.clear') }}
+      <app-spinner v-if="isLoading" />
+      <span v-else>{{ $t('todo-nav.clear') }}</span>
     </button>
   </nav>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
+import AppSpinner from '@/components/AppSpinner.vue';
 import filters from '@/helpers/filter.helper';
 
 export default {
   name: 'TodoListNav',
   props: { todos: { type: Array, required: true } },
+  components: { AppSpinner },
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   computed: {
     ...mapState('Todo', ['visibility']),
 
@@ -65,10 +73,13 @@ export default {
 
     async removeCompleted() {
       this.clearError();
+      this.isLoading = true;
       try {
         await this.deleteCompleted();
       } catch (error) {
         this.setError(error.message);
+      } finally {
+        this.isLoading = false;
       }
     },
     onChangeVisibility(visibility) {

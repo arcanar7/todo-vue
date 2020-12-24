@@ -2,7 +2,6 @@ export default {
   namespaced: true,
   state: {
     loading: false,
-    localLoading: false,
     error: null,
     success: null,
     isOnLine: true,
@@ -11,9 +10,6 @@ export default {
   mutations: {
     setLoading(state, payload) {
       state.loading = payload;
-    },
-    setLocalLoading(state, payload) {
-      state.localLoading = payload;
     },
     setError(state, payload) {
       state.error = payload;

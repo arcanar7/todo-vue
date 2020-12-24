@@ -1,7 +1,7 @@
 <template>
   <div class="locale-changer">
     <span class="lang" :class="[{ expanded: expand }]" @click="onExpand" v-click-outside="onExpandHide">
-      <span class="lang__title">{{ langTitle }}</span>
+      <span class="lang__title">{{ $t('language') }}</span>
       <ul class="lang__dropdown">
         <li v-for="(lang, i) in langs" :key="`Lang${i}`" @click="onChangeLang(lang)">
           {{ lang.title }}
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapMutations } from 'vuex';
 
 export default {
   name: 'LanguageSelect',
@@ -36,14 +36,11 @@ export default {
       expand: false,
     };
   },
-  computed: {
-    ...mapState('Lang', ['langTitle']),
-  },
   methods: {
     ...mapMutations('Lang', ['setLang']),
 
     onChangeLang(lang) {
-      this.setLang(lang);
+      this.setLang(lang.val);
     },
     onExpand() {
       this.expand = !this.expand;
@@ -64,7 +61,6 @@ export default {
 .lang {
   position: relative;
   display: inline-block;
-  width: 150px;
   height: 40px;
   cursor: pointer;
   box-shadow: none;
@@ -74,7 +70,7 @@ export default {
     position: absolute;
     top: 17px;
     right: 10%;
-    z-index: 3;
+    z-index: 5;
     content: '';
     border: 6px solid $primary;
     border-color: $primary transparent transparent transparent;
@@ -82,14 +78,11 @@ export default {
   }
 
   &__title {
-    position: absolute;
-    top: 0;
-    z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
     height: 100%;
+    padding: 0 30px 0 20px;
     font-weight: 700;
     color: $text-primary;
     user-select: none;
@@ -101,7 +94,7 @@ export default {
   &__dropdown {
     position: absolute;
     top: 40px;
-    z-index: 1;
+    z-index: 3;
     width: 100%;
     padding: 0;
     margin: 0;

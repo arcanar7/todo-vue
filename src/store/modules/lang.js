@@ -4,13 +4,11 @@ export default {
   namespaced: true,
   state: {
     lang: 'en',
-    langTitle: 'English',
   },
   mutations: {
-    setLang(state, { val, title }) {
-      state.lang = val;
-      state.langTitle = title;
-      i18n.locale = val;
+    setLang(state, payload) {
+      state.lang = payload;
+      i18n.locale = payload;
     },
   },
 };

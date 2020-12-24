@@ -60,5 +60,6 @@
   "app-notify": {
     "text": "New version available!",
     "refresh": "Refresh"
-  }
+  },
+  "language": "Language"
 }

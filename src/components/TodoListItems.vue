@@ -37,9 +37,10 @@ export default {
 
 <style lang="scss">
 .todo-list {
-  flex-grow: 1;
+  width: 100%;
   padding: 0;
   margin: 0;
+  overflow: hidden;
   list-style: none;
 
   .todo {

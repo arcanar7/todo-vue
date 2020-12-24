@@ -144,6 +144,7 @@ export default {
     font-size: 24px;
     font-style: italic;
     font-weight: 700;
+    word-break: break-all;
     transition: 0.5s color ease-out;
   }
 
@@ -151,6 +152,7 @@ export default {
     position: absolute;
     right: 0;
     bottom: 0;
+    z-index: 2;
     display: none;
     font-size: 30px;
     color: $primary-light;
