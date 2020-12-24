@@ -11,7 +11,10 @@
       </div>
       <indicator />
       <language-select />
-      <h1 class="title">{{ $t('title') }}</h1>
+      <div class="title-wrapper">
+        <app-spinner size="lds-spinner_small-plus" colorName="primary" v-if="loadingApp" />
+        <h1 class="title">{{ $t('title') }}</h1>
+      </div>
       <h4 class="offline-title" v-if="!isOnLine">{{ $t('offline') }}</h4>
     </header>
     <main class="app-inner">
@@ -34,6 +37,7 @@ import IconBase from '@/components/IconBase.vue';
 import IconExit from '@/components/icons/IconExit.vue';
 import Indicator from '@/components/Indicator.vue';
 import AppNotify from '@/components/AppNotify.vue';
+import AppSpinner from '@/components/AppSpinner.vue';
 
 export default {
   name: 'HomePage',
@@ -44,6 +48,7 @@ export default {
     IconExit,
     Indicator,
     AppNotify,
+    AppSpinner,
   },
   data() {
     return {
@@ -140,6 +145,12 @@ export default {
   .offline-title {
     color: $error;
   }
+}
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .app-inner {

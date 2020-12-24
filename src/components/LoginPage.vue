@@ -56,7 +56,7 @@
         </template>
       </span>
       <button type="submit" class="login-form__btn" :disabled="isLoginValid">
-        <app-spinner v-if="loadingApp"></app-spinner>
+        <app-spinner v-if="loadingApp" />
         {{ $t('login.log-in') }}
       </button>
       <span class="login-form__forgot">

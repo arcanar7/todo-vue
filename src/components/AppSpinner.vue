@@ -1,5 +1,13 @@
 <template functional>
-  <div class="lds-ring" :class="props.primary">
+  <div class="lds-spinner" :class="[props.size, props.colorName]">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
     <div></div>
     <div></div>
     <div></div>
@@ -10,65 +18,133 @@
 <script>
 export default {
   name: 'AppSpinner',
-  props: { primary: String },
+  props: {
+    size: {
+      type: [String],
+      default: 'lds-spinner_small',
+    },
+    colorName: {
+      type: [String],
+      default: 'primary-lightness',
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-.lds-ring {
-  position: relative;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
+.lds-spinner_small {
+  @include spinner(23px);
+}
 
-  div {
-    position: absolute;
-    box-sizing: border-box;
-    display: block;
-    width: 20px;
-    height: 20px;
-    border: 2px solid $primary-lightness;
-    border-color: $primary-lightness transparent transparent transparent;
-    border-radius: 50%;
-    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  }
+.lds-spinner_small-plus {
+  @include spinner(50px);
+}
+
+.lds-spinner_medium {
+  @include spinner(100px);
+}
+
+.lds-spinner_large {
+  @include spinner(150px);
 }
 
 .primary {
-  display: flex;
-  flex-grow: 1;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-
-  div {
-    width: 50px;
-    height: 50px;
-    border: 4px solid $primary-lightness;
-    border-color: $text-primary transparent transparent transparent;
+  div::after {
+    background: $primary !important;
   }
 }
 
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+.primary-lightness {
+  div::after {
+    background: $primary-lightness !important;
+  }
 }
 
-.lds-ring div:nth-child(2) {
+.lds-spinner {
+  position: relative;
+  display: inline-block;
+  color: official;
+
+  div {
+    animation: lds-spinner 1.2s linear infinite;
+
+    &::after {
+      position: absolute;
+      display: block;
+      content: ' ';
+      background: $primary-lightness;
+      border-radius: 20%;
+    }
+  }
+}
+
+.lds-spinner div:nth-child(1) {
+  transform: rotate(0deg);
+  animation-delay: -1.1s;
+}
+
+.lds-spinner div:nth-child(2) {
+  transform: rotate(30deg);
+  animation-delay: -1s;
+}
+
+.lds-spinner div:nth-child(3) {
+  transform: rotate(60deg);
+  animation-delay: -0.9s;
+}
+
+.lds-spinner div:nth-child(4) {
+  transform: rotate(90deg);
+  animation-delay: -0.8s;
+}
+
+.lds-spinner div:nth-child(5) {
+  transform: rotate(120deg);
+  animation-delay: -0.7s;
+}
+
+.lds-spinner div:nth-child(6) {
+  transform: rotate(150deg);
+  animation-delay: -0.6s;
+}
+
+.lds-spinner div:nth-child(7) {
+  transform: rotate(180deg);
+  animation-delay: -0.5s;
+}
+
+.lds-spinner div:nth-child(8) {
+  transform: rotate(210deg);
+  animation-delay: -0.4s;
+}
+
+.lds-spinner div:nth-child(9) {
+  transform: rotate(240deg);
   animation-delay: -0.3s;
 }
 
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+.lds-spinner div:nth-child(10) {
+  transform: rotate(270deg);
+  animation-delay: -0.2s;
 }
 
-@keyframes lds-ring {
+.lds-spinner div:nth-child(11) {
+  transform: rotate(300deg);
+  animation-delay: -0.1s;
+}
+
+.lds-spinner div:nth-child(12) {
+  transform: rotate(330deg);
+  animation-delay: 0s;
+}
+
+@keyframes lds-spinner {
   0% {
-    transform: rotate(0deg);
+    opacity: 1;
   }
 
   100% {
-    transform: rotate(360deg);
+    opacity: 0;
   }
 }
 </style>

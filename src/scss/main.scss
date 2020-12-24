@@ -1,5 +1,6 @@
-@import './_variables.scss';
-@import './_auth.scss';
+@import './variables';
+@import './auth';
+@import './mixins';
 
 $assets: '/assets/fonts';
 

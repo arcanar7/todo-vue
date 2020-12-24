@@ -81,7 +81,7 @@
         </template>
       </span>
       <button type="submit" class="login-form__btn" :disabled="isRegistrationValid">
-        <app-spinner v-if="loadingApp"></app-spinner>
+        <app-spinner v-if="loadingApp" />
         {{ $t('register.create') }}
       </button>
     </form>

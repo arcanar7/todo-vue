@@ -11,7 +11,7 @@
       :disabled="!isOnLine || isLoading"
     />
     <button class="new-todo__btn" @click="addTodo" :title="$t('todo-new.add-title')" :disabled="isLoading || !isOnLine">
-      <app-spinner v-if="isLoading"></app-spinner>
+      <app-spinner v-if="isLoading" />
       <span v-else>+</span>
     </button>
   </div>

@@ -1,5 +1,5 @@
 <template>
-  <div class="todo-wrapper">
+  <div class="todo-wrapper" :class="{ 'todo-wrapper_disabled': loadingApp }">
     <todo-list-new />
     <div class="empty-state" v-if="!todosArray.length && !loadingApp">
       <p>
@@ -10,10 +10,9 @@
       </icon-base>
     </div>
     <section class="main" v-else>
-      <app-spinner :primary="'primary'" v-if="loadingApp"></app-spinner>
-      <todo-list-items v-else :todos="todosArray"></todo-list-items>
+      <todo-list-items :todos="todosArray"></todo-list-items>
     </section>
-    <section class="nav-wrapper" v-show="todosArray.length && !loadingApp">
+    <section class="nav-wrapper" v-show="todosArray.length">
       <todo-list-nav :todos="todosArray"></todo-list-nav>
     </section>
   </div>
@@ -24,7 +23,6 @@ import { mapState, mapActions, mapMutations } from 'vuex';
 import TodoListItems from '@/components/TodoListItems.vue';
 import TodoListNew from '@/components/TodoListNew.vue';
 import TodoListNav from '@/components/TodoListNav.vue';
-import AppSpinner from '@/components/AppSpinner.vue';
 import IconBase from '@/components/IconBase.vue';
 import IconArrow from '@/components/icons/IconArrow.vue';
 
@@ -34,7 +32,6 @@ export default {
     TodoListItems,
     TodoListNew,
     TodoListNav,
-    AppSpinner,
     IconBase,
     IconArrow,
   },
@@ -70,6 +67,11 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  &_disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
 
   .error-title {
     margin: 10px auto;
