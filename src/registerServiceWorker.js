@@ -20,8 +20,8 @@ if (process.env.NODE_ENV === 'production') {
       console.log('New content is downloading.');
     },
     updated() {
-      console.log('New content is available; please refresh.');
-      store.dispatch('setNotification', true);
+      console.log('New content is available, please refresh.');
+      store.commit('Utils/setNotification', true, { root: true });
     },
     offline() {
       console.log('No internet connection found. App is running in offline mode.');
