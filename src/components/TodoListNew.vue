@@ -4,7 +4,7 @@
       class="new-todo__title"
       autofocus
       autocomplete="off"
-      ref="newTodo"
+      v-todo-focus
       :placeholder="$t('todo-new.ph-new')"
       v-model="newTodo"
       @keyup.enter="addTodo"
@@ -24,6 +24,11 @@ import AppSpinner from '@/components/AppSpinner.vue';
 export default {
   name: 'TodoListNew',
   components: { AppSpinner },
+  directives: {
+    'todo-focus': (el) => {
+      el.focus();
+    },
+  },
   data() {
     return {
       newTodo: '',
@@ -47,7 +52,6 @@ export default {
         }
         this.newTodo = '';
       }
-      this.$refs.newTodo.focus();
     },
   },
 };
