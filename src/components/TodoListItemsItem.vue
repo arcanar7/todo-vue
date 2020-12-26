@@ -1,5 +1,5 @@
 <template>
-  <div class="todo__view">
+  <div class="todo__view" :class="{ todo__view_updated: isUpdate }">
     <div class="checkbox">
       <input
         ref="checkBoxToggle"
@@ -29,6 +29,7 @@ export default {
     return {
       clickCount: 0,
       clickTimer: null,
+      isUpdate: false,
     };
   },
   methods: {
@@ -60,6 +61,7 @@ export default {
       }
 
       this.clearError();
+      this.isUpdate = true;
       try {
         await this.updateTodo({
           title: this.todo.title,
@@ -68,6 +70,8 @@ export default {
         });
       } catch (error) {
         this.setError(error.message);
+      } finally {
+        this.isUpdate = false;
       }
     },
     editTodoHandler() {
@@ -93,6 +97,7 @@ export default {
   flex-grow: 1;
   min-height: 27px;
   padding: 5px;
+  transition: background-color 0.3s;
 
   .checkbox {
     position: relative;
@@ -147,21 +152,33 @@ export default {
     word-break: break-all;
     transition: 0.5s color ease-out;
   }
+}
+
+.destroy {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: none;
+  font-size: 30px;
+  color: $primary-light;
+  background-color: $background;
+  transition: 0.3s color ease-out, background-color 0.3s;
+
+  &::after {
+    content: '×';
+  }
+}
+
+.todo__view_updated {
+  background-color: $todo-highlight-color;
+
+  .title {
+    color: $primary-lightness;
+  }
 
   .destroy {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    z-index: 2;
-    display: none;
-    font-size: 30px;
-    color: $primary-light;
-    background-color: inherit;
-    transition: 0.2s color ease-out;
-
-    &::after {
-      content: '×';
-    }
+    background-color: $todo-highlight-color;
   }
 }
 
