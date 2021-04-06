@@ -5,7 +5,7 @@
         ref="checkBoxToggle"
         class="toggle"
         type="checkbox"
-        v-model="todo.completed"
+        :checked="todo.completed"
         :id="todo.id"
         @change="onToggleComplete"
         :disabled="!isOnLine"
@@ -33,7 +33,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations('Todo', ['beforeEditTitle', 'editTodo']),
+    ...mapMutations('Todo', ['editTodo']),
     ...mapActions('Todo', ['updateTodo', 'removeTodo']),
     ...mapMutations('Utils', ['setError', 'clearError']),
 
@@ -48,7 +48,7 @@ export default {
         } else if (this.clickCount === 2) {
           clearTimeout(this.clickTimer);
           this.clickCount = 0;
-          this.editTodoHandler();
+          this.editTodo(this.todo);
         }
       }
     },
@@ -73,10 +73,6 @@ export default {
       } finally {
         this.isUpdate = false;
       }
-    },
-    editTodoHandler() {
-      this.beforeEditTitle(this.todo.title);
-      this.editTodo(this.todo);
     },
     async onRemoveTodo() {
       this.clearError();
@@ -194,6 +190,7 @@ export default {
 @media (hover: hover) {
   .destroy:hover {
     color: $text-primary;
+    background-color: inherit;
   }
 
   .todo__view:hover {

@@ -17,7 +17,6 @@ export default {
     todos: [],
     visibility: 'all',
     editedTodo: null,
-    beforeEditTitle: '',
   },
   mutations: {
     setVisibility(state, payload) {
@@ -43,9 +42,6 @@ export default {
     editTodo(state, payload) {
       state.editedTodo = payload;
     },
-    beforeEditTitle(state, payload) {
-      state.beforeEditTitle = payload;
-    },
   },
   actions: {
     clearTodos({ commit }) {
@@ -70,7 +66,6 @@ export default {
       commit('createTodo', { ...newTodo, id: todo.key });
     },
     async fetchTodos({ commit, rootState }) {
-      commit('beforeEditTitle', '');
       const resultTodos = [];
 
       // const todos = await fetchWithAuth(`${process.env.VUE_APP_api}todo`, {

@@ -5,7 +5,7 @@
       class="edit-title"
       type="text"
       :style="{ height: textHeight }"
-      v-model="todo.title"
+      v-model="todoTitle"
       v-todo-focus="todo === editedTodo"
       @blur="doneEdit"
       @keyup.enter="doneEdit"
@@ -49,13 +49,14 @@ export default {
   data() {
     return {
       textHeight: '27px',
+      todoTitle: this.todo.title,
     };
   },
   updated() {
     this.textHeight = getComputedStyle(this.$refs.fake).height;
   },
   computed: {
-    ...mapState('Todo', ['editedTodo', 'beforeEditTitle']),
+    ...mapState('Todo', ['editedTodo']),
   },
   methods: {
     ...mapMutations('Todo', ['editTodo']),
@@ -68,9 +69,9 @@ export default {
       }
 
       const { title, completed, id } = this.todo;
-      const newTitle = title.trim();
+      const newTitle = this.todoTitle.trim();
 
-      if (newTitle !== this.beforeEditTitle) {
+      if (newTitle !== title) {
         this.clearError();
         try {
           if (newTitle) {
@@ -86,7 +87,7 @@ export default {
       this.editTodo(null);
     },
     cancelEdit() {
-      this.todo.title = this.beforeEditTitle;
+      this.todoTitle = this.todo.title;
       this.editTodo(null);
     },
   },
