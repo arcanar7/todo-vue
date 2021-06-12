@@ -1,7 +1,7 @@
 <template>
   <div class="todo-wrapper" :class="{ 'todo-wrapper_disabled': loadingApp }">
     <todo-list-new />
-    <div class="empty-state" v-if="!todosArray.length && !loadingApp">
+    <div class="empty-state" v-if="!hasTodo && !loadingApp">
       <p>
         {{ $t('todo-list.empty') }}
       </p>
@@ -10,10 +10,10 @@
       </icon-base>
     </div>
     <section class="main" v-else>
-      <todo-list-items :todos="todosArray"></todo-list-items>
+      <todo-list-items />
     </section>
-    <section class="nav-wrapper" v-show="todosArray.length">
-      <todo-list-nav :todos="todosArray"></todo-list-nav>
+    <section class="nav-wrapper" v-show="hasTodo">
+      <todo-list-nav />
     </section>
   </div>
 </template>
@@ -51,8 +51,8 @@ export default {
   computed: {
     ...mapState('Todo', ['todos']),
 
-    todosArray() {
-      return [...this.todos.map((item) => ({ ...item }))];
+    hasTodo() {
+      return this.todos.length;
     },
   },
   methods: {
@@ -71,10 +71,6 @@ export default {
   &_disabled {
     pointer-events: none;
     opacity: 0.5;
-  }
-
-  .error-title {
-    margin: 10px auto;
   }
 }
 

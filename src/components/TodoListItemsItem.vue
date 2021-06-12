@@ -2,7 +2,6 @@
   <div class="todo__view" :class="{ todo__view_updated: isUpdate }">
     <div class="checkbox">
       <input
-        ref="checkBoxToggle"
         class="toggle"
         type="checkbox"
         :checked="todo.completed"
@@ -15,7 +14,9 @@
     <label class="title" :class="todo.completed ? 'completed' : 'color-primary'" @click="onClickTitle">
       {{ todo.title }}
     </label>
-    <button class="destroy" @click="onRemoveTodo" :title="$t('todo.remove-title')" :disabled="!isOnLine"></button>
+    <button class="destroy" @click="onRemoveTodo" :title="$t('todo.remove-title')" :disabled="!isOnLine">
+      &times;
+    </button>
   </div>
 </template>
 
@@ -37,13 +38,13 @@ export default {
     ...mapActions('Todo', ['updateTodo', 'removeTodo']),
     ...mapMutations('Utils', ['setError', 'clearError']),
 
-    onClickTitle(e) {
+    onClickTitle() {
       if (this.isOnLine) {
         this.clickCount += 1;
         if (this.clickCount === 1) {
           this.clickTimer = setTimeout(() => {
             this.clickCount = 0;
-            this.onToggleComplete(e);
+            this.onToggleComplete();
           }, 250);
         } else if (this.clickCount === 2) {
           clearTimeout(this.clickTimer);
@@ -52,21 +53,14 @@ export default {
         }
       }
     },
-    async onToggleComplete(e) {
-      let { checked } = this.$refs.checkBoxToggle;
-      const { id } = this.$refs.checkBoxToggle;
-
-      if (e.target.tagName === 'LABEL') {
-        checked = !checked;
-      }
-
+    async onToggleComplete() {
       this.clearError();
       this.isUpdate = true;
       try {
         await this.updateTodo({
           title: this.todo.title,
-          completed: checked,
-          id,
+          completed: !this.todo.completed,
+          id: this.todo.id,
         });
       } catch (error) {
         this.setError(error.message);
@@ -93,6 +87,7 @@ export default {
   flex-grow: 1;
   min-height: 27px;
   padding: 5px;
+  line-height: 1;
   transition: background-color 0.3s;
 
   .checkbox {
@@ -157,13 +152,10 @@ export default {
   z-index: 2;
   display: none;
   font-size: 30px;
+  line-height: 1;
   color: $primary-light;
   background-color: $background;
   transition: 0.3s color ease-out, background-color 0.3s;
-
-  &::after {
-    content: '×';
-  }
 }
 
 .todo__view_updated {

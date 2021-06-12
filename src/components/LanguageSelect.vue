@@ -3,7 +3,7 @@
     <span class="lang" :class="[{ expanded: expand }]" @click="onExpand" v-click-outside="onExpandHide">
       <span class="lang__title">{{ $t('language') }}</span>
       <ul class="lang__dropdown">
-        <li v-for="(lang, i) in langs" :key="`Lang${i}`" @click="onChangeLang(lang)">
+        <li v-for="lang in langs" :key="lang.val" @click="onChangeLang(lang)">
           {{ lang.title }}
         </li>
       </ul>

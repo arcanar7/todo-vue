@@ -174,6 +174,10 @@ export default {
   }
 }
 
+.footer {
+  padding: 10px;
+}
+
 @media screen and (max-width: $screen) {
   .header-app,
   .app-inner {

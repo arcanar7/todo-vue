@@ -29,7 +29,7 @@ export default {
 
 <style lang="scss">
 .notification {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
   z-index: 1000;
   display: flex;

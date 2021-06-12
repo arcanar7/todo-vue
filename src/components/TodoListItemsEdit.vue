@@ -6,7 +6,7 @@
       type="text"
       :style="{ height: textHeight }"
       v-model="todoTitle"
-      v-todo-focus="todo === editedTodo"
+      v-todo-focus
       @blur="doneEdit"
       @keyup.enter="doneEdit"
       @keydown.enter.prevent=""
@@ -39,10 +39,10 @@ export default {
     IconCancel,
   },
   directives: {
-    'todo-focus': (el, binding) => {
-      if (binding.value) {
+    'todo-focus': {
+      inserted: (el) => {
         el.focus();
-      }
+      },
     },
   },
   props: { todo: { type: Object, required: true } },
@@ -97,7 +97,7 @@ export default {
 <style lang="scss">
 .edit {
   position: relative;
-  display: none;
+  display: flex;
   width: 100%;
 
   &-title,
@@ -111,7 +111,8 @@ export default {
 
   &-title {
     width: 100%;
-    padding: 3px 70px 3px 10px;
+    min-height: 37px;
+    padding: 2px 70px 3px 10px;
     overflow: hidden;
     color: $text-primary;
     resize: none;
@@ -169,6 +170,8 @@ export default {
 @media screen and (max-width: $screen) {
   .edit {
     &-title {
+      min-height: 42px;
+      padding-top: 1px;
       padding-right: 100px;
       font-size: 32px;
     }
@@ -184,6 +187,7 @@ export default {
 
     &-done,
     &-cancel {
+      top: 4px;
       width: 40px;
       height: 34px;
     }

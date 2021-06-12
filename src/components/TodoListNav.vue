@@ -8,8 +8,8 @@
       <li>
         <button
           class="todo-nav-filters__btn"
-          :class="{ selected: visibility == 'all' }"
-          @click="onChangeVisibility('all')"
+          :class="{ selected: visibility == $options.VISIBILITY.all }"
+          @click="onChangeVisibility($options.VISIBILITY.all)"
         >
           {{ $t('todo-nav.all') }}
         </button>
@@ -17,8 +17,8 @@
       <li>
         <button
           class="todo-nav-filters__btn"
-          :class="{ selected: visibility == 'active' }"
-          @click="onChangeVisibility('active')"
+          :class="{ selected: visibility == $options.VISIBILITY.active }"
+          @click="onChangeVisibility($options.VISIBILITY.active)"
         >
           {{ $t('todo-nav.active') }}
         </button>
@@ -26,8 +26,8 @@
       <li>
         <button
           class="todo-nav-filters__btn"
-          :class="{ selected: visibility == 'completed' }"
-          @click="onChangeVisibility('completed')"
+          :class="{ selected: visibility == $options.VISIBILITY.completed }"
+          @click="onChangeVisibility($options.VISIBILITY.completed)"
         >
           {{ $t('todo-nav.completed') }}
         </button>
@@ -36,7 +36,7 @@
     <button
       class="todo-nav__clear-completed"
       @click="removeCompleted"
-      v-show="todos.length > remaining"
+      v-show="hasCompleted"
       :disabled="!isOnLine || isLoading"
     >
       <app-spinner v-if="isLoading" />
@@ -52,18 +52,22 @@ import filters from '@/helpers/filter.helper';
 
 export default {
   name: 'TodoListNav',
-  props: { todos: { type: Array, required: true } },
   components: { AppSpinner },
+  VISIBILITY: { all: 'all', active: 'active', completed: 'completed' },
   data() {
     return {
       isLoading: false,
     };
   },
   computed: {
-    ...mapState('Todo', ['visibility']),
+    ...mapState('Todo', ['todos', 'visibility']),
 
     remaining() {
       return filters.active(this.todos).length;
+    },
+
+    hasCompleted() {
+      return Boolean(filters.completed(this.todos).length);
     },
   },
   methods: {

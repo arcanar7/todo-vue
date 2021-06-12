@@ -8,12 +8,14 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 
+const ERROR_DURATION = 4000;
+
 export default {
   name: 'AppError',
   mounted() {
     setTimeout(() => {
       this.onClose();
-    }, 4000);
+    }, ERROR_DURATION);
   },
   computed: {
     ...mapState('Utils', ['error']),

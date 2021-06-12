@@ -66,9 +66,8 @@ export default {
     flex-grow: 1;
 
     &:focus {
-      height: 38px;
       background-color: $primary-lightness;
-      border: 2px solid $primary;
+      border-color: $primary;
     }
   }
 
@@ -79,8 +78,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
 
     span {
       font-size: 32px;

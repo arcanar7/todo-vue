@@ -40,6 +40,12 @@ $assets: '/assets/fonts';
     url('#{$assets}/subset-Roboto-Black.woff') format('woff');
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
   -webkit-tap-highlight-color: hsla(0, 0, 0, 0);

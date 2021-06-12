@@ -2,34 +2,28 @@
   <ul class="todo-list">
     <transition-group name="todo" mode="out-in">
       <li v-for="todo of filteredTodos" class="todo" :class="{ editing: todo.id === editedTodoId }" :key="todo.id">
-        <todo-list-items-item :todo="todo"></todo-list-items-item>
-        <todo-list-items-edit :todo="todo"></todo-list-items-edit>
+        <todo-list-items-container :todo="todo" />
       </li>
     </transition-group>
   </ul>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapGetters, mapState } from 'vuex';
 import filters from '@/helpers/filter.helper';
-import TodoListItemsItem from '@/components/TodoListItemsItem.vue';
-import TodoListItemsEdit from '@/components/TodoListItemsEdit.vue';
+import TodoListItemsContainer from '@/components/TodoListItemsContainer.vue';
 
 export default {
   name: 'TodoListItems',
   components: {
-    TodoListItemsItem,
-    TodoListItemsEdit,
+    TodoListItemsContainer,
   },
-  props: { todos: { type: Array, required: true } },
   computed: {
-    ...mapState('Todo', ['visibility', 'editedTodo']),
+    ...mapState('Todo', ['todos', 'visibility', 'editedTodo']),
+    ...mapGetters('Todo', ['editedTodoId']),
 
     filteredTodos() {
       return filters[this.visibility](this.todos);
-    },
-    editedTodoId() {
-      return this.editedTodo?.id;
     },
   },
 };
@@ -47,16 +41,6 @@ export default {
     display: flex;
     min-height: 38px;
     border-bottom: 1px solid $primary-lightest;
-  }
-
-  .editing {
-    .edit {
-      display: flex;
-    }
-
-    .todo__view {
-      display: none;
-    }
   }
 }
 

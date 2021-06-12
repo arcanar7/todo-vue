@@ -11,24 +11,14 @@
   }
 }
 
-.error-title {
-  color: $error;
-  background-color: $error-lightness;
-  border: 1px solid $error-light;
-}
-
-.success-title {
-  color: $success;
-  background-color: $success-lightness;
-  border: 1px solid $success-light;
-}
-
-.error-title,
 .success-title {
   padding: 5px;
   margin: 0 10px;
   font-size: 14px;
   font-weight: 400;
+  color: $success;
+  background-color: $success-lightness;
+  border: 1px solid $success-light;
   border-radius: 5px;
 }
 
@@ -49,9 +39,8 @@
   &__password,
   &__name {
     &:focus {
-      height: 38px;
       background-color: $primary-lightness;
-      border: 2px solid $primary;
+      border-color: $primary;
     }
   }
 
@@ -84,15 +73,13 @@
 }
 
 .has-error {
-  height: 38px;
   background-color: $error-lightness;
-  border: 2px solid $error-light;
+  border-color: $error-light;
 }
 
 .valid-input {
-  height: 38px;
   background-color: $success-lightness;
-  border: 2px solid $success-light;
+  border-color: $success-light;
 }
 
 .message-input {

@@ -57,10 +57,7 @@ export default {
       //   },
       //   body: JSON.stringify({ title }),
       // }).then((res) => res.json());
-      const todo = await fb
-        .database()
-        .ref(rootState.Auth.user.id)
-        .push(newTodo);
+      const todo = await fb.database().ref(rootState.Auth.user.id).push(newTodo);
       // if (todo.message) throw new Error(todo.message);
       // commit('createTodo', new Todo(title, false, todo._id));
       commit('createTodo', { ...newTodo, id: todo.key });
@@ -75,10 +72,7 @@ export default {
       //     Authorization: `Bearer ${getters.accessToken}`,
       //   },
       // }).then((res) => res.json());
-      const fbVal = await fb
-        .database()
-        .ref(rootState.Auth.user.id)
-        .once('value');
+      const fbVal = await fb.database().ref(rootState.Auth.user.id).once('value');
       const todos = fbVal.val();
       // if (todos.message) throw new Error(todos.message);
       if (todos) {
@@ -98,11 +92,7 @@ export default {
       //   },
       //   body: JSON.stringify({ title, completed }),
       // }).then((res) => res.json());
-      await fb
-        .database()
-        .ref(rootState.Auth.user.id)
-        .child(id)
-        .update({ title, completed });
+      await fb.database().ref(rootState.Auth.user.id).child(id).update({ title, completed });
       // if (todo.message) throw new Error(todo.message);
       commit('updateTodo', { title, completed, id });
     },
@@ -114,11 +104,7 @@ export default {
       //     Authorization: `Bearer ${getters.accessToken}`,
       //   },
       // }).then((res) => res.json());
-      await fb
-        .database()
-        .ref(rootState.Auth.user.id)
-        .child(id)
-        .remove();
+      await fb.database().ref(rootState.Auth.user.id).child(id).remove();
       // if (todo.message) throw new Error(todo.message);
       commit('removeTodo', id);
     },
@@ -144,6 +130,11 @@ export default {
       //   body: JSON.stringify({ id }),
       // }).then((res) => res.json());
       // if (todo.message) throw new Error(todo.message);
+    },
+  },
+  getters: {
+    editedTodoId(state) {
+      return state.editedTodo?.id;
     },
   },
 };
