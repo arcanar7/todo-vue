@@ -154,8 +154,8 @@ export default {
   font-size: 30px;
   line-height: 1;
   color: $primary-light;
-  background-color: $background;
-  transition: 0.3s color ease-out, background-color 0.3s;
+  background: none;
+  transition: 0.3s color ease-out;
 }
 
 .todo__view_updated {
