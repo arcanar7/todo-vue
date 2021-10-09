@@ -18,11 +18,11 @@ export default {
   name: 'LanguageSelect',
   directives: {
     'click-outside': {
-      bind(el, binding) {
+      created(el, binding) {
         el.addEventListener('click', (e) => e.stopPropagation());
         document.body.addEventListener('click', binding.value);
       },
-      unbind(el, binding) {
+      unmounted(el, binding) {
         document.body.removeEventListener('click', binding.value);
       },
     },
@@ -61,6 +61,7 @@ export default {
 .lang {
   position: relative;
   display: inline-block;
+  width: 120px;
   height: 40px;
   cursor: pointer;
   box-shadow: none;
@@ -143,8 +144,8 @@ export default {
   }
 
   li {
-    height: 30px;
-    padding: 5px 0;
+    height: 100%;
+    padding: 10px 0;
     color: $text-primary;
   }
 }

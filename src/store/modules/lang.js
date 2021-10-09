@@ -1,4 +1,4 @@
-import i18n from '@/i18n';
+import i18n from '../../i18n';
 
 export default {
   namespaced: true,
@@ -8,7 +8,7 @@ export default {
   mutations: {
     setLang(state, payload) {
       state.lang = payload;
-      i18n.locale = payload;
+      i18n.global.locale = payload;
     },
   },
 };

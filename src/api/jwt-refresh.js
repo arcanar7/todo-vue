@@ -1,5 +1,5 @@
-import router from '@/router';
-import store from '@/store';
+import router from '../router';
+import store from '../store';
 
 function refreshToken(token) {
   return fetch(`${process.env.VUE_APP_api}auth/token`, {

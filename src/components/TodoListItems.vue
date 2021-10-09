@@ -10,8 +10,8 @@
 
 <script>
 import { mapGetters, mapState } from 'vuex';
-import filters from '@/helpers/filter.helper';
-import TodoListItemsContainer from '@/components/TodoListItemsContainer.vue';
+import filters from '../helpers/filter.helper';
+import TodoListItemsContainer from './TodoListItemsContainer.vue';
 
 export default {
   name: 'TodoListItems',
@@ -49,7 +49,7 @@ export default {
   transition: 0.3s all;
 }
 
-.todo-enter,
+.todo-enter-from,
 .todo-leave-to {
   opacity: 0;
   transform: translateX(-30px);

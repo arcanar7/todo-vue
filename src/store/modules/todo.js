@@ -1,7 +1,4 @@
-import fb from 'firebase/app';
-import 'firebase/database';
-// import fetchWithAuth from '../api/jwt-refresh';
-// import { CONTENT_TYPES, METHODS } from './constants';
+import { child, get, getDatabase, push, ref, remove, update } from 'firebase/database';
 
 class Todo {
   constructor(title, completed = false, id = null) {
@@ -47,89 +44,61 @@ export default {
     clearTodos({ commit }) {
       commit('loadTodos', []);
     },
+
     async createTodo({ commit, rootState }, { title }) {
       const newTodo = new Todo(title);
-      // const todo = await fetchWithAuth(`${process.env.VUE_APP_api}todo`, {
-      //   method: METHODS.post,
-      //   headers: {
-      //     'Content-Type': CONTENT_TYPES.application,
-      //     Authorization: `Bearer ${getters.token}`,
-      //   },
-      //   body: JSON.stringify({ title }),
-      // }).then((res) => res.json());
-      const todo = await fb.database().ref(rootState.Auth.user.id).push(newTodo);
-      // if (todo.message) throw new Error(todo.message);
-      // commit('createTodo', new Todo(title, false, todo._id));
+      const dbRef = ref(getDatabase(), rootState.Auth.user.id);
+      const todo = await push(dbRef, newTodo);
+
       commit('createTodo', { ...newTodo, id: todo.key });
     },
+
     async fetchTodos({ commit, rootState }) {
       const resultTodos = [];
+      const dbRef = ref(getDatabase(), rootState.Auth.user.id);
 
-      // const todos = await fetchWithAuth(`${process.env.VUE_APP_api}todo`, {
-      //   method: METHODS.get,
-      //   headers: {
-      //     'Content-Type': CONTENT_TYPES.application,
-      //     Authorization: `Bearer ${getters.accessToken}`,
-      //   },
-      // }).then((res) => res.json());
-      const fbVal = await fb.database().ref(rootState.Auth.user.id).once('value');
-      const todos = fbVal.val();
-      // if (todos.message) throw new Error(todos.message);
-      if (todos) {
+      get(dbRef).then((snapshot) => {
+        if (!snapshot.exists()) {
+          return;
+        }
+
+        const todos = snapshot.val();
+
         Object.keys(todos).forEach((key) => {
           const todo = todos[key];
           resultTodos.push(new Todo(todo.title, todo.completed, key));
         });
-      }
-      commit('loadTodos', resultTodos);
+
+        commit('loadTodos', resultTodos);
+      });
     },
+
     async updateTodo({ commit, rootState }, { title, completed, id }) {
-      // const todo = await fetchWithAuth(`${process.env.VUE_APP_api}todo/${id}`, {
-      //   method: METHODS.put,
-      //   headers: {
-      //     'Content-Type': CONTENT_TYPES.application,
-      //     Authorization: `Bearer ${getters.accessToken}`,
-      //   },
-      //   body: JSON.stringify({ title, completed }),
-      // }).then((res) => res.json());
-      await fb.database().ref(rootState.Auth.user.id).child(id).update({ title, completed });
-      // if (todo.message) throw new Error(todo.message);
+      const dbRef = ref(getDatabase(), rootState.Auth.user.id);
+
+      await update(child(dbRef, id), { title, completed });
+
       commit('updateTodo', { title, completed, id });
     },
     async removeTodo({ commit, rootState }, id) {
-      // const todo = await fetchWithAuth(`${process.env.VUE_APP_api}todo/${id}`, {
-      //   method: METHODS.delete,
-      //   headers: {
-      //     'Content-Type': CONTENT_TYPES.application,
-      //     Authorization: `Bearer ${getters.accessToken}`,
-      //   },
-      // }).then((res) => res.json());
-      await fb.database().ref(rootState.Auth.user.id).child(id).remove();
-      // if (todo.message) throw new Error(todo.message);
+      const dbRef = ref(getDatabase(), rootState.Auth.user.id);
+
+      await remove(child(dbRef, id));
+
       commit('removeTodo', id);
     },
     async deleteCompleted({ state, commit, rootState }) {
-      const { id } = rootState.Auth.user;
       const { todos } = state;
-      const ref = fb.database().ref(id);
-
+      const dbRef = ref(getDatabase(), rootState.Auth.user.id);
       const updates = todos.reduce((acc, item) => {
         if (item.completed) {
           acc[item.id] = null;
         }
         return acc;
       }, {});
-      await ref.update(updates);
+
+      await update(dbRef, updates);
       commit('deleteCompleted');
-      // const todo = await fetchWithAuth(`${process.env.VUE_APP_api}todo`, {
-      //   method: METHODS.delete,
-      //   headers: {
-      //     'Content-Type': CONTENT_TYPES.application,
-      //     Authorization: `Bearer ${getters.accessToken}`,
-      //   },
-      //   body: JSON.stringify({ id }),
-      // }).then((res) => res.json());
-      // if (todo.message) throw new Error(todo.message);
     },
   },
   getters: {

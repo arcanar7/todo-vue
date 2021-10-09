@@ -4,7 +4,7 @@
       <div class="logout">
         {{ email }}
         <button class="exit" title="Log out" @click="onLogOut">
-          <icon-base icon-name="exit">
+          <icon-base icon-name="Exit">
             <icon-exit />
           </icon-base>
         </button>
@@ -31,13 +31,13 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
-import TodoList from '@/components/TodoList.vue';
-import LanguageSelect from '@/components/LanguageSelect.vue';
-import IconBase from '@/components/IconBase.vue';
-import IconExit from '@/components/icons/IconExit.vue';
-import Indicator from '@/components/Indicator.vue';
-import AppNotify from '@/components/AppNotify.vue';
-import AppSpinner from '@/components/AppSpinner.vue';
+import TodoList from '../components/TodoList.vue';
+import LanguageSelect from '../components/LanguageSelect.vue';
+import IconBase from '../components/IconBase.vue';
+import IconExit from '../components/icons/IconExit.vue';
+import Indicator from '../components/Indicator.vue';
+import AppNotify from '../components/AppNotify.vue';
+import AppSpinner from '../components/AppSpinner.vue';
 
 export default {
   name: 'HomePage',
@@ -64,7 +64,7 @@ export default {
     window.addEventListener('online', this.setOnline);
     window.addEventListener('offline', this.setOnline);
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('beforeinstallprompt', this.beforeInstallHandler);
     window.removeEventListener('online', this.setOnline);
     window.removeEventListener('offline', this.setOnline);

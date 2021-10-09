@@ -6,22 +6,24 @@
     </header>
     <section class="inner">
       <div class="nav">
-        <router-link to="/login" class="nav__login" active-class="active">
+        <router-link to="/login" class="nav__login">
           {{ $t('auth.login') }}
         </router-link>
-        <router-link to="/registration" class="nav__registration" active-class="active">
+        <router-link to="/registration" class="nav__registration">
           {{ $t('auth.registration') }}
         </router-link>
       </div>
-      <transition name="component-fade" mode="out-in">
-        <router-view />
-      </transition>
+      <router-view v-slot="{ Component }">
+        <transition name="component-fade" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </section>
   </div>
 </template>
 
 <script>
-import LanguageSelect from '@/components/LanguageSelect.vue';
+import LanguageSelect from '../components/LanguageSelect.vue';
 
 export default {
   name: 'AuthPage',
@@ -96,7 +98,7 @@ export default {
   }
 }
 
-.active {
+.router-link-exact-active {
   font-weight: 400 !important;
   color: $text-primary !important;
   background-color: $background !important;
@@ -107,7 +109,7 @@ export default {
   transition: 0.3s opacity ease;
 }
 
-.component-fade-enter,
+.component-fade-enter-from,
 .component-fade-leave-to {
   opacity: 0;
 }

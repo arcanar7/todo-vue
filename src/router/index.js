@@ -1,19 +1,15 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 
-import HomePage from '@/views/HomePage.vue';
-import AuthPage from '@/views/AuthPage.vue';
-import LoginPage from '@/components/LoginPage.vue';
-import RegistrationPage from '@/components/RegistrationPage.vue';
-import ResetPasswordPage from '@/components/ResetPasswordPage.vue';
-import NotFoundPage from '@/components/NotFoundPage.vue';
-import AuthGuard from '@/router/auth-guard';
+import HomePage from '../views/HomePage.vue';
+import AuthPage from '../views/AuthPage.vue';
+import LoginPage from '../components/LoginPage.vue';
+import RegistrationPage from '../components/RegistrationPage.vue';
+import ResetPasswordPage from '../components/ResetPasswordPage.vue';
+import NotFoundPage from '../components/NotFoundPage.vue';
+import AuthGuard from './auth-guard';
 
-Vue.use(Router);
-
-export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+export default createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -42,11 +38,6 @@ export default new Router({
         },
       ],
     },
-    {
-      path: '/404',
-      name: '404',
-      component: NotFoundPage,
-    },
-    { path: '*', redirect: '/404' },
+    { path: '/:pathMatch(.*)*', name: '404', component: NotFoundPage },
   ],
 });

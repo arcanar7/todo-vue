@@ -3,15 +3,17 @@
     <transition name="fade" mode="out-in">
       <app-error v-if="error" />
     </transition>
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
+    <router-view v-slot="{ Component }">
+      <transition name="fade" mode="out-in">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import AppError from '@/components/AppError.vue';
+import AppError from './components/AppError.vue';
 
 export default {
   components: { AppError },
@@ -27,7 +29,7 @@ export default {
   transition: 0.5s opacity;
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
   opacity: 0;
 }

@@ -1,14 +1,14 @@
-<template functional>
+<template>
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    :width="props.width"
-    :height="props.height"
-    :viewBox="props.viewBox"
-    :aria-labelledby="props.iconName"
+    :width="width"
+    :height="height"
+    :viewBox="viewBox"
+    :aria-labelledby="iconName"
     role="img"
   >
-    <title v-if="props.iconName" :id="props.iconName" lang="en">{{ props.iconName }}</title>
-    <g :fill="props.iconColor">
+    <title v-if="iconName" :id="iconName" lang="en">{{ iconName }}</title>
+    <g :fill="iconColor">
       <slot />
     </g>
   </svg>

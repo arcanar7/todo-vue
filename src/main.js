@@ -1,17 +1,15 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import 'normalize.css';
-import fb from 'firebase/app';
-
-import App from '@/App.vue';
-import router from '@/router';
-import store from '@/store';
-import '@/registerServiceWorker';
-import i18n from '@/i18n';
+import { initializeApp } from 'firebase/app';
 import { mapState } from 'vuex';
 
-Vue.config.productionTip = false;
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import i18n from './i18n';
+import './registerServiceWorker';
 
-const mixin = {
+const commonMixin = {
   computed: {
     ...mapState('Utils', ['loading', 'isOnLine']),
     ...mapState('Lang', ['lang']),
@@ -22,14 +20,8 @@ const mixin = {
   },
 };
 
-Vue.mixin(mixin);
-
-new Vue({
-  router,
-  store,
-  render: (h) => h(App),
-  i18n,
-
+const app = createApp({
+  ...App,
   created() {
     const firebaseConfig = {
       apiKey: process.env.VUE_APP_apiKey,
@@ -41,7 +33,14 @@ new Vue({
       appId: process.env.VUE_APP_appId,
       measurementId: process.env.VUE_APP_measurementId,
     };
-    fb.initializeApp(firebaseConfig);
-    i18n.locale = this.lang;
+    initializeApp(firebaseConfig);
+    i18n.global.locale = this.lang;
   },
-}).$mount('#app');
+});
+
+app.use(i18n);
+app.use(router);
+app.use(store);
+app.mixin(commonMixin);
+
+app.mount('#app');

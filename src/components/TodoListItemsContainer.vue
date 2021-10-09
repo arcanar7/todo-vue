@@ -5,8 +5,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import TodoListItemsItem from '@/components/TodoListItemsItem.vue';
-import TodoListItemsEdit from '@/components/TodoListItemsEdit.vue';
+import TodoListItemsItem from './TodoListItemsItem.vue';
+import TodoListItemsEdit from './TodoListItemsEdit.vue';
 
 export default {
   name: 'TodoListItemsContainer',

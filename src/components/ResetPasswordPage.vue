@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import AuthMixin from '@/mixins/auth.mixin';
-import AppSpinner from '@/components/AppSpinner.vue';
-import IconBase from '@/components/IconBase.vue';
-import IconWarning from '@/components/icons/IconWarning.vue';
+import AuthMixin from '../mixins/auth.mixin';
+import AppSpinner from './AppSpinner.vue';
+import IconBase from './IconBase.vue';
+import IconWarning from './icons/IconWarning.vue';
 
 export default {
   name: 'ResetPasswordPage',

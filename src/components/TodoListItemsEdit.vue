@@ -27,9 +27,9 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import IconBase from '@/components/IconBase.vue';
-import IconCheckmark from '@/components/icons/IconCheckmark.vue';
-import IconCancel from '@/components/icons/IconCancel.vue';
+import IconBase from './IconBase.vue';
+import IconCheckmark from './icons/IconCheckmark.vue';
+import IconCancel from './icons/IconCancel.vue';
 
 export default {
   name: 'TodoListItemsEdit',

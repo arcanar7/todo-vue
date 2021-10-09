@@ -1,5 +1,5 @@
-<template functional>
-  <div class="lds-spinner" :class="[props.size, props.colorName]">
+<template>
+  <div class="lds-spinner" :class="[size, colorName]">
     <div></div>
     <div></div>
     <div></div>

@@ -1,14 +1,14 @@
-<template functional>
+<template>
   <div class="not-found-wrapper">
     <header class="not-found-header">
-      <h1 class="not-found-header__title">{{ parent.$t('title') }}</h1>
+      <h1 class="not-found-header__title">{{ $t('title') }}</h1>
     </header>
     <main class="not-found-main">
-      <h2 class="not-found-main__title">{{ parent.$t('not-found.title') }}</h2>
+      <h2 class="not-found-main__title">{{ $t('not-found.title') }}</h2>
     </main>
     <nav class="not-found-nav">
       <router-link to="/" class="not-found-nav__home">
-        {{ parent.$t('not-found.home') }}
+        {{ $t('not-found.home') }}
       </router-link>
     </nav>
   </div>

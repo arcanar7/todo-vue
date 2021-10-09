@@ -20,11 +20,11 @@
 
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
-import TodoListItems from '@/components/TodoListItems.vue';
-import TodoListNew from '@/components/TodoListNew.vue';
-import TodoListNav from '@/components/TodoListNav.vue';
-import IconBase from '@/components/IconBase.vue';
-import IconArrow from '@/components/icons/IconArrow.vue';
+import TodoListItems from './TodoListItems.vue';
+import TodoListNew from './TodoListNew.vue';
+import TodoListNav from './TodoListNav.vue';
+import IconBase from './IconBase.vue';
+import IconArrow from './icons/IconArrow.vue';
 
 export default {
   name: 'TodoList',

@@ -14,7 +14,7 @@
     <label class="title" :class="todo.completed ? 'completed' : 'color-primary'" @click="onClickTitle">
       {{ todo.title }}
     </label>
-    <button class="destroy" @click="onRemoveTodo" :title="$t('todo.remove-title')" :disabled="!isOnLine">
+    <button class="removeButton" @click="onRemoveTodo" :title="$t('todo.remove-title')" :disabled="!isOnLine">
       &times;
     </button>
   </div>
@@ -145,7 +145,7 @@ export default {
   }
 }
 
-.destroy {
+.removeButton {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -165,7 +165,7 @@ export default {
     color: $primary-lightness;
   }
 
-  .destroy {
+  .removeButton {
     background-color: $todo-highlight-color;
   }
 }
@@ -180,13 +180,13 @@ export default {
 }
 
 @media (hover: hover) {
-  .destroy:hover {
+  .removeButton:hover {
     color: $text-primary;
     background-color: inherit;
   }
 
   .todo__view:hover {
-    .destroy {
+    .removeButton {
       display: inline-block;
     }
   }
@@ -194,7 +194,7 @@ export default {
 
 @media (pointer: coarse) {
   .todo__view {
-    .destroy {
+    .removeButton {
       display: inline-block;
       font-size: 40px;
     }
@@ -209,7 +209,7 @@ export default {
       font-size: 32px;
     }
 
-    .destroy {
+    .removeButton {
       font-size: 40px;
 
       &:active {

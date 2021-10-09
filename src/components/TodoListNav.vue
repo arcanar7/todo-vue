@@ -47,8 +47,8 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import AppSpinner from '@/components/AppSpinner.vue';
-import filters from '@/helpers/filter.helper';
+import AppSpinner from './AppSpinner.vue';
+import filters from '../helpers/filter.helper';
 
 export default {
   name: 'TodoListNav',

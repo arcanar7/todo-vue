@@ -1,7 +1,11 @@
-import fb from 'firebase/app';
-import 'firebase/auth';
-import { clearStorage } from '@/helpers/localStorage.helper';
-// import { CONTENT_TYPES } from './constants';
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+} from 'firebase/auth';
+import { clearStorage } from '../../helpers/localStorage.helper';
 
 class User {
   constructor(id) {
@@ -37,35 +41,31 @@ export default {
   },
   actions: {
     async registerUser({ commit }, { email, password }) {
-      // const user = await fetch(`${process.env.VUE_APP_api}auth/register`, {
-      //   method: 'post',
-      //   headers: { 'Content-Type': CONTENT_TYPES.application },
-      //   body: JSON.stringify({ email, password }),
-      // }).then((res) => res.json());
-      const user = await fb.auth().createUserWithEmailAndPassword(email, password);
-      // if (user.message) {
-      //   throw new Error(user.message);
-      // }
+      const auth = getAuth();
+      const { user } = await createUserWithEmailAndPassword(auth, email, password);
+
       commit('setUser', new User(user.uid));
     },
+
     async loginUser({ commit }, { email, password }) {
-      // const user = await fetch(`${process.env.VUE_APP_api}auth/login`, {
-      //   method: 'post',
-      //   headers: { 'Content-Type': CONTENT_TYPES.application },
-      //   body: JSON.stringify({ email, password }),
-      // }).then((res) => res.json());
-      const { user } = await fb.auth().signInWithEmailAndPassword(email, password);
-      // if (user.message) {
-      //   throw new Error(user.message);
-      // }
-      // commit('setToken', user);
+      const auth = getAuth();
+
+      const { user } = await signInWithEmailAndPassword(auth, email, password);
+
       commit('setUser', new User(user.uid));
       commit('setEmail', email);
     },
+
     async resetPassword(_, email) {
-      await fb.auth().sendPasswordResetEmail(email);
+      const auth = getAuth();
+      await sendPasswordResetEmail(auth, email);
     },
-    logoutUser({ commit }) {
+
+    async logoutUser({ commit }) {
+      const auth = getAuth();
+
+      await signOut(auth);
+
       commit('setUser', null);
       commit('setToken', {
         accessToken: '',
@@ -73,8 +73,8 @@ export default {
         expDate: null,
       });
       commit('setEmail', '');
+
       clearStorage();
-      fb.auth().signOut();
     },
   },
 };

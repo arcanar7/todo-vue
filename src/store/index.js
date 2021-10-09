@@ -1,15 +1,12 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 
-import Auth from '@/store/modules/auth';
-import Utils from '@/store/modules/utils';
-import Todo from '@/store/modules/todo';
-import Lang from '@/store/modules/lang';
+import Auth from './modules/auth';
+import Utils from './modules/utils';
+import Todo from './modules/todo';
+import Lang from './modules/lang';
 
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default createStore({
   modules: { Auth, Utils, Todo, Lang },
   plugins: [createPersistedState()],
 });
